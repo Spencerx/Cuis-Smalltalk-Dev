@@ -1,6 +1,6 @@
 'From Cuis7.9 [latest update: #8145] on 24 August 2026 at 10:45:26 am'!
 'Description '!
-!provides: 'DynamicallyCodeCreatingTestSupport' 1 4!
+!provides: 'DynamicallyCodeCreatingTestSupport' 1 5!
 SystemOrganization addCategory: #DynamicallyCodeCreatingTestSupport!
 
 
@@ -216,7 +216,7 @@ tearDown
 !DynamicallyCodeCreatingTest class methodsFor: 'class factory' stamp: 'HAW 17/Dec/2019, 2:34:07 pm (UTC)'!
 classCategoryOfTestData
 	
-	^ '__Refactoring-TestData__'! !
+	^ '__Refactoring_TestData__'! !
 
 !DynamicallyCodeCreatingTest class methodsFor: 'testing' stamp: 'jmv 27/Jun/2022, 4:18:52 pm (UTC)'!
 isAbstract

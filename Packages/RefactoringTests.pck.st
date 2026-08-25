@@ -2,7 +2,7 @@
 'Description '!
 !provides: 'RefactoringTests' 1 3!
 !requires: 'DynamicallyCodeCreatingTestSupport' 1 0 nil!
-!requires: '__Refactoring-TestData__' 1 0 nil!
+!requires: '__Refactoring_TestData__' 1 0 nil!
 SystemOrganization addCategory: #RefactoringTests!
 
 
@@ -14107,7 +14107,7 @@ allClassCategoriesOfTestData
 !RenameSelectorTest methodsFor: 'class factory' stamp: 'HAW 4/Mar/2019, 6:59:42 pm (UTC)'!
 anotherClassCategoryOfTestData
 
-	^self classCategoryOfTestData,'-Another'! !
+	^self classCategoryOfTestData,'_Another'! !
 
 !RenameSelectorTest methodsFor: 'class factory' stamp: 'HAW 15/Aug/2018, 4:03:16 pm (UTC)'!
 classToRefactorName
@@ -14150,7 +14150,7 @@ createClassWithImplementorAndSenderNamed: aName subclassOf: aSuperclass categori
 !RenameSelectorTest methodsFor: 'class factory' stamp: 'HAW 21/Mar/2025, 12:46:54 am (UTC)'!
 siblingClassCategory
 
-	^self classCategoryOfTestData,'-sibling'! !
+	^self classCategoryOfTestData,'_sibling'! !
 
 !RenameSelectorTest methodsFor: 'assertions' stamp: 'jmv 8/Jul/2025, 6:46:37 pm (UTC)'!
 assertWasNotRenamedInClass: aClass 

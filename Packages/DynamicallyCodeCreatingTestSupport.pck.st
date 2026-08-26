@@ -1,6 +1,6 @@
-'From Cuis7.9 [latest update: #8145] on 24 August 2026 at 10:45:26 am'!
+'From Cuis7.9 [latest update: #8146] on 25 August 2026 at 10:20:25 pm'!
 'Description '!
-!provides: 'DynamicallyCodeCreatingTestSupport' 1 5!
+!provides: 'DynamicallyCodeCreatingTestSupport' 1 7!
 SystemOrganization addCategory: #DynamicallyCodeCreatingTestSupport!
 
 
@@ -191,12 +191,14 @@ cleanUpInstanceVariables
 		to: self class instSize 
 		do: [ :anInstVarIndex | self instVarAt: anInstVarIndex put: nil ]! !
 
-!DynamicallyCodeCreatingTest methodsFor: 'setup/teardown' stamp: 'jmv 20/Mar/2024, 7:45:28 pm (UTC)'!
+!DynamicallyCodeCreatingTest methodsFor: 'setup/teardown' stamp: 'jmv 26/Aug/2026, 1:12:54 am (UTC)'!
 setUp
 
 	super setUp.
 	"If the authorInitials are not set, they will be asked - Hernan"
 	UISupervisor whenUIinSafeState: [ Utilities authorInitials ].
+	self allClassCategoriesOfTestData do: [ :aClassCategory |
+		(SystemOrganization classesAt: aClassCategory) do: [ :aClass | aClass removeFromSystem ]].
 	"Because I'm using the same system to create classes and removed them with its category at tearDown, I want to be sure 
 	I will not remove something I don't have too - Hernan"
 	setUpAssertionsPassed := false.

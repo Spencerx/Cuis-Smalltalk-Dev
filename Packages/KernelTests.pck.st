@@ -1,6 +1,6 @@
-'From Cuis7.9 [latest update: #8145] on 24 August 2026 at 11:10:27 am'!
+'From Cuis7.9 [latest update: #8146] on 25 August 2026 at 10:07:10 pm'!
 'Description '!
-!provides: 'KernelTests' 1 0!
+!provides: 'KernelTests' 1 2!
 SystemOrganization addCategory: #'KernelTests-Objects'!
 SystemOrganization addCategory: #'KernelTests-Classes'!
 SystemOrganization addCategory: #'KernelTests-Numbers'!
@@ -1338,23 +1338,23 @@ Processor invalidMethodInStackDueToClass: BecomeTestExperiment
 	self becomeForward: {22}.
 	^a + b! !
 
-!BecomeTestExperiment class methodsFor: 'as yet unclassified' stamp: 'jmv 8/Mar/2019, 3:37:17 pm (UTC)'!
+!BecomeTestExperiment class methodsFor: 'as yet unclassified' stamp: 'jmv 26/Aug/2026, 12:52:15 am (UTC)'!
 threeVars
 
 	Object subclass: #BecomeTestExperiment
 		instanceVariableNames: 'c a b'
 		classVariableNames: ''
 		poolDictionaries: ''
-		category: 'BaseImageTests-Kernel'! !
+		category: 'KernelTests-Experiments'! !
 
-!BecomeTestExperiment class methodsFor: 'as yet unclassified' stamp: 'jmv 8/Mar/2019, 3:37:22 pm (UTC)'!
+!BecomeTestExperiment class methodsFor: 'as yet unclassified' stamp: 'jmv 26/Aug/2026, 12:52:21 am (UTC)'!
 twoVars
 
 	Object subclass: #BecomeTestExperiment
 		instanceVariableNames: 'a b'
 		classVariableNames: ''
 		poolDictionaries: ''
-		category: 'BaseImageTests-Kernel'! !
+		category: 'KernelTests-Experiments'! !
 
 !FinalizationTestObject methodsFor: 'accessing' stamp: 'jmv 17/Dec/2024, 1:20:13 pm (UTC)'!
 finalizeAction: aBlock

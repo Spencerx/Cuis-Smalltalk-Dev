@@ -1,6 +1,6 @@
-'From Cuis7.9 [latest update: #8145] on 24 August 2026 at 11:11:59 am'!
+'From Cuis7.9 [latest update: #8146] on 25 August 2026 at 10:07:08 pm'!
 'Description '!
-!provides: 'ToolsTests' 1 0!
+!provides: 'ToolsTests' 1 2!
 !requires: 'DynamicallyCodeCreatingTestSupport' 1 0 nil!
 SystemOrganization addCategory: #'ToolsTests-Browser'!
 SystemOrganization addCategory: #'ToolsTests-Changes'!
@@ -196,6 +196,11 @@ userChangesForTestsFileExtension
 
 	^'.test.changes' ! !
 
+!ChangesTest methodsFor: 'setUp/tearDown' stamp: 'jmv 26/Aug/2026, 1:06:00 am (UTC)'!
+setUp
+	self userChangesForTestsFile delete.
+	super setUp.! !
+
 !ChangesTest methodsFor: 'setUp/tearDown' stamp: 'HAW 17/Dec/2019, 2:36:27 pm (UTC)'!
 tearDown
 
@@ -313,7 +318,7 @@ test06ScanClassRenamedChange
 		self deny: classRenamedChange stamp isNil. ]
 ! !
 
-!ChangesTest methodsFor: 'log tests' stamp: 'jmv 10/Sep/2023, 10:55:14 pm (UTC)'!
+!ChangesTest methodsFor: 'log tests' stamp: 'jmv 26/Aug/2026, 12:45:14 am (UTC)'!
 test01AddingAClassShouldBeLogged
 	" Log format expected:
 
@@ -329,7 +334,7 @@ test01AddingAClassShouldBeLogged
 	self changeUserChangesFileWhile: [
 		newClass := self createTestDataClass.
 
-		self assertIsLoggedOnce: '!!classDefinition: #', self testDataClassName, ' category: #''', self classCategoryOfTestData,''' stamp:'.
+		self assertIsLoggedOnce: '!!classDefinition: #', self testDataClassName, ' category: #', self classCategoryOfTestData,' stamp:'.
 		self assertIsLoggedOnce: newClass definition ] ! !
 
 !ChangesTest methodsFor: 'log tests' stamp: 'HAW 1/Nov/2019, 9:08:48 pm (UTC)'!

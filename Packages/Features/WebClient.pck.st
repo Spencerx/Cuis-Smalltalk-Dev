@@ -1,9 +1,9 @@
-'From Cuis7.7 [latest update: #7779] on 23 December 2025 at 4:40:46 pm'!
+'From Cuis7.9 [latest update: #8149] on 29 August 2026 at 6:52:33 pm'!
 'Description Description - This package is a port and refactoring of WebClient from http://ss3.gemstone.com/ss/WebClient.html with moderate changes by David Graham, Nicola Mingotti, Juan Vuletich and Hernan Wilkinson.
 	- WebClient-Core-ul.100
 	- WebClient-Help-ar.10
 	- WebClient-Tests-topa.48'!
-!provides: 'WebClient' 1 38!
+!provides: 'WebClient' 1 39!
 !requires: 'Network-Kernel' 1 2 nil!
 !requires: 'Identities-UUID' 1 7 nil!
 !requires: 'Cryptography-DigitalSignatures' 1 7 nil!
@@ -329,11 +329,11 @@ WebUtils contains a number of utility methods used by WebClient/WebServer.!
 SqueakSSL provides an interface to the platforms SSL/TLS facilities.
 !
 
-!WebChunkedStream methodsFor: 'testing' stamp: 'ar 31/Jan/2012 14:26:00'!
+!WebChunkedStream methodsFor: 'testing' stamp: 'ar 31/Jan/2012, 5:26:00 pm (UTC)'!
 atEnd
 	^chunkSize = 0 and:[super atEnd]! !
 
-!WebChunkedStream methodsFor: 'accessing' stamp: 'ar 31/Jan/2012 14:09:00'!
+!WebChunkedStream methodsFor: 'accessing' stamp: 'ar 31/Jan/2012, 5:09:00 pm (UTC)'!
 next
 	"Answer the next decompressed object in the Stream represented by the
 	receiver."
@@ -343,7 +343,7 @@ next
 		ifTrue: [^self pastEndRead]
 		ifFalse: [^collection at: (position := position + 1)]! !
 
-!WebChunkedStream methodsFor: 'accessing' stamp: 'ar 31/Jan/2012 14:25:00'!
+!WebChunkedStream methodsFor: 'accessing' stamp: 'ar 31/Jan/2012, 5:25:00 pm (UTC)'!
 next: anInteger 
 	"Answer the next anInteger elements of my collection.  overriden for simplicity"
 
@@ -353,7 +353,7 @@ next: anInteger
 	^super next: anInteger
 ! !
 
-!WebChunkedStream methodsFor: 'accessing' stamp: 'DSG 29/May/2012 13:40:00'!
+!WebChunkedStream methodsFor: 'accessing' stamp: 'DSG 29/May/2012, 4:40:00 pm (UTC)'!
 nextChunk
 	"Answer the next chunk from a message using chunked transfer encoding."
 
@@ -375,33 +375,33 @@ nextChunk
 	^chunk
 ! !
 
-!WebChunkedStream methodsFor: 'accessing' stamp: 'ar 31/Jan/2012 14:11:00'!
+!WebChunkedStream methodsFor: 'accessing' stamp: 'ar 31/Jan/2012, 5:11:00 pm (UTC)'!
 pastEndRead
 	"Need more data"
 
 	self nextChunk.
 	^self next! !
 
-!WebChunkedStream methodsFor: 'initialize' stamp: 'ar 31/Jan/2012 14:24:00'!
+!WebChunkedStream methodsFor: 'initialize' stamp: 'ar 31/Jan/2012, 5:24:00 pm (UTC)'!
 on: aStream
 
 	sourceStream := aStream.
 	collection := (aStream isBinary ifTrue:[ByteArray] ifFalse:[String]) new.
 	position := readLimit := 0.! !
 
-!SqueakSSLCertificateError methodsFor: 'testing' stamp: 'ar 16/Aug/2011 19:18:00'!
+!SqueakSSLCertificateError methodsFor: 'testing' stamp: 'ar 16/Aug/2011, 10:18:00 pm (UTC)'!
 isResumable
 	"Determine whether an exception is resumable."
 
 	^true! !
 
-!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012 13:14:00'!
+!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012, 4:14:00 pm (UTC)'!
 client
 	"The client causing the exception"
 
 	^client! !
 
-!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012 13:49:00'!
+!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012, 4:49:00 pm (UTC)'!
 message
 	"Answer a default message for the user to ask for input"
 
@@ -411,19 +411,19 @@ message
 
 	^'The server at "', client serverName, '" requires authentication.'.! !
 
-!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012 13:04:00'!
+!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012, 4:04:00 pm (UTC)'!
 request
 	"The request object causing the exception"
 
 	^request! !
 
-!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012 13:05:00'!
+!WebAuthRequired methodsFor: 'accessing' stamp: 'ar 10/Feb/2012, 4:05:00 pm (UTC)'!
 response
 	"The response object causing the exception"
 
 	^response! !
 
-!WebAuthRequired methodsFor: 'initialize' stamp: 'ar 10/Feb/2012 13:06:00'!
+!WebAuthRequired methodsFor: 'initialize' stamp: 'ar 10/Feb/2012, 4:06:00 pm (UTC)'!
 client: aWebClient request: aWebRequest response: aWebResponse
 	"Initializes the exception"
 
@@ -432,7 +432,7 @@ client: aWebClient request: aWebRequest response: aWebResponse
 	response := aWebResponse.
 ! !
 
-!WebAuthRequired methodsFor: 'initialize' stamp: 'ar 10/Feb/2012 13:13:00'!
+!WebAuthRequired methodsFor: 'initialize' stamp: 'ar 10/Feb/2012, 4:13:00 pm (UTC)'!
 username: username password: password
 	"Use the given username/password as credentials"
 
@@ -450,30 +450,30 @@ username: username password: password
 	retry ifTrue:[self resume: true].
 ! !
 
-!WebAuthRequired methodsFor: 'defaults' stamp: 'ar 10/Feb/2012 13:14:00'!
+!WebAuthRequired methodsFor: 'defaults' stamp: 'ar 10/Feb/2012, 4:14:00 pm (UTC)'!
 defaultAction
 
 	self resume: false.! !
 
-!WebAuthRequired methodsFor: 'defaults' stamp: 'ar 10/Feb/2012 13:07:00'!
+!WebAuthRequired methodsFor: 'defaults' stamp: 'ar 10/Feb/2012, 4:07:00 pm (UTC)'!
 defaultResumeValue
 	"Resume with false by default"
 
 	^false! !
 
-!WebAuthRequired methodsFor: 'testing' stamp: 'ar 10/Feb/2012 13:09:00'!
+!WebAuthRequired methodsFor: 'testing' stamp: 'ar 10/Feb/2012, 4:09:00 pm (UTC)'!
 isProxyAuth
 	"Return true if proxy authorization is required"
 
 	^response code = 407! !
 
-!WebAuthRequired methodsFor: 'testing' stamp: 'ar 10/Feb/2012 13:09:00'!
+!WebAuthRequired methodsFor: 'testing' stamp: 'ar 10/Feb/2012, 4:09:00 pm (UTC)'!
 isUnauthorized
 	"Return true if authorization is required"
 
 	^response code = 401! !
 
-!WebAuthRequired class methodsFor: 'instance creation' stamp: 'ar 10/Feb/2012 13:16:00'!
+!WebAuthRequired class methodsFor: 'instance creation' stamp: 'ar 10/Feb/2012, 4:16:00 pm (UTC)'!
 client: aWebClient request: aWebRequest response: aWebResponse
 	"Creates a new exception"
 
@@ -482,20 +482,20 @@ client: aWebClient request: aWebRequest response: aWebResponse
 		request: aWebRequest 
 		response: aWebResponse! !
 
-!SecureSocket methodsFor: 'accessing' stamp: 'ar 17/Jun/2012 11:07:00'!
+!SecureSocket methodsFor: 'accessing' stamp: 'ar 17/Jun/2012, 2:07:00 pm (UTC)'!
 certState
 	^ssl ifNotNil:[ssl certState]! !
 
-!SecureSocket methodsFor: 'accessing' stamp: 'ar 17/Jun/2012 11:07:00'!
+!SecureSocket methodsFor: 'accessing' stamp: 'ar 17/Jun/2012, 2:07:00 pm (UTC)'!
 peerName
 	^ssl ifNotNil:[ssl peerName]! !
 
-!SecureSocket methodsFor: 'accessing' stamp: 'ar 17/Jun/2012 11:05:00'!
+!SecureSocket methodsFor: 'accessing' stamp: 'ar 17/Jun/2012, 2:05:00 pm (UTC)'!
 ssl
 	"Answer the SqueakSSL instance"
 	^ssl! !
 
-!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012 12:00:00'!
+!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012, 3:00:00 pm (UTC)'!
 decodeData
 	"Receive data from the given socket into the given array starting at the given index. Return the number of bytes read or zero if no data is available."
 	| total bytesRead |
@@ -515,14 +515,14 @@ decodeData
 	decoded setFrom: 1 to: total.
 ! !
 
-!SecureSocket methodsFor: 'primitives' stamp: 'ar 19/Jun/2012 21:12:00'!
+!SecureSocket methodsFor: 'primitives' stamp: 'ar 20/Jun/2012, 12:12:00 am (UTC)'!
 isConnected
 	"Return true if this socket is connected."
 	"We mustn't return false if there is data available"
 
 	^super isConnected or:[self dataAvailable]! !
 
-!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012 12:00:00'!
+!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012, 3:00:00 pm (UTC)'!
 primSocket: socketID receiveDataInto: buffer startingAt: index count: count
 	"Receive data from the given socket into the given array starting at the given index. Return the number of bytes read or zero if no data is available."
 	| total |
@@ -538,7 +538,7 @@ primSocket: socketID receiveDataInto: buffer startingAt: index count: count
 	^total
 ! !
 
-!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012 11:00:00'!
+!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012, 2:00:00 pm (UTC)'!
 primSocket: socketID sendData: buffer startIndex: start count: amount
 	"Send data to the remote host through the given socket starting with the given byte index of the given byte array. The data sent is 'pushed' immediately. Return the number of bytes of data actually sent; any remaining data should be re-submitted for sending after the current send operation has completed."
 	"Note: In general, it many take several sendData calls to transmit a large data array since the data is sent in send-buffer-sized chunks. The size of the send buffer is determined when the socket is created."
@@ -550,7 +550,7 @@ primSocket: socketID sendData: buffer startIndex: start count: amount
 	count < 0 ifTrue:[self error: 'SSL Error: ', count].
 	^super primSocket: socketID sendData: sendBuf startIndex: 1 count: count! !
 
-!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012 12:01:00'!
+!SecureSocket methodsFor: 'primitives' stamp: 'ar 17/Jun/2012, 3:01:00 pm (UTC)'!
 primSocketReceiveDataAvailable: socketID
 	"Return true if data may be available for reading from the current socket."
 
@@ -558,7 +558,7 @@ primSocketReceiveDataAvailable: socketID
 	self decodeData.
 	^decoded atEnd not! !
 
-!SecureSocket methodsFor: 'initialize' stamp: 'ar 17/Jun/2012 11:08:00'!
+!SecureSocket methodsFor: 'initialize' stamp: 'ar 17/Jun/2012, 2:08:00 pm (UTC)'!
 destroy
 	ssl ifNotNil:[
 		ssl destroy.
@@ -566,7 +566,7 @@ destroy
 	].
 	super destroy.! !
 
-!SecureSocket methodsFor: 'initialize' stamp: 'ar 17/Jun/2012 11:11:00'!
+!SecureSocket methodsFor: 'initialize' stamp: 'ar 17/Jun/2012, 2:11:00 pm (UTC)'!
 initialize
 
 	super initialize.
@@ -575,7 +575,7 @@ initialize
 	readBuf := ByteArray new: 4096.
 ! !
 
-!SecureSocket methodsFor: 'connect' stamp: 'jmv 13/Apr/2023 15:49:41'!
+!SecureSocket methodsFor: 'connect' stamp: 'jmv 13/Apr/2023, 6:49:41 pm (UTC)'!
 sslAccept: certName
 	"Perform the SSL server handshake. This method uses all the common SocketStream methods to adhere to the various timeout/signalling settings of SocketStream. It only installs the SSL instance after the handshake is complete."
 
@@ -604,13 +604,13 @@ sslAccept: certName
 	].
 ! !
 
-!SecureSocket methodsFor: 'connect' stamp: 'ul 15/Oct/2014 19:27:00'!
+!SecureSocket methodsFor: 'connect' stamp: 'ul 15/Oct/2014, 10:27:00 pm (UTC)'!
 sslConnect
 	"Perform the SSL client handshake. This method uses all the common SocketStream methods to adhere to the various timeout/signalling settings of SocketStream. It only installs the SSL instance after the handshake is complete."
 
 	self sslConnectTo: nil! !
 
-!SecureSocket methodsFor: 'connect' stamp: 'jmv 13/Apr/2023 15:49:46'!
+!SecureSocket methodsFor: 'connect' stamp: 'jmv 13/Apr/2023, 6:49:46 pm (UTC)'!
 sslConnectTo: serverName
 	"Perform the SSL client handshake. This method uses all the common SocketStream methods to adhere to the various timeout/signalling settings of SocketStream. It only installs the SSL instance after the handshake is complete. If serverName is not nil, then try to use it for SNI."
 
@@ -638,7 +638,7 @@ sslConnectTo: serverName
 	].
 ! !
 
-!SecureSocket class methodsFor: 'examples' stamp: 'jmv 26/Jun/2017 18:57:14'!
+!SecureSocket class methodsFor: 'examples' stamp: 'jmv 26/Jun/2017, 9:57:14 pm (UTC)'!
 google: query
 	"An example HTTPS query to encrypted.google.com.
 	Example:
@@ -685,7 +685,7 @@ google: query
 	]] ensure:[socket destroy].
 ! !
 
-!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010 16:31:00'!
+!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010, 7:31:00 pm (UTC)'!
 ascii
 	"Switch to ASCII"
 
@@ -697,7 +697,7 @@ ascii
 			yourself.
 ! !
 
-!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 9/Nov/2010 11:09:00'!
+!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 9/Nov/2010, 2:09:00 pm (UTC)'!
 binary
 	"Switch to binary"
 
@@ -709,7 +709,7 @@ binary
 			yourself.
 ! !
 
-!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010 16:31:00'!
+!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010, 7:31:00 pm (UTC)'!
 certState
 	"Returns the certificate verification bits. The returned value indicates
 	whether the certificate is valid. The two standard values are:
@@ -730,7 +730,7 @@ certState
 
 	^ssl ifNotNil:[ssl certState]! !
 
-!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010 16:31:00'!
+!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010, 7:31:00 pm (UTC)'!
 ignoredCertIssues
 	"Answer the mask of 'acceptable issues' with certs. To completely ignore all cert issues use -1 which still ensures privacy (encryption) to the remote host, but does not guard against a man-in-the-middle attack (i.e., you cannot be sure that the remote host is what he says he is). The reasons are a bit mask consisting of the following values:
 		1 - If set, there is an unspecified issue with the cert (generic error)
@@ -743,7 +743,7 @@ ignoredCertIssues
 
 	^certIssues! !
 
-!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010 16:31:00'!
+!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010, 7:31:00 pm (UTC)'!
 ignoredCertIssues: reasonsMask
 	"Set the mask of 'acceptable issues' with certs. To completely ignore all cert issues use -1 which still ensures privacy (encryption) to the remote host, but does not guard against a man-in-the-middle attack (i.e., you cannot be sure that the remote host is what he says he is). The reasons are a bit mask consisting of the following values:
 		1 - If set, there is an unspecified issue with the cert (generic error)
@@ -756,27 +756,27 @@ ignoredCertIssues: reasonsMask
 
 	certIssues := reasonsMask! !
 
-!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010 14:45:00'!
+!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010, 5:45:00 pm (UTC)'!
 peerName
 	"Returns the certificate name of the remote peer.
 	The method only returns a name if the certificate has been verified."
 
 	^ssl ifNotNil:[ssl peerName]! !
 
-!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010 16:32:00'!
+!SecureSocketStream methodsFor: 'accessing' stamp: 'ar 25/Jul/2010, 7:32:00 pm (UTC)'!
 ssl
 	"The SqueakSSL instance"
 
 	^ssl! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010 15:03:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010, 6:03:00 pm (UTC)'!
 atEnd
 	"Pre Squeak 4.2 compatibility"
 
 	self receiveAvailableData.
 	^super atEnd! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010 17:33:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010, 8:33:00 pm (UTC)'!
 flush
 	"Pre-Squeak 4.2 compatibility"
 
@@ -788,7 +788,7 @@ flush
 			outNextToWrite := 1]
 ! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010 15:03:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010, 6:03:00 pm (UTC)'!
 isDataAvailable
 	"Pre Squeak 4.2 compatibility"
  
@@ -796,7 +796,7 @@ isDataAvailable
 	^self receiveAvailableData < inNextToWrite
 ! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010 17:35:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010, 8:35:00 pm (UTC)'!
 nextPutAllFlush: aCollection
 	"Pre Squeak 4.2 compatibility"
 
@@ -809,7 +809,7 @@ nextPutAllFlush: aCollection
 			do: [:ex | shouldSignal ifFalse: ["swallow"]]]
 ! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010 17:32:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010, 8:32:00 pm (UTC)'!
 receiveAvailableData
 	"Pre Squeak 4.2 compatibility"
 	
@@ -817,27 +817,27 @@ receiveAvailableData
 	^self adjustInBuffer: recentlyRead
 ! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010 15:03:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010, 6:03:00 pm (UTC)'!
 receiveData: nBytes
 	"Pre Squeak 4.2 compatibility"
 
 	self receiveAvailableData.
 	^super receiveData: nBytes.! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010 17:32:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 25/Jul/2010, 8:32:00 pm (UTC)'!
 receiveDataIfAvailable
 	"Pre Squeak 4.2 compatibility"
 
 	^self receiveAvailableData
 ! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010 15:03:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010, 6:03:00 pm (UTC)'!
 upToAll: aStringOrByteArray
 	"Pre Squeak 4.2 compatibility"
 
 	^self upToAll: aStringOrByteArray limit: 100000! !
 
-!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010 15:03:00'!
+!SecureSocketStream methodsFor: 'private-compat' stamp: 'ar 23/Nov/2010, 6:03:00 pm (UTC)'!
 upToAll: aStringOrByteArray limit: nBytes
 	"Pre Squeak 4.2 compatibility"
 
@@ -880,7 +880,7 @@ upToAll: aStringOrByteArray limit: nBytes
 	"not found and (non-signaling) connection was closed"
 	^self nextAllInBuffer! !
 
-!SecureSocketStream methodsFor: 'errors' stamp: 'ar 16/Aug/2011 10:21:00'!
+!SecureSocketStream methodsFor: 'errors' stamp: 'ar 16/Aug/2011, 1:21:00 pm (UTC)'!
 certError: errorString code: reason
 	"Signal an issue with a certificate. If the reason code matches the acceptable cert issues, continue, otherwise signal an error."
 
@@ -888,7 +888,7 @@ certError: errorString code: reason
 	^SqueakSSLCertificateError signal: errorString, '(code: ', reason, ')'.
 ! !
 
-!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 25/Jul/2010 17:30:00'!
+!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 25/Jul/2010, 8:30:00 pm (UTC)'!
 close
 	"Flush any data still not sent and take care of the socket."
 
@@ -898,7 +898,7 @@ close
 		ssl := nil.
 	].! !
 
-!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 25/Jul/2010 17:34:00'!
+!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 25/Jul/2010, 8:34:00 pm (UTC)'!
 destroy
 	"Destroy the receiver and its underlying socket. Does not attempt to flush the output buffers. For a graceful close use SocketStream>>close instead."
 
@@ -913,7 +913,7 @@ destroy
 		ssl := nil.
 	].! !
 
-!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 25/Jul/2010 15:58:00'!
+!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 25/Jul/2010, 6:58:00 pm (UTC)'!
 initialize
 	"Initialize the receiver"
 	
@@ -927,7 +927,7 @@ initialize
 	certIssues := 0.
 ! !
 
-!SecureSocketStream methodsFor: 'initialize' stamp: 'jmv 13/Apr/2023 15:49:51'!
+!SecureSocketStream methodsFor: 'initialize' stamp: 'jmv 13/Apr/2023, 6:49:51 pm (UTC)'!
 sslAccept: certName
 	"Perform the SSL server handshake. This method uses all the common SocketStream methods to adhere to the various timeout/signalling settings of SocketStream. It only installs the SSL instance after the handshake is complete."
 
@@ -963,13 +963,13 @@ sslAccept: certName
 	].
 ! !
 
-!SecureSocketStream methodsFor: 'initialize' stamp: 'ul 15/Oct/2014 19:20:00'!
+!SecureSocketStream methodsFor: 'initialize' stamp: 'ul 15/Oct/2014, 10:20:00 pm (UTC)'!
 sslConnect
 	"Perform the SSL client handshake. This method uses all the common SocketStream methods to adhere to the various timeout/signalling settings of SocketStream. It only installs the SSL instance after the handshake is complete."
 
 	self sslConnectTo: nil! !
 
-!SecureSocketStream methodsFor: 'initialize' stamp: 'jmv 26/Jun/2017 18:55:27'!
+!SecureSocketStream methodsFor: 'initialize' stamp: 'jmv 26/Jun/2017, 9:55:27 pm (UTC)'!
 sslConnectTo: serverName
 	"Perform the SSL client handshake. This method uses all the common SocketStream methods to adhere to the various timeout/signalling settings of SocketStream. It only installs the SSL instance after the handshake is complete. If serverName is not nil, then try to use it for SNI."
 
@@ -1004,7 +1004,7 @@ sslConnectTo: serverName
 	].
 ! !
 
-!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 27/Jul/2010 21:09:00'!
+!SecureSocketStream methodsFor: 'initialize' stamp: 'ar 28/Jul/2010, 12:09:00 am (UTC)'!
 verifyCert: hostName
 	"Verifies the cert state and host name"
 
@@ -1017,7 +1017,7 @@ verifyCert: hostName
 	(ssl peerName match: hostName) 
 		ifFalse:[self certError: 'Host name mismatch' code: -1].! !
 
-!SecureSocketStream methodsFor: 'private-socket' stamp: 'ar 15/Nov/2010 11:39:00'!
+!SecureSocketStream methodsFor: 'private-socket' stamp: 'ar 15/Nov/2010, 2:39:00 pm (UTC)'!
 receiveData
 	"This method drains the available decryption data before waiting for the socket"
 
@@ -1045,7 +1045,7 @@ receiveData
 	^self receiveAvailableData.
 ! !
 
-!SecureSocketStream methodsFor: 'private-socket' stamp: 'ar 17/Nov/2011 13:19:00'!
+!SecureSocketStream methodsFor: 'private-socket' stamp: 'ar 17/Nov/2011, 4:19:00 pm (UTC)'!
 receiveDataInto: buffer startingAt: index
 	"Read and decrypt the data from the underlying socket. "
 
@@ -1078,7 +1078,7 @@ receiveDataInto: buffer startingAt: index
 	^count
 ! !
 
-!SecureSocketStream methodsFor: 'private-socket' stamp: 'ar 25/Jul/2010 17:37:00'!
+!SecureSocketStream methodsFor: 'private-socket' stamp: 'ar 25/Jul/2010, 8:37:00 pm (UTC)'!
 sendData: buffer count: n
 	"Encrypts the data before sending it on the underlying socket.
 	Breaks large chunks into 2k components to fit safely into ssl frame."
@@ -1100,7 +1100,7 @@ sendData: buffer count: n
 		start := start + amount.
 	].! !
 
-!WebClient methodsFor: 'printing' stamp: 'ar 9/Aug/2010 08:50:00'!
+!WebClient methodsFor: 'printing' stamp: 'ar 9/Aug/2010, 11:50:00 am (UTC)'!
 printOn: aStream
 	"Print the receiver on aStream"
 
@@ -1114,7 +1114,7 @@ printOn: aStream
 	aStream nextPut:$).
 ! !
 
-!WebClient methodsFor: 'cookies' stamp: 'ar 12/Aug/2010 21:40:00'!
+!WebClient methodsFor: 'cookies' stamp: 'ar 13/Aug/2010, 12:40:00 am (UTC)'!
 acceptCookie: aCookie host: reqHost path: path
 	"Accept a cookie from a prior response"
 
@@ -1150,20 +1150,20 @@ acceptCookie: aCookie host: reqHost path: path
 	].
 	^false! !
 
-!WebClient methodsFor: 'cookies' stamp: 'ar 1/Apr/2010 18:04:00'!
+!WebClient methodsFor: 'cookies' stamp: 'ar 1/Apr/2010, 9:04:00 pm (UTC)'!
 acceptCookies
 	"Whether we should accept cookies"
 
 	^flags anyMask: FlagAcceptCookies! !
 
-!WebClient methodsFor: 'cookies' stamp: 'ar 1/Apr/2010 18:05:00'!
+!WebClient methodsFor: 'cookies' stamp: 'ar 1/Apr/2010, 9:05:00 pm (UTC)'!
 acceptCookies: aBool
 	"Whether we should accept cookies"
 
 	flags := aBool ifTrue:[flags bitOr: FlagAcceptCookies] ifFalse:[flags bitClear: FlagAcceptCookies].
 ! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 28/Jul/2010 20:49:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 28/Jul/2010, 11:49:00 pm (UTC)'!
 accessLog
 	"The standard access log. Can be either a stream or a string; if the access log
 	is a string then the string is assumed to be a file name and the file will be opened 
@@ -1171,7 +1171,7 @@ accessLog
 
 	^accessLog! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 28/Jul/2010 20:49:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 28/Jul/2010, 11:49:00 pm (UTC)'!
 accessLog: aStreamOrFilename
 	"The standard access log. Can be either a stream or a string; if the access log
 	is a string then the string is assumed to be a file name and the file will be opened 
@@ -1179,57 +1179,57 @@ accessLog: aStreamOrFilename
 
 	accessLog := aStreamOrFilename! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010 18:03:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010, 9:03:00 pm (UTC)'!
 allowAuth
 	"If true, WebClient will attempt to handle authorization requests"
 
 	^flags anyMask: FlagAllowAuth! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010 18:02:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010, 9:02:00 pm (UTC)'!
 allowAuth: aBool
 	"If true, WebClient will attempt to handle authorization requests"
 
 	flags := aBool ifTrue:[flags bitOr: FlagAllowAuth] ifFalse:[flags bitClear: FlagAllowAuth].
 ! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010 18:01:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010, 9:01:00 pm (UTC)'!
 allowRedirect
 	"If true, WebClient will attempt to handle redirect responses"
 
 	^flags anyMask: FlagAllowRedirect! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010 18:02:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 1/Apr/2010, 9:02:00 pm (UTC)'!
 allowRedirect: aBool
 	"If true, WebClient will attempt to handle redirect responses"
 
 	flags := aBool ifTrue:[flags bitOr: FlagAllowRedirect] ifFalse:[flags bitClear: FlagAllowRedirect].
 ! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 10/Feb/2012 13:13:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 10/Feb/2012, 4:13:00 pm (UTC)'!
 authParams
 	"The authentication parameters"
 
 	^authParams! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 10/Feb/2012 13:13:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 10/Feb/2012, 4:13:00 pm (UTC)'!
 authParams: aDictionary
 	"The authentication parameters"
 
 	authParams := aDictionary! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 23/Feb/2010 10:31:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 23/Feb/2010, 1:31:00 pm (UTC)'!
 cookies
 	"The cookies that have been set for this session"
 
 	^cookies! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 23/Feb/2010 10:31:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 23/Feb/2010, 1:31:00 pm (UTC)'!
 cookies: aCollection
 	"The cookies that have been set for this session"
 
 	cookies := aCollection.! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 12/Aug/2010 21:16:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 13/Aug/2010, 12:16:00 am (UTC)'!
 debugLog
 	"If provided, WebClient will print all requests and responses to the debugLog,
 	except from the content of the message. The debug log must be a stream of
@@ -1237,7 +1237,7 @@ debugLog
 
 	^debugLog! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 12/Aug/2010 21:17:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 13/Aug/2010, 12:17:00 am (UTC)'!
 debugLog: aStream
 	"If provided, WebClient will print all requests and responses to the debugLog,
 	except from the content of the message. The debug log must be a stream of
@@ -1245,7 +1245,7 @@ debugLog: aStream
 
 	debugLog := aStream! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:12:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:12:00 am (UTC)'!
 maxRedirect
 	"The max. number of redirects we allow for the SAME SITE before giving up.
 	Redirects can happen for any number of reasons between any number of sites
@@ -1253,7 +1253,7 @@ maxRedirect
 
 	^maxRedirect! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:12:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:12:00 am (UTC)'!
 maxRedirect: aNumber
 	"The max. number of redirects we allow for the SAME SITE before giving up.
 	Redirects can happen for any number of reasons between any number of sites
@@ -1261,7 +1261,7 @@ maxRedirect: aNumber
 
 	maxRedirect := aNumber! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 27/Mar/2010 12:01:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 27/Mar/2010, 3:01:00 pm (UTC)'!
 password
 	"The password for remote authentication.
 	The password should generally not be a plain-text
@@ -1270,7 +1270,7 @@ password
 
 	^authParams at: #password ifAbsent:[nil]! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 27/Mar/2010 01:32:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 27/Mar/2010, 4:32:00 am (UTC)'!
 password: aStringOrValuable
 	"The password for remote authentication.
 	The password should generally not be a plain-text
@@ -1279,26 +1279,26 @@ password: aStringOrValuable
 
 	^authParams at: #password put: aStringOrValuable! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 5/Aug/2010 19:50:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 5/Aug/2010, 10:50:00 pm (UTC)'!
 scheme
 	"The scheme used for the request (usually http or https)"
 
 	^scheme! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 5/Aug/2010 19:50:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 5/Aug/2010, 10:50:00 pm (UTC)'!
 scheme: aString
 	"The scheme used for the request (usually http or https)"
 
 	scheme := aString! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 21/Feb/2010 09:50:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 21/Feb/2010, 12:50:00 pm (UTC)'!
 server
 	"The server to use for connections.
 	The server is specified as server:port if needed"
 
 	^server! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 21/Feb/2010 09:50:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 21/Feb/2010, 12:50:00 pm (UTC)'!
 server: aString
 	"The server to use for connections.
 	The server should be specified as server:port if needed"
@@ -1306,13 +1306,13 @@ server: aString
 	server := aString
 ! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 19:22:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 10:22:00 pm (UTC)'!
 serverName
 	"Returns the name part of the server:port description"
 
 	^server copyUpTo: $:! !
 
-!WebClient methodsFor: 'accessing' stamp: 'NM 23/Aug/2021 16:36:46'!
+!WebClient methodsFor: 'accessing' stamp: 'NM 23/Aug/2021, 7:36:46 pm (UTC)'!
 serverPort
 	"Returns the port of the server:port description"
 
@@ -1321,44 +1321,44 @@ serverPort
 		ifNotEmpty:[:portString| portString asNumber].
 ! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:12:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:12:00 pm (UTC)'!
 timeout
 	"Timeout for the http operations"
 
 	^timeout! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:12:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:12:00 pm (UTC)'!
 timeout: aNumber
 	"Timeout for the http operations"
 
 	timeout := aNumber! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:16:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:16:00 am (UTC)'!
 userAgent
 	"The User-Agent string sent to the server"
 
 	^userAgent! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:17:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:17:00 am (UTC)'!
 userAgent: aString
 	"The User-Agent string sent to the server. 
 	If no user agent should be sent, this value can be set to nil"
 
 	userAgent := aString! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 24/Mar/2010 16:05:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 24/Mar/2010, 7:05:00 pm (UTC)'!
 username
 	"The username for remote authentication"
 
 	^authParams at: #username ifAbsent:[nil]! !
 
-!WebClient methodsFor: 'accessing' stamp: 'ar 24/Mar/2010 16:05:00'!
+!WebClient methodsFor: 'accessing' stamp: 'ar 24/Mar/2010, 7:05:00 pm (UTC)'!
 username: aString
 	"The username for remote authentication"
 
 	authParams at: #username put: aString! !
 
-!WebClient methodsFor: 'authentication' stamp: 'ar 30/Mar/2010 20:45:00'!
+!WebClient methodsFor: 'authentication' stamp: 'ar 30/Mar/2010, 11:45:00 pm (UTC)'!
 authDispatch: request from: response header: authHeader params: params
 	"Dispatch on an authentication method. 
 	Subclasses can extend this method to support more auth methods."
@@ -1371,7 +1371,7 @@ authDispatch: request from: response header: authHeader params: params
 	} otherwise:["ignore"].
 ! !
 
-!WebClient methodsFor: 'authentication' stamp: 'jmv 26/May/2022 12:07:21'!
+!WebClient methodsFor: 'authentication' stamp: 'jmv 26/May/2022, 3:07:21 pm (UTC)'!
 basicAuth: request from: response header: header params: params
 	"Provide basic authentication for the request"
 
@@ -1386,7 +1386,7 @@ basicAuth: request from: response header: header params: params
 	pass := (params at: #password ifAbsent:[nil]) ifNil:[^self].
 	authParams at: #authResponse put: (user, ':', pass value) asUtf8Bytes base64Encoded! !
 
-!WebClient methodsFor: 'authentication' stamp: 'ar 26/Aug/2010 07:48:00'!
+!WebClient methodsFor: 'authentication' stamp: 'ar 26/Aug/2010, 10:48:00 am (UTC)'!
 digestAuth: request from: response header: authHeader params: params
 	"Perform digest authentication"
 
@@ -1440,7 +1440,7 @@ digestAuth: request from: response header: authHeader params: params
 	].
 	params at: #authResponse put: header.! !
 
-!WebClient methodsFor: 'authentication' stamp: 'ar 30/Mar/2010 20:46:00'!
+!WebClient methodsFor: 'authentication' stamp: 'ar 30/Mar/2010, 11:46:00 pm (UTC)'!
 flushAuthState: params
 	"Fliush authentication state that should not been preserved 
 	inbetween failed attempts to authenticate. 
@@ -1449,7 +1449,7 @@ flushAuthState: params
 	params removeKey: #authMethod ifAbsent:[].
 ! !
 
-!WebClient methodsFor: 'sending' stamp: 'ar 10/Feb/2012 13:12:00'!
+!WebClient methodsFor: 'sending' stamp: 'ar 10/Feb/2012, 4:12:00 pm (UTC)'!
 authenticate: request from: response
 	"Authenticate after having received a 401/407 response.
 	Returns true if we should retry, false if we fail here."
@@ -1512,7 +1512,7 @@ authenticate: request from: response
 	"And retry with the new credentials"
 	^self authenticate: request from: response! !
 
-!WebClient methodsFor: 'sending' stamp: 'ar 4/Sep/2010 11:10:00'!
+!WebClient methodsFor: 'sending' stamp: 'ar 4/Sep/2010, 2:10:00 pm (UTC)'!
 redirect: request from: response
 	"Handle a 3xx redirect response"
 
@@ -1547,13 +1547,13 @@ redirect: request from: response
 
 	^true! !
 
-!WebClient methodsFor: 'sending' stamp: 'ar 25/Feb/2010 22:16:00'!
+!WebClient methodsFor: 'sending' stamp: 'ar 26/Feb/2010, 1:16:00 am (UTC)'!
 sendRequest: request
 	"Send an http request"
 
 	^self sendRequest: request content: nil size: 0! !
 
-!WebClient methodsFor: 'sending' stamp: 'DSG 25/May/2012 23:35:00'!
+!WebClient methodsFor: 'sending' stamp: 'DSG 26/May/2012, 2:35:00 am (UTC)'!
 sendRequest: request content: contentStream size: streamSize
 	"Send an http request"
 
@@ -1568,7 +1568,7 @@ sendRequest: request content: contentStream size: streamSize
 						]]].
 ! !
 
-!WebClient methodsFor: 'sending' stamp: 'CK 24/Nov/2017 14:32:10'!
+!WebClient methodsFor: 'sending' stamp: 'CK 24/Nov/2017, 5:32:10 pm (UTC)'!
 sendRequest: request contentBlock: contentBlock
 	"Send an http request"
 
@@ -1640,7 +1640,7 @@ sendRequest: request contentBlock: contentBlock
 
 	^response! !
 
-!WebClient methodsFor: 'sending' stamp: 'ar 12/Aug/2010 21:37:00'!
+!WebClient methodsFor: 'sending' stamp: 'ar 13/Aug/2010, 12:37:00 am (UTC)'!
 writeCookiesFor: request on: aStream
 	"Write the cookies for a particular request"
 
@@ -1653,14 +1653,14 @@ writeCookiesFor: request on: aStream
 	].
 ! !
 
-!WebClient methodsFor: 'sending' stamp: 'DSG 24/May/2012 17:24:00'!
+!WebClient methodsFor: 'sending' stamp: 'DSG 24/May/2012, 8:24:00 pm (UTC)'!
 writeHeadersFor: request on: aStream
 	"Write all the headers for the given request on aStream"
 
 	request headersDo:[:key :value| aStream nextPutAll: key, ': ', value asString; nextPutAll: String crlfString].
 ! !
 
-!WebClient methodsFor: 'sending' stamp: 'CK 24/Nov/2017 14:43:55'!
+!WebClient methodsFor: 'sending' stamp: 'CK 24/Nov/2017, 5:43:55 pm (UTC)'!
 writeRequest: request on: aStream
 	"Write all the request headers on the given stream"
 
@@ -1671,7 +1671,7 @@ writeRequest: request on: aStream
 		aStream crlf.
 		aStream flush].! !
 
-!WebClient methodsFor: 'sending' stamp: 'CK 24/Nov/2017 14:37:08'!
+!WebClient methodsFor: 'sending' stamp: 'CK 24/Nov/2017, 5:37:08 pm (UTC)'!
 writeRequestLine: request on: aStream
 	"Write the HTTP request line on the given stream"
 
@@ -1698,7 +1698,7 @@ writeRequestLine: request on: aStream
 
 	aStream nextPutAll: request rawUrl; space; nextPutAll: request protocol; nextPutAll: String crlfString.! !
 
-!WebClient methodsFor: 'initialize' stamp: 'topa 17/Jun/2016 20:59:00'!
+!WebClient methodsFor: 'initialize' stamp: 'topa 17/Jun/2016, 11:59:00 pm (UTC)'!
 close
 	"Close the client's stream"
 
@@ -1707,7 +1707,7 @@ close
 		stream := nil].
 ! !
 
-!WebClient methodsFor: 'initialize' stamp: 'CK 24/Nov/2017 14:24:01'!
+!WebClient methodsFor: 'initialize' stamp: 'CK 24/Nov/2017, 5:24:01 pm (UTC)'!
 connect
 	"Connect the client to a web server. Returns nil if successful,
 	a WebResponse if a proxy CONNECT request fails."
@@ -1740,7 +1740,7 @@ connect
 	scheme = 'https' ifTrue:[self retryOnce: [^self sslConnect]].
 	^nil! !
 
-!WebClient methodsFor: 'initialize' stamp: 'ar 21/Jul/2010 21:12:00'!
+!WebClient methodsFor: 'initialize' stamp: 'ar 22/Jul/2010, 12:12:00 am (UTC)'!
 defaultPort
 	"Return the default port to use if no port was specified.
 	Since we only support https and http, default to port 80 unless https."
@@ -1749,7 +1749,7 @@ defaultPort
 		ifTrue:[443]
 		ifFalse:[80]! !
 
-!WebClient methodsFor: 'initialize' stamp: 'BAP 13/Dec/2023 15:57:57'!
+!WebClient methodsFor: 'initialize' stamp: 'BAP 13/Dec/2023, 6:57:57 pm (UTC)'!
 defaultUserAgent
 	"Answer the default User-Agent string to use for WebClient"
 
@@ -1757,7 +1757,7 @@ defaultUserAgent
 		SystemVersion current versionString,'; ', 
 		WebUtils platformName,')'.! !
 
-!WebClient methodsFor: 'initialize' stamp: 'ul 28/Jul/2016 18:09:00'!
+!WebClient methodsFor: 'initialize' stamp: 'ul 28/Jul/2016, 9:09:00 pm (UTC)'!
 destroy
 	"Destroys the client"
 
@@ -1767,21 +1767,21 @@ destroy
 	].
 ! !
 
-!WebClient methodsFor: 'initialize' stamp: 'ar 27/Mar/2010 11:59:00'!
+!WebClient methodsFor: 'initialize' stamp: 'ar 27/Mar/2010, 2:59:00 pm (UTC)'!
 detectProxyServer
 	"Automatically detect the proxy server to use"
 
 	proxyServer := ProxyHandler proxyServerFor: self server.
 ! !
 
-!WebClient methodsFor: 'initialize' stamp: 'ar 1/Apr/2010 18:51:00'!
+!WebClient methodsFor: 'initialize' stamp: 'ar 1/Apr/2010, 9:51:00 pm (UTC)'!
 flushAuthState
 	"Flush all the auth state"
 
 	self flushAuthState: authParams.
 	self flushAuthState: proxyParams.! !
 
-!WebClient methodsFor: 'initialize' stamp: 'ar 10/Feb/2012 13:33:00'!
+!WebClient methodsFor: 'initialize' stamp: 'ar 10/Feb/2012, 4:33:00 pm (UTC)'!
 initialize
 	"Initializes the receiver"
 	flags := 0.
@@ -1803,7 +1803,7 @@ initialize
 	debugLog := DebugLog.
 ! !
 
-!WebClient methodsFor: 'initialize' stamp: 'jmv 13/Apr/2023 15:19:00'!
+!WebClient methodsFor: 'initialize' stamp: 'jmv 13/Apr/2023, 6:19:00 pm (UTC)'!
 initializeFromUrl: urlString
 	"Initialize the client from a url string"
 
@@ -1825,14 +1825,14 @@ initializeFromUrl: urlString
 	self server: serverAndPort.
 	self detectProxyServer.! !
 
-!WebClient methodsFor: 'initialize' stamp: 'ar 9/Aug/2010 08:30:00'!
+!WebClient methodsFor: 'initialize' stamp: 'ar 9/Aug/2010, 11:30:00 am (UTC)'!
 newRequest
 	"Create an return a new WebRequest.
 	Subclasses can use this method to override the default request class."
 
 	^WebRequest new! !
 
-!WebClient methodsFor: 'initialize' stamp: 'CK 24/Nov/2017 14:59:44'!
+!WebClient methodsFor: 'initialize' stamp: 'CK 24/Nov/2017, 5:59:44 pm (UTC)'!
 proxyConnect
 	"Send a proxy CONNECT request to connect to a remote host via the chosen proxy server"
 
@@ -1878,13 +1878,13 @@ proxyConnect
 
 	^response! !
 
-!WebClient methodsFor: 'initialize' stamp: 'ar 4/Sep/2010 11:10:00'!
+!WebClient methodsFor: 'initialize' stamp: 'ar 4/Sep/2010, 2:10:00 pm (UTC)'!
 requestWithUrl: urlString
 	"Create and return a new WebRequest initialized with the given url."
 
 	^self  newRequest initializeFromUrl: urlString! !
 
-!WebClient methodsFor: 'initialize' stamp: 'topa 4/Nov/2014 00:13:00'!
+!WebClient methodsFor: 'initialize' stamp: 'topa 4/Nov/2014, 3:13:00 am (UTC)'!
 retryOnce: aTryBlock
 	" Retry the block once if it failes,
 	except for direct network errors.
@@ -1898,7 +1898,7 @@ retryOnce: aTryBlock
 			ifTrue: [e pass]
 			ifFalse: [again := false. e retry]].! !
 
-!WebClient methodsFor: 'initialize' stamp: 'CK 24/Nov/2017 14:25:04'!
+!WebClient methodsFor: 'initialize' stamp: 'CK 24/Nov/2017, 5:25:04 pm (UTC)'!
 sslConnect
 	"Do the SSL handshake"
 	"Connect the client to a web server"
@@ -1922,21 +1922,21 @@ sslConnect
 	^ nil"indicating success"
 ! !
 
-!WebClient methodsFor: 'initialize' stamp: 'jmv 18/Mar/2019 13:15:39'!
+!WebClient methodsFor: 'initialize' stamp: 'jmv 18/Mar/2019, 4:15:39 pm (UTC)'!
 sslConnect: aStream to: aLastServer
 	"Do the SSL handshake, use SNI if available"
 	(aStream respondsTo: #sslConnectTo:)
 		ifTrue: [aStream sslConnectTo: aLastServer]
 		ifFalse: [aStream sslConnect].! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010 20:04:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010, 11:04:00 pm (UTC)'!
 httpDelete: urlString
 	"Sends an DELETE request"
 
 	^self httpDelete: urlString do:[:req]
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010 11:06:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010, 2:06:00 pm (UTC)'!
 httpDelete: urlString do: aBlock
 	"Sends a DELETE request"
 
@@ -1948,7 +1948,7 @@ httpDelete: urlString do: aBlock
 	aBlock value: request.
 	^self sendRequest: request.! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 23/Feb/2010 08:57:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 23/Feb/2010, 11:57:00 am (UTC)'!
 httpGet: urlString
 	"GET the response from the given url"
 	"(WebClient httpGet: 'http://www.squeak.org') content"
@@ -1956,7 +1956,7 @@ httpGet: urlString
 	^self httpGet: urlString do:[:req]
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'CK 24/Nov/2017 14:46:24'!
+!WebClient methodsFor: 'methods' stamp: 'CK 24/Nov/2017, 5:46:24 pm (UTC)'!
 httpGet: urlString do: aBlock
 	"GET the response from the given url
 	(WebClient httpGet: 'http://www.cuis-smalltalk.org/') content
@@ -1972,14 +1972,14 @@ httpGet: urlString do: aBlock
 	^self sendRequest: request
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010 20:05:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010, 11:05:00 pm (UTC)'!
 httpHead: urlString
 	"Sends a HEAD request"
 
 	^self httpHead: urlString do:[:req]
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010 11:06:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010, 2:06:00 pm (UTC)'!
 httpHead: urlString do: aBlock
 	"Sends a HEAD request"
 
@@ -1991,14 +1991,14 @@ httpHead: urlString do: aBlock
 	aBlock value: request.
 	^self sendRequest: request.! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010 20:05:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010, 11:05:00 pm (UTC)'!
 httpOptions: urlString
 	"Sends an OPTIONS request"
 
 	^self httpOptions: urlString do:[:req]
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010 11:06:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010, 2:06:00 pm (UTC)'!
 httpOptions: urlString do: aBlock
 	"Sends an OPTIONS request"
 
@@ -2011,13 +2011,13 @@ httpOptions: urlString do: aBlock
 	^self sendRequest: request
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 23/Feb/2010 08:56:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 23/Feb/2010, 11:56:00 am (UTC)'!
 httpPost: urlString content: postData type: contentType
 	"POST the data to the given url"
 
 	^self httpPost: urlString content: postData type: contentType do:[:req]! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010 11:07:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010, 2:07:00 pm (UTC)'!
 httpPost: urlString content: postData type: contentType do: aBlock
 	"POST the data to the given url"
 
@@ -2031,7 +2031,7 @@ httpPost: urlString content: postData type: contentType do: aBlock
 	aBlock value: request.
 	^self sendRequest: request content: postData readStream size: postData size! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 31/Aug/2010 22:54:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 1/Sep/2010, 1:54:00 am (UTC)'!
 httpPostChunked: urlString content: chunkBlock type: contentType
 	"POST the data to the given url using chunked transfer-encoding.
 	The chunkBlock takes a request and can be fed using #nextChunkPut:
@@ -2047,7 +2047,7 @@ httpPostChunked: urlString content: chunkBlock type: contentType
 
 	^self httpPostChunked: urlString content: chunkBlock type: contentType do: [:req]! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010 11:07:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010, 2:07:00 pm (UTC)'!
 httpPostChunked: urlString content: chunkBlock type: contentType do: aBlock
 	"POST the data to the given url using chunked transfer-encoding. 
 	The chunkBlock takes a request and can be fed using #nextChunkPut:
@@ -2079,13 +2079,13 @@ httpPostChunked: urlString content: chunkBlock type: contentType do: aBlock
 	].
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 23/Feb/2010 08:57:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 23/Feb/2010, 11:57:00 am (UTC)'!
 httpPut: urlString content: postData type: contentType
 	"PUT the data to the given url"
 
 	^self httpPut: urlString content: postData type: contentType do:[:req]! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010 11:07:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010, 2:07:00 pm (UTC)'!
 httpPut: urlString content: postData type: contentType do: aBlock
 	"PUT the data to the given url"
 
@@ -2099,14 +2099,14 @@ httpPut: urlString content: postData type: contentType do: aBlock
 	aBlock value: request.
 	^self sendRequest: request content: postData readStream size: postData size! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010 20:05:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 11/May/2010, 11:05:00 pm (UTC)'!
 httpTrace: urlString
 	"Sends a TRACE request"
 
 	^self httpTrace: urlString do:[:req]
 ! !
 
-!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010 11:08:00'!
+!WebClient methodsFor: 'methods' stamp: 'ar 4/Sep/2010, 2:08:00 pm (UTC)'!
 httpTrace: urlString do: aBlock
 	"Sends a TRACE request"
 
@@ -2119,25 +2119,25 @@ httpTrace: urlString do: aBlock
 	^self sendRequest: request
 ! !
 
-!WebClient methodsFor: 'testing' stamp: 'ar 30/Mar/2010 19:18:00'!
+!WebClient methodsFor: 'testing' stamp: 'ar 30/Mar/2010, 10:18:00 pm (UTC)'!
 isConnected
 	"Returns true if the client is still connected"
 
 	^stream notNil and:[stream isConnected]! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 10/Feb/2012 13:12:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 10/Feb/2012, 4:12:00 pm (UTC)'!
 proxyParams
 	"The proxy authentication parameters"
 
 	^proxyParams! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 10/Feb/2012 13:12:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 10/Feb/2012, 4:12:00 pm (UTC)'!
 proxyParams: aDictionary
 	"The proxy authentication parameters"
 
 	proxyParams := aDictionary! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010 16:04:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010, 7:04:00 pm (UTC)'!
 proxyPass
 	"The password for an authenticating proxy.
 	The password should generally not be a plain-text
@@ -2146,7 +2146,7 @@ proxyPass
 
 	^proxyParams at: #password! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010 16:04:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010, 7:04:00 pm (UTC)'!
 proxyPass: aStringOrValuable
 	"The password for an authenticating proxy.
 	The password should generally not be a plain-text
@@ -2155,7 +2155,7 @@ proxyPass: aStringOrValuable
 
 	proxyParams at: #password put: aStringOrValuable! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 20/Feb/2010 19:17:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 20/Feb/2010, 10:17:00 pm (UTC)'!
 proxyServer
 	"The proxy server to use for connections.
 	The server should be specified as server:port if the proxy
@@ -2163,7 +2163,7 @@ proxyServer
 
 	^proxyServer! !
 
-!WebClient methodsFor: 'proxy' stamp: 'CK 24/Nov/2017 14:01:01'!
+!WebClient methodsFor: 'proxy' stamp: 'CK 24/Nov/2017, 5:01:01 pm (UTC)'!
 proxyServer: aString
 	"The proxy server to use for connections.
 	The server should be specified as server:port if the proxy
@@ -2172,13 +2172,13 @@ proxyServer: aString
 	proxyServer := aString.
 	ProxyHandler defaultProxyServer: aString.! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 20/Feb/2010 19:22:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 20/Feb/2010, 10:22:00 pm (UTC)'!
 proxyServerName
 	"Returns the name part of the server:port description"
 
 	^proxyServer copyUpTo: $:! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 20/Feb/2010 19:21:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 20/Feb/2010, 10:21:00 pm (UTC)'!
 proxyServerPort
 	"Returns the port of the proxyServer:port description"
 
@@ -2187,19 +2187,19 @@ proxyServerPort
 		ifNotEmpty:[:portString| portString asInteger].
 ! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010 16:02:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010, 7:02:00 pm (UTC)'!
 proxyUser
 	"The user name for an authenticating proxy"
 
 	^proxyParams at: #username ifAbsent:[nil]! !
 
-!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010 16:02:00'!
+!WebClient methodsFor: 'proxy' stamp: 'ar 24/Mar/2010, 7:02:00 pm (UTC)'!
 proxyUser: aString
 	"The user name for an authenticating proxy"
 
 	proxyParams at: #username put: aString! !
 
-!WebClient class methodsFor: 'accessing' stamp: 'ar 12/Aug/2010 21:20:00'!
+!WebClient class methodsFor: 'accessing' stamp: 'ar 13/Aug/2010, 12:20:00 am (UTC)'!
 debugLog
 	"The default debugLog, if any:
 		WebClient debugLog: Transcript.
@@ -2208,7 +2208,7 @@ debugLog
 
 	^DebugLog! !
 
-!WebClient class methodsFor: 'accessing' stamp: 'ar 12/Aug/2010 21:20:00'!
+!WebClient class methodsFor: 'accessing' stamp: 'ar 13/Aug/2010, 12:20:00 am (UTC)'!
 debugLog: aStream
 	"The default debugLog, if any:
 		WebClient debugLog: Transcript.
@@ -2217,19 +2217,19 @@ debugLog: aStream
 
 	DebugLog := aStream.! !
 
-!WebClient class methodsFor: 'accessing' stamp: 'ar 23/Feb/2010 22:26:00'!
+!WebClient class methodsFor: 'accessing' stamp: 'ar 24/Feb/2010, 1:26:00 am (UTC)'!
 proxyHandler
 	"The currently registered proxy handler"
 
 	^ProxyHandler! !
 
-!WebClient class methodsFor: 'accessing' stamp: 'ar 23/Feb/2010 22:26:00'!
+!WebClient class methodsFor: 'accessing' stamp: 'ar 24/Feb/2010, 1:26:00 am (UTC)'!
 proxyHandler: anObject
 	"The currently registered proxy handler"
 
 	ProxyHandler := anObject! !
 
-!WebClient class methodsFor: 'utilities' stamp: 'ar 1/Jun/2010 20:24:00'!
+!WebClient class methodsFor: 'utilities' stamp: 'ar 1/Jun/2010, 11:24:00 pm (UTC)'!
 htmlSubmit: urlString fields: fieldMap
 	"A utility method for html submit operations. The fieldMap can be EITHER
 	an array of associations OR a Dictionary of key value pairs (the former is
@@ -2247,7 +2247,7 @@ htmlSubmit: urlString fields: fieldMap
 			method: 'GET'
 ! !
 
-!WebClient class methodsFor: 'utilities' stamp: 'ar 1/Jun/2010 20:24:00'!
+!WebClient class methodsFor: 'utilities' stamp: 'ar 1/Jun/2010, 11:24:00 pm (UTC)'!
 htmlSubmit: urlString fields: fieldMap method: method
 	"A utility method for html submit operations. The fieldMap can be EITHER
 	an array of associations OR a Dictionary of key value pairs (the former is
@@ -2266,7 +2266,7 @@ htmlSubmit: urlString fields: fieldMap method: method
 			encoding: 'application/x-www-form-urlencoded'
 ! !
 
-!WebClient class methodsFor: 'utilities' stamp: 'ar 20/Jul/2010 20:10:00'!
+!WebClient class methodsFor: 'utilities' stamp: 'ar 20/Jul/2010, 11:10:00 pm (UTC)'!
 htmlSubmit: urlString fields: fields method: method encoding: encoding
 	"A utility method for html submit operations. The fieldMap can be EITHER
 	an array of associations OR a Dictionary of key value pairs (the former is
@@ -2305,7 +2305,7 @@ htmlSubmit: urlString fields: fields method: method encoding: encoding
 	self error: 'Unsupported method: ', method.
 ! !
 
-!WebClient class methodsFor: 'utilities' stamp: 'ar 20/Jul/2010 20:09:00'!
+!WebClient class methodsFor: 'utilities' stamp: 'ar 20/Jul/2010, 11:09:00 pm (UTC)'!
 httpPost: url multipartFields: fieldMap
 	"Make a form submission using multipart/form-data POST.
 
@@ -2324,7 +2324,7 @@ httpPost: url multipartFields: fieldMap
 		content: (WebUtils encodeMultipartForm: fieldMap boundary: boundary) 
 		type: 'multipart/form-data; boundary=', boundary! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:30:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:30:00 pm (UTC)'!
 httpDelete: urlString
 	"Sends a DELETE request"
 	"WebClient httpDelete: 'http://ftp.squeak.org/trunk'"
@@ -2332,7 +2332,7 @@ httpDelete: urlString
 	^self httpDo:[:client| client httpDelete: urlString].
 ! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:29:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:29:00 pm (UTC)'!
 httpDo: aBlock
 	"Simplified wrapper for running various methods"
 
@@ -2342,14 +2342,14 @@ httpDo: aBlock
 	response content; close.
 	^response! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:30:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:30:00 pm (UTC)'!
 httpGet: urlString
 	"Get the response from the given url"
 	"(WebClient httpGet: 'http://www.squeak.org') content"
 
 	^self httpDo:[:client| client httpGet: urlString].! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:31:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:31:00 pm (UTC)'!
 httpHead: urlString
 	"Sends a HEAD request"
 	"WebClient httpHead: 'http://ftp.squeak.org/trunk'"
@@ -2357,7 +2357,7 @@ httpHead: urlString
 	^self httpDo:[:client| client httpHead: urlString].
 ! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:31:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:31:00 pm (UTC)'!
 httpOptions: urlString
 	"Sends an OPTIONS request"
 	"WebClient httpOptions: 'http://ftp.squeak.org/*'"
@@ -2366,14 +2366,14 @@ httpOptions: urlString
 	^self httpDo:[:client| client httpOptions: urlString]
 ! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:31:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:31:00 pm (UTC)'!
 httpPost: urlString content: postData type: contentType
 	"Fire off an HTTP post request"
 
 	^self httpDo:[:client| client httpPost: urlString content: postData type: contentType]
 ! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:31:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:31:00 pm (UTC)'!
 httpPostChunked: urlString content: chunkBlock type: contentType
 	"POST the data to the given url using chunked transfer-encoding.
 	The chunkBlock takes a request and can be fed using #nextChunkPut:
@@ -2391,13 +2391,13 @@ httpPostChunked: urlString content: chunkBlock type: contentType
 		client httpPostChunked: urlString content: chunkBlock type: contentType]
 ! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:32:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:32:00 pm (UTC)'!
 httpPut: urlString content: postData type: contentType
 	"Fire off an HTTP PUT request"
 
 	^self httpDo:[:client| client httpPut: urlString content: postData type: contentType]! !
 
-!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012 13:32:00'!
+!WebClient class methodsFor: 'methods' stamp: 'ar 10/Feb/2012, 4:32:00 pm (UTC)'!
 httpTrace: urlString
 	"Sends a TRACE request"
 	"(WebClient httpTrace: 'http://lists.squeakfoundation.org') content"
@@ -2405,7 +2405,7 @@ httpTrace: urlString
 
 	^self httpDo:[:client| client httpTrace: urlString]! !
 
-!WebClient class methodsFor: 'class initialization' stamp: 'jmv 26/Jun/2017 19:16:36'!
+!WebClient class methodsFor: 'class initialization' stamp: 'jmv 26/Jun/2017, 10:16:36 pm (UTC)'!
 initialize
 	"WebClient initialize"
 
@@ -2416,7 +2416,7 @@ initialize
 	"Default proxy handler"
 	ProxyHandler := WebUtils! !
 
-!WebClient class methodsFor: 'benchmark' stamp: 'jmv 25/Jun/2017 20:07:19'!
+!WebClient class methodsFor: 'benchmark' stamp: 'jmv 25/Jun/2017, 11:07:19 pm (UTC)'!
 requestBenchmark: url persistent: aBool
 	"Run a WebClient benchmark to measure request handling speed.
 	Try using a persistent connection if requested.
@@ -2448,7 +2448,7 @@ requestBenchmark: url persistent: aBool
 	].
 	^(count  * 1000 // time) printStringWithCommas, ' requests/sec'! !
 
-!WebClient class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011 10:39:00'!
+!WebClient class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011, 1:39:00 pm (UTC)'!
 webSocket00: serverUrl protocol: protocol
 	"Attempt to connect to the given server url using the WebSocket api"
 
@@ -2478,7 +2478,7 @@ webSocket00: serverUrl protocol: protocol
 	^WebSocket00 on: resp stream.
 ! !
 
-!WebClient class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011 10:39:00'!
+!WebClient class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011, 1:39:00 pm (UTC)'!
 webSocket07: serverUrl protocol: protocol
 	"Attempt to connect to the given server url using the WebSocket api"
 	"http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-07"
@@ -2510,7 +2510,7 @@ webSocket07: serverUrl protocol: protocol
 	^WebSocket07 on: resp stream.
 ! !
 
-!WebClient class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011 10:39:00'!
+!WebClient class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011, 1:39:00 pm (UTC)'!
 webSocket68: serverUrl protocol: protocol
 	"Attempt to connect to the given server url using the WebSocket api"
 
@@ -2530,7 +2530,7 @@ webSocket68: serverUrl protocol: protocol
 	^WebSocket00 on: resp stream.
 ! !
 
-!WebClient class methodsFor: 'websockets' stamp: 'ar 9/Jul/2010 00:37:00'!
+!WebClient class methodsFor: 'websockets' stamp: 'ar 9/Jul/2010, 3:37:00 am (UTC)'!
 webSocketTo: serverUrl
 	"Attempt to connect to the given server url using the WebSocket api"
 
@@ -2551,130 +2551,130 @@ webSocketTo: serverUrl
 
 	^self webSocketTo: serverUrl protocol: nil! !
 
-!WebClient class methodsFor: 'websockets' stamp: 'ar 9/Jul/2010 00:31:00'!
+!WebClient class methodsFor: 'websockets' stamp: 'ar 9/Jul/2010, 3:31:00 am (UTC)'!
 webSocketTo: serverUrl protocol: protocol
 	"Attempt to connect to the given server url using the WebSocket api"
 
 	^self webSocket00: serverUrl protocol: protocol! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 5/Aug/2010 18:22:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 5/Aug/2010, 9:22:00 pm (UTC)'!
 comment
 	"Cookie comment"
 
 	^comment! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 5/Aug/2010 18:22:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 5/Aug/2010, 9:22:00 pm (UTC)'!
 comment: aString
 	"Cookie comment"
 
 	comment := aString! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 domain
 	"Cookie domain"
 
 	^domain! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 domain: aString
 	"Cookie domain"
 
 	domain := aString.! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 11/May/2010 20:06:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 11/May/2010, 11:06:00 pm (UTC)'!
 expiry
 	"The expiry DateAndTime"
 
 	^expiry! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 11/May/2010 20:06:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 11/May/2010, 11:06:00 pm (UTC)'!
 expiry: aDateAndTime
 	"The expiry DateAndTime"
 
 	expiry := aDateAndTime ifNotNil:[:dt| dt asUTC].! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 5/Aug/2010 18:21:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 5/Aug/2010, 9:21:00 pm (UTC)'!
 expirySeconds: maxAge
 	"Compute the cookie's expiry age from the given number of seconds"
 
 	maxAge = 0 ifTrue:[self expiry: DateAndTime new].
 	self expiry: DateAndTime now + maxAge seconds.! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 31/Mar/2010 08:38:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 31/Mar/2010, 11:38:00 am (UTC)'!
 httpOnly
 	"If the cookie should be httpOnly (not scriptable).
 	See http://msdn2.microsoft.com/en-us/library/ms533046.aspx"
 
 	^httpOnly! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 31/Mar/2010 08:38:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 31/Mar/2010, 11:38:00 am (UTC)'!
 httpOnly: aBool
 	"If the cookie should be httpOnly (not scriptable).
 	See http://msdn2.microsoft.com/en-us/library/ms533046.aspx"
 
 	httpOnly := aBool! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 name
 	"The name of the cookie"
 
 	^name! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 name: aString
 	"The name of the cookie"
 
 	name := aString! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 path
 	"Cookie path"
 
 	^path! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 path: aString
 	"Cookie path"
 
 	path := aString! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 secure
 	"Secure cookie flag"
 
 	^secure! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 secure: aBool
 	"Secure cookie flag"
 
 	secure := aBool! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 value
 	"The value of the cookie"
 
 	^value! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:06:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:06:00 pm (UTC)'!
 value: aString
 	"The value of the cookie"
 
 	value := aString! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:06:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:06:00 pm (UTC)'!
 version
 	"Cookie version"
 
 	^version! !
 
-!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:06:00'!
+!WebCookie methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:06:00 pm (UTC)'!
 version: aString
 	"Cookie version"
 
 	version := aString! !
 
-!WebCookie methodsFor: 'printing' stamp: 'jmv 25/Jun/2017 19:15:34'!
+!WebCookie methodsFor: 'printing' stamp: 'jmv 29/Aug/2026, 9:51:45 pm (UTC)'!
 printOn: aStream
 	"Creates the string representation for this cookie"
 
@@ -2682,7 +2682,7 @@ printOn: aStream
 	expiry ifNotNil:[ 
 		aStream nextPutAll:'; expires='.
 		aStream nextPutAll: expiry dayOfWeekName ,  ', '.
-		expiry date printOn: aStream format: #(1 2 3 $- 2 2 2 ).
+		expiry date printOn: aStream format: #(1 2 3 $- 2 1 2 ).
 		aStream nextPutAll: ' ', expiry time print24,' GMT'.
 	].
 	path ifNotNil:[
@@ -2702,7 +2702,7 @@ printOn: aStream
 	].
 ! !
 
-!WebCookie methodsFor: 'comparing' stamp: 'ar 11/May/2010 08:58:00'!
+!WebCookie methodsFor: 'comparing' stamp: 'ar 11/May/2010, 11:58:00 am (UTC)'!
 = aCookie
 	"Compare the receiver with aCookie"
 
@@ -2711,19 +2711,19 @@ printOn: aStream
 		and:[aCookie domain = self domain
 		and:[aCookie path = self path]]].! !
 
-!WebCookie methodsFor: 'comparing' stamp: 'ar 11/May/2010 08:59:00'!
+!WebCookie methodsFor: 'comparing' stamp: 'ar 11/May/2010, 11:59:00 am (UTC)'!
 hash
 	"Hash is re-implemented because #= is re-implemented"
 
 	^name hash + domain hash + path hash.! !
 
-!WebCookie methodsFor: 'converting' stamp: 'ar 20/Feb/2010 11:06:00'!
+!WebCookie methodsFor: 'converting' stamp: 'ar 20/Feb/2010, 2:06:00 pm (UTC)'!
 asString
 	"Create the string representation for this cookie"
 
 	^String streamContents:[:s| self printOn: s].! !
 
-!WebCookie methodsFor: 'initialize' stamp: 'ar 31/Mar/2010 08:40:00'!
+!WebCookie methodsFor: 'initialize' stamp: 'ar 31/Mar/2010, 11:40:00 am (UTC)'!
 initialize
 	"Initializes the receiver"
 	super initialize.
@@ -2731,7 +2731,7 @@ initialize
 	httpOnly := false.
 ! !
 
-!WebCookie methodsFor: 'initialize' stamp: 'jmv 10/Jan/2023 14:58:08'!
+!WebCookie methodsFor: 'initialize' stamp: 'jmv 10/Jan/2023, 5:58:08 pm (UTC)'!
 readExpiryFrom: aString
 	"Read a cookie expiry date from the given string.
 	The expiration date is specified in the 'Wdy, DD-Mon-YYYY HH:MM:SS GMT' format."
@@ -2745,7 +2745,7 @@ readExpiryFrom: aString
 		DateAndTime readFrom: tokens readStream.
 	] on: Error do:[:ex| ex return: DateAndTime new].! !
 
-!WebCookie methodsFor: 'initialize' stamp: 'jmv 25/Jun/2017 19:15:38'!
+!WebCookie methodsFor: 'initialize' stamp: 'jmv 25/Jun/2017, 10:15:38 pm (UTC)'!
 readFrom: aStream
 	"Read a cookie from the given stream"
 
@@ -2769,14 +2769,14 @@ readFrom: aStream
 		} otherwise:[Transcript log: 'Unknown cookie field: ', key].
 	].! !
 
-!WebCookie methodsFor: 'testing' stamp: 'ar 11/May/2010 20:06:00'!
+!WebCookie methodsFor: 'testing' stamp: 'ar 11/May/2010, 11:06:00 pm (UTC)'!
 isExpired
 	"Return true if this cookie is expired"
 	
 	expiry ifNil:[^false].
 	^expiry asUTC < DateAndTime now asUTC! !
 
-!WebMessage methodsFor: 'printing' stamp: 'ar 20/Feb/2010 11:05:00'!
+!WebMessage methodsFor: 'printing' stamp: 'ar 20/Feb/2010, 2:05:00 pm (UTC)'!
 printOn: aStream
 	"Prints the receiver"
 
@@ -2785,14 +2785,14 @@ printOn: aStream
 	self writeOn: aStream.
 	aStream nextPut: $).! !
 
-!WebMessage methodsFor: 'printing' stamp: 'DSG 24/May/2012 17:38:00'!
+!WebMessage methodsFor: 'printing' stamp: 'DSG 24/May/2012, 8:38:00 pm (UTC)'!
 writeHeadersOn: aStream
 	"Write the request"
 
 	self headersDo:[:key :value| aStream nextPutAll: key, ': ', value asString; nextPutAll: String crlfString].
 ! !
 
-!WebMessage methodsFor: 'printing' stamp: 'DSG 24/May/2012 17:38:00'!
+!WebMessage methodsFor: 'printing' stamp: 'DSG 24/May/2012, 8:38:00 pm (UTC)'!
 writeOn: aStream
 	"Write the request"
 
@@ -2800,20 +2800,20 @@ writeOn: aStream
 	aStream nextPutAll: String crlfString.
 ! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 16:31:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 7:31:00 pm (UTC)'!
 addHeader: key value: value
 	"Adds an ADDITIONAL header for the given key"
 
 	headers add: key -> value.! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 11:02:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 2:02:00 pm (UTC)'!
 headerAt: key
 	"Answers a single value for the given http header. 
 	Do not use for headers that may appear multiple times, such at www-authenticate."
 
 	^self headerAt: key ifAbsent:[''].! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 11:03:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 2:03:00 pm (UTC)'!
 headerAt: key ifAbsent: aBlock
 	"Answers a single value for the given http header. 
 	Do not use for headers that may appear multiple times, such at www-authenticate."
@@ -2821,7 +2821,7 @@ headerAt: key ifAbsent: aBlock
 	self headersAt: key do:[:value| ^value].
 	^aBlock value! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 12:18:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 3:18:00 pm (UTC)'!
 headerAt: key put: value
 	"Sets the value of a header, adding if necessary"
 
@@ -2833,14 +2833,14 @@ headerAt: key put: value
 	].
 	self addHeader: key value: value.! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 11:03:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 2:03:00 pm (UTC)'!
 headersAt: key
 	"Answers a collection of values for the given http header. 
 	Use for headers that may appear multiple times, such at www-authenticate."
 
 	^self headersAt: key ifAbsent:[#()].! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 11:03:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 2:03:00 pm (UTC)'!
 headersAt: aKey do: aBlock
 	"Evaluate aBlock with all the headers matching aKey"
 
@@ -2848,7 +2848,7 @@ headersAt: aKey do: aBlock
 		(aKey sameAs: key) ifTrue:[ aBlock value: value].
 	].! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 11:03:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 2:03:00 pm (UTC)'!
 headersAt: key ifAbsent: aBlock
 	"Answers a collection of values for the given http header. 
 	Use for headers that may appear multiple times, such at www-authenticate."
@@ -2859,7 +2859,7 @@ headersAt: key ifAbsent: aBlock
 	^hdrs asArray ifEmpty:[aBlock value]
 ! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010 11:03:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 20/Feb/2010, 2:03:00 pm (UTC)'!
 headersDo: aBlock
 	"Evaluate aBlock with all of the headers key-value pairs"
 
@@ -2867,20 +2867,20 @@ headersDo: aBlock
 		aBlock value: assoc key value: assoc value.
 	].! !
 
-!WebMessage methodsFor: 'headers' stamp: 'ar 26/Mar/2010 19:02:00'!
+!WebMessage methodsFor: 'headers' stamp: 'ar 26/Mar/2010, 10:02:00 pm (UTC)'!
 removeHeader: key
 	"Removes ALL headers with the given key"
 
 	headers := headers reject:[:assoc| assoc key sameAs: key].
 ! !
 
-!WebMessage methodsFor: 'converting' stamp: 'ar 23/Feb/2010 09:02:00'!
+!WebMessage methodsFor: 'converting' stamp: 'ar 23/Feb/2010, 12:02:00 pm (UTC)'!
 asString
 	"Prints the receiver"
 
 	^String streamContents:[:s| self writeOn: s].! !
 
-!WebMessage methodsFor: 'streaming' stamp: 'ar 2/Feb/2012 15:55:00'!
+!WebMessage methodsFor: 'streaming' stamp: 'ar 2/Feb/2012, 6:55:00 pm (UTC)'!
 chunkFrom: srcStream to: dstStream progress: progressBlock
 	"Stream the content of srcStream to dstStream.
 	Use chunked transfer-encoding."
@@ -2902,7 +2902,7 @@ chunkFrom: srcStream to: dstStream progress: progressBlock
 	dstStream flush.
 	progressBlock ifNotNil:[progressBlock value: nil value: totalRead].! !
 
-!WebMessage methodsFor: 'streaming' stamp: 'DSG 29/Mar/2015 09:10:00'!
+!WebMessage methodsFor: 'streaming' stamp: 'DSG 29/Mar/2015, 12:10:00 pm (UTC)'!
 nextChunk
 	"Answer the next chunk from a message using chunked transfer encoding."
 
@@ -2912,7 +2912,7 @@ nextChunk
 	stream skip: 2. "CrLf"
 	^chunk! !
 
-!WebMessage methodsFor: 'streaming' stamp: 'ar 31/Aug/2010 22:57:00'!
+!WebMessage methodsFor: 'streaming' stamp: 'ar 1/Sep/2010, 1:57:00 am (UTC)'!
 nextChunkPut: chunk
 	"Send the next chunk of a message using chunked transfer encoding.
 
@@ -2926,7 +2926,7 @@ nextChunkPut: chunk
 		stream nextPutAll: chunk; crlf; flush.
 	].! !
 
-!WebMessage methodsFor: 'streaming' stamp: 'ar 4/May/2010 15:44:00'!
+!WebMessage methodsFor: 'streaming' stamp: 'ar 4/May/2010, 6:44:00 pm (UTC)'!
 streamFrom: srcStream size: size progress: aBlock
 	"Stream the given source stream to the message's socket stream.
 	Outbound. Can be used on both request/response depending on
@@ -2934,7 +2934,7 @@ streamFrom: srcStream size: size progress: aBlock
 
 	^self streamFrom: srcStream to: stream size: size progress: aBlock! !
 
-!WebMessage methodsFor: 'streaming' stamp: 'ar 10/Jul/2010 13:51:00'!
+!WebMessage methodsFor: 'streaming' stamp: 'ar 10/Jul/2010, 4:51:00 pm (UTC)'!
 streamFrom: srcStream to: dstStream size: sizeOrNil progress: progressBlock
 	"Stream the content of srcStream to dstStream.
 	If a size is given, stream that many elements, otherwise stream up to the end."
@@ -2963,7 +2963,7 @@ streamFrom: srcStream to: dstStream size: sizeOrNil progress: progressBlock
 	dstStream flush.
 	progressBlock ifNotNil:[progressBlock value: sizeOrNil value: totalRead].! !
 
-!WebMessage methodsFor: 'streaming' stamp: 'ar 4/May/2010 15:46:00'!
+!WebMessage methodsFor: 'streaming' stamp: 'ar 4/May/2010, 6:46:00 pm (UTC)'!
 streamTo: dstStream size: size progress: aBlock
 	"Stream from the receiver's socket stream to the given destination stream.
 	Inbound. Can be used on both request/response depending on
@@ -2974,76 +2974,76 @@ streamTo: dstStream size: size progress: aBlock
 		self streamFrom: content readStream to: dstStream size: size progress: aBlock
 	].! !
 
-!WebMessage methodsFor: 'initialize' stamp: 'ar 4/May/2010 20:02:00'!
+!WebMessage methodsFor: 'initialize' stamp: 'ar 4/May/2010, 11:02:00 pm (UTC)'!
 close
 	"Always closes regardless of connection header"
 
 	stream ifNotNil:[stream close].! !
 
-!WebMessage methodsFor: 'initialize' stamp: 'ar 6/May/2010 20:47:00'!
+!WebMessage methodsFor: 'initialize' stamp: 'ar 6/May/2010, 11:47:00 pm (UTC)'!
 closeIfTransient
 	"Close the underlying connection if it's not persistent"
 
 	self isPersistent ifFalse:[self close].
 ! !
 
-!WebMessage methodsFor: 'initialize' stamp: 'ar 4/May/2010 20:02:00'!
+!WebMessage methodsFor: 'initialize' stamp: 'ar 4/May/2010, 11:02:00 pm (UTC)'!
 destroy
 	"Destroys the underlying stream"
 
 	stream ifNotNil:[stream destroy].! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 18/Jun/2010 23:52:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 19/Jun/2010, 2:52:00 am (UTC)'!
 content
 	"Reads and caches available content and returns it."
 
 	^content ifNil:[content := self getContent].
 ! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 30/Mar/2010 22:05:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 31/Mar/2010, 1:05:00 am (UTC)'!
 content: aString
 	"Sets content for a response"
 
 	content := aString.! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'tsl 18/Jan/2021 11:17:47'!
+!WebMessage methodsFor: 'accessing' stamp: 'tsl 18/Jan/2021, 2:17:47 pm (UTC)'!
 contentLength
 	"Answers the numeric value of the Content-Length header, or nil if no header exist"
 
 	^(self headerAt: 'Content-Length' ifAbsent:[^nil]) asNumber! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 4/May/2010 21:04:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 5/May/2010, 12:04:00 am (UTC)'!
 contentLength: aNumber
 	"Sets the numeric value of the Content-Length header"
 
 	^self headerAt: 'Content-Length' put: aNumber! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:01:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:01:00 pm (UTC)'!
 contentStream
 	"Answers a stream for the conent."
 
 	^stream! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:02:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:02:00 pm (UTC)'!
 contentType
 	"Answer the content type for the receiver"
 
 	^self headerAt: 'Content-Type' ifAbsent:['application/octet-stream']
 ! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 30/Mar/2010 21:58:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 31/Mar/2010, 12:58:00 am (UTC)'!
 contentType: aString
 	"Sets the content type for the receiver"
 
 	^self headerAt: 'Content-Type' put: aString! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ul 21/Apr/2015 06:40:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ul 21/Apr/2015, 9:40:00 am (UTC)'!
 contentWithProgress: progressBlock
 	"Reads and caches available content and returns it."
 
 	^content ifNil: [ content := self getContentWithProgress: progressBlock ]! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Jul/2010 20:09:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Jul/2010, 11:09:00 pm (UTC)'!
 multipartBoundary
 	"Answer the boundary of a multipart/form-data message"
 
@@ -3052,19 +3052,19 @@ multipartBoundary
 	(header beginsWith: 'multipart/form-data') ifFalse:[^nil].
 	^(header copyFrom: (header findString: 'boundary=') + 9 to: header size)! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 16:31:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 7:31:00 pm (UTC)'!
 protocol
 	"Returns the requested protocol"
 
 	^protocol! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 16:31:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 7:31:00 pm (UTC)'!
 protocol: aString
 	"Returns the requested protocol"
 
 	protocol := aString! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'dtl 17/Jul/2012 18:59:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'dtl 17/Jul/2012, 9:59:00 pm (UTC)'!
 remoteHost
 	"Return the name of the remote host"
 
@@ -3074,25 +3074,25 @@ remoteHost
 	^ NetNameResolver stringFromAddress: remote.
 ! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:01:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:01:00 pm (UTC)'!
 stream
 	"Answers the underlying TCP stream"
 
 	^stream! !
 
-!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 11:01:00'!
+!WebMessage methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 2:01:00 pm (UTC)'!
 stream: aStream
 	"Sets the underlying TCP stream"
 
 	stream := aStream! !
 
-!WebMessage methodsFor: 'private' stamp: 'ul 21/Apr/2015 06:31:00'!
+!WebMessage methodsFor: 'private' stamp: 'ul 21/Apr/2015, 9:31:00 am (UTC)'!
 getContent
 	"Reads available content and returns it."
 
 	^self getContentWithProgress: nil! !
 
-!WebMessage methodsFor: 'private' stamp: 'jmv 13/Apr/2023 21:59:33'!
+!WebMessage methodsFor: 'private' stamp: 'jmv 14/Apr/2023, 12:59:33 am (UTC)'!
 getContentWithProgress: progressBlockOrNil
 	"Reads available content and returns it."
 
@@ -3109,7 +3109,7 @@ getContentWithProgress: progressBlockOrNil
 	(self headerAt: 'content-encoding') = 'gzip' ifFalse: [ ^result ].
 	^UnicodeString fromBytesStream: (GZipReadStream on: result asByteArray)! !
 
-!WebMessage methodsFor: 'testing' stamp: 'pmm 19/Jun/2010 08:05:00'!
+!WebMessage methodsFor: 'testing' stamp: 'pmm 19/Jun/2010, 11:05:00 am (UTC)'!
 isPersistent
 	"Return true if this is a persistent connection"
 
@@ -3124,7 +3124,7 @@ isPersistent
 	"Assume that later HTTP versions are compatible with 1.1"
 	^true! !
 
-!WebMessage class methodsFor: 'class initialization' stamp: 'ar 21/Feb/2010 09:55:00'!
+!WebMessage class methodsFor: 'class initialization' stamp: 'ar 21/Feb/2010, 12:55:00 pm (UTC)'!
 initialize
 	"self initialize"
 
@@ -3182,13 +3182,13 @@ initialize
 		507.	'Insufficient Storage'. 		"WebDav RFC: 2518"
 	}.! !
 
-!WebMessage class methodsFor: 'utilities' stamp: 'klub 14/Jan/2014 22:09:00'!
+!WebMessage class methodsFor: 'utilities' stamp: 'klub 15/Jan/2014, 1:09:00 am (UTC)'!
 statusCodeAt: code
 	"Return the textual description of a status code"
 
 	^StatusCodes at: code ifAbsent: [ 'Unknown error' ]! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 5/Aug/2010 19:51:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 5/Aug/2010, 10:51:00 pm (UTC)'!
 acceptsCookie: aCookie from: webClient
 	"Returns true if this cookie is applicable to this request"
 
@@ -3206,49 +3206,49 @@ acceptsCookie: aCookie from: webClient
 	].
 	^true! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010 15:18:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010, 6:18:00 pm (UTC)'!
 isDeleteRequest
 	"Returns true if this is an HTTP DELETE request"
 
 	^self method = 'DELETE'! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 20/Feb/2010 10:40:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 20/Feb/2010, 1:40:00 pm (UTC)'!
 isGetRequest
 	"Returns true if this is an HTTP GET request"
 
 	^self method = 'GET'! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 20/Feb/2010 10:41:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 20/Feb/2010, 1:41:00 pm (UTC)'!
 isHeadRequest
 	"Returns true if this is an HTTP HEAD request"
 
 	^self method = 'HEAD'! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010 15:19:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010, 6:19:00 pm (UTC)'!
 isOptionsRequest
 	"Returns true if this is an HTTP OPTIONS request"
 
 	^self method = 'OPTIONS'! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 20/Feb/2010 10:41:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 20/Feb/2010, 1:41:00 pm (UTC)'!
 isPostRequest
 	"Returns true if this is an HTTP POST request"
 
 	^self method = 'POST'! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010 15:18:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010, 6:18:00 pm (UTC)'!
 isPutRequest
 	"Returns true if this is an HTTP PUT request"
 
 	^self method = 'PUT'! !
 
-!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010 15:18:00'!
+!WebRequest methodsFor: 'testing' stamp: 'ar 23/Jun/2010, 6:18:00 pm (UTC)'!
 isTraceRequest
 	"Returns true if this is an HTTP TRACE request"
 
 	^self method = 'TRACE'! !
 
-!WebRequest methodsFor: 'converting' stamp: 'ar 26/Sep/2011 10:25:00'!
+!WebRequest methodsFor: 'converting' stamp: 'ar 26/Sep/2011, 1:25:00 pm (UTC)'!
 asWebSocket
 	"Convert this request into a WebSocket"
 
@@ -3266,7 +3266,7 @@ asWebSocket
 	^self asWebSocket07
 ! !
 
-!WebRequest methodsFor: 'converting' stamp: 'ar 26/Sep/2011 10:39:00'!
+!WebRequest methodsFor: 'converting' stamp: 'ar 26/Sep/2011, 1:39:00 pm (UTC)'!
 asWebSocket00
 	"Convert this request into a WebSocket"
 
@@ -3296,7 +3296,7 @@ asWebSocket00
 	^WebSocket00 on: stream.
 ! !
 
-!WebRequest methodsFor: 'converting' stamp: 'klub 13/Jun/2012 17:00:00'!
+!WebRequest methodsFor: 'converting' stamp: 'klub 13/Jun/2012, 8:00:00 pm (UTC)'!
 asWebSocket07
 	"Convert this request into a WebSocket"
 
@@ -3331,7 +3331,7 @@ asWebSocket07
    frame.''
 	So not using masking is compatible with the 07 protocol and is required by RFC 6455."! !
 
-!WebRequest methodsFor: 'converting' stamp: 'ar 26/Sep/2011 10:40:00'!
+!WebRequest methodsFor: 'converting' stamp: 'ar 26/Sep/2011, 1:40:00 pm (UTC)'!
 asWebSocket68
 	"Convert this request into a WebSocket"
 
@@ -3352,7 +3352,7 @@ asWebSocket68
 	stream flush.
 	^WebSocket00 on: stream.! !
 
-!WebRequest methodsFor: 'sending' stamp: 'klub 24/Jul/2011 19:25:00'!
+!WebRequest methodsFor: 'sending' stamp: 'klub 24/Jul/2011, 10:25:00 pm (UTC)'!
 closeIfTransient: resp after: aBlock
 	"Evaluate aBlock. Close the connection if it is transient.
 	Inserts Connection: close header if needed."
@@ -3371,13 +3371,13 @@ closeIfTransient: resp after: aBlock
 	close  ifTrue:[self close].
 ! !
 
-!WebRequest methodsFor: 'sending' stamp: 'ar 23/Feb/2010 22:04:00'!
+!WebRequest methodsFor: 'sending' stamp: 'ar 24/Feb/2010, 1:04:00 am (UTC)'!
 sendResponse: resp content: aString
 	"Send a WebResponse with content."
 
 	^self sendResponse: resp contentStream: aString readStream size: aString size! !
 
-!WebRequest methodsFor: 'sending' stamp: 'ar 31/Aug/2010 22:11:00'!
+!WebRequest methodsFor: 'sending' stamp: 'ar 1/Sep/2010, 1:11:00 am (UTC)'!
 sendResponse: resp contentBlock: contentBlock
 	"Sends a WebResponse, streaming its contents from aStream.
 	If a size is provided, insert a Content-Length header, otherwise
@@ -3398,7 +3398,7 @@ sendResponse: resp contentBlock: contentBlock
 		server ifNotNil:[server logRequest: self response: resp].
 	].! !
 
-!WebRequest methodsFor: 'sending' stamp: 'ar 31/Aug/2010 22:12:00'!
+!WebRequest methodsFor: 'sending' stamp: 'ar 1/Sep/2010, 1:12:00 am (UTC)'!
 sendResponse: resp contentStream: aStream size: streamSize
 	"Sends a WebResponse, streaming its contents from aStream.
 	If a size is provided, insert a Content-Length header, otherwise
@@ -3412,20 +3412,20 @@ sendResponse: resp contentStream: aStream size: streamSize
 		resp streamFrom: aStream to: sockStream size: streamSize progress: nil
 	]! !
 
-!WebRequest methodsFor: 'cookies' stamp: 'ar 20/Feb/2010 19:34:00'!
+!WebRequest methodsFor: 'cookies' stamp: 'ar 20/Feb/2010, 10:34:00 pm (UTC)'!
 cookieAt: aString
 	"Answer the value for a cookie with the given name"
 
 	^self cookieAt: aString ifAbsent:['']! !
 
-!WebRequest methodsFor: 'cookies' stamp: 'ar 20/Feb/2010 19:35:00'!
+!WebRequest methodsFor: 'cookies' stamp: 'ar 20/Feb/2010, 10:35:00 pm (UTC)'!
 cookieAt: aString ifAbsent: aBlock
 	"Answer the value for a cookie with the given name"
 
 	self cookiesDo:[:name :value| name = aString ifTrue:[^value]].
 	^aBlock value! !
 
-!WebRequest methodsFor: 'cookies' stamp: 'ar 20/Feb/2010 19:35:00'!
+!WebRequest methodsFor: 'cookies' stamp: 'ar 20/Feb/2010, 10:35:00 pm (UTC)'!
 cookies
 	"Answer all the cookies defined in the request"
 
@@ -3434,7 +3434,7 @@ cookies
 	self cookiesDo:[:name :value| cookies at: name put: value].
 	^cookies! !
 
-!WebRequest methodsFor: 'cookies' stamp: 'ar 5/Aug/2010 19:56:00'!
+!WebRequest methodsFor: 'cookies' stamp: 'ar 5/Aug/2010, 10:56:00 pm (UTC)'!
 cookiesDo: aBlock
 	"Parse the cookie headers and evaluate aBlock with name / value pairs"
 
@@ -3444,7 +3444,7 @@ cookiesDo: aBlock
 				value: (token copyUpTo: $=) withBlanksTrimmed 
 				value: (token copyAfter: $=) withBlanksTrimmed]].! !
 
-!WebRequest methodsFor: 'fields' stamp: 'ar 20/Jul/2010 20:08:00'!
+!WebRequest methodsFor: 'fields' stamp: 'ar 20/Jul/2010, 11:08:00 pm (UTC)'!
 fields
 	"Answer the fields for the given request."
 
@@ -3456,7 +3456,7 @@ fields
 	^fields
 ! !
 
-!WebRequest methodsFor: 'fields' stamp: 'ar 21/Feb/2010 09:55:00'!
+!WebRequest methodsFor: 'fields' stamp: 'ar 21/Feb/2010, 12:55:00 pm (UTC)'!
 getFields
 	"Decodes the fields embedded in the url ?var1=val1&var2=val2"
 
@@ -3465,7 +3465,7 @@ getFields
 	^WebUtils decodeUrlEncodedForm: args multipleValues: false
 ! !
 
-!WebRequest methodsFor: 'fields' stamp: 'ar 28/Jul/2010 21:01:00'!
+!WebRequest methodsFor: 'fields' stamp: 'ar 29/Jul/2010, 12:01:00 am (UTC)'!
 multipartFields
 	"Answers the multipart fields of a post request"
 
@@ -3476,7 +3476,7 @@ multipartFields
 	].
 	^fields! !
 
-!WebRequest methodsFor: 'fields' stamp: 'ar 20/Jul/2010 20:08:00'!
+!WebRequest methodsFor: 'fields' stamp: 'ar 20/Jul/2010, 11:08:00 pm (UTC)'!
 multipartFieldsDo: aBlock
 	"Evaluate aBlock with the multipart fields of a post request.
 	The block is expected to take three arguments:
@@ -3490,7 +3490,7 @@ multipartFieldsDo: aBlock
 			ifTrue: [WebUtils decodeMultipartForm: self content readStream boundary: self multipartBoundary do: aBlock]
 			ifFalse: [Dictionary new]! !
 
-!WebRequest methodsFor: 'fields' stamp: 'jmv 25/Jun/2017 20:10:00'!
+!WebRequest methodsFor: 'fields' stamp: 'jmv 25/Jun/2017, 11:10:00 pm (UTC)'!
 postFields
 	"Answers the multipart fields of a post request"
 
@@ -3502,7 +3502,7 @@ postFields
 					multipleValues: true ]
 			ifFalse: [Dictionary new]! !
 
-!WebRequest methodsFor: 'initialize' stamp: 'ar 23/Feb/2010 09:02:00'!
+!WebRequest methodsFor: 'initialize' stamp: 'ar 23/Feb/2010, 12:02:00 pm (UTC)'!
 initialize
 	"Initialize the receiver"
 
@@ -3511,7 +3511,7 @@ initialize
 	protocol := 'HTTP/1.1'.
 	headers := OrderedCollection new.! !
 
-!WebRequest methodsFor: 'initialize' stamp: 'jmv 13/Apr/2023 15:19:08'!
+!WebRequest methodsFor: 'initialize' stamp: 'jmv 13/Apr/2023, 6:19:08 pm (UTC)'!
 initializeFromUrl: urlString
 	"Initialize the client from a http url or string"
 
@@ -3526,7 +3526,7 @@ initializeFromUrl: urlString
 	(rawUrl beginsWith: '/') ifFalse:[rawUrl := '/', rawUrl].
 ! !
 
-!WebRequest methodsFor: 'initialize' stamp: 'ar 1/Apr/2010 16:03:00'!
+!WebRequest methodsFor: 'initialize' stamp: 'ar 1/Apr/2010, 7:03:00 pm (UTC)'!
 newResponse
 	"Create a new response entitiy.
 	Subclasses can override this method to provide a different response class"
@@ -3535,14 +3535,14 @@ newResponse
 		request: self;
 		yourself! !
 
-!WebRequest methodsFor: 'initialize' stamp: 'ar 8/Jul/2010 19:11:00'!
+!WebRequest methodsFor: 'initialize' stamp: 'ar 8/Jul/2010, 10:11:00 pm (UTC)'!
 newWebSocketOn: aStream
 	"Create a new socket entitiy.
 	Subclasses can override this method to provide a different response class"
 
 	^WebSocket on: aStream! !
 
-!WebRequest methodsFor: 'initialize' stamp: 'jmv 25/Jun/2017 19:15:52'!
+!WebRequest methodsFor: 'initialize' stamp: 'jmv 25/Jun/2017, 10:15:52 pm (UTC)'!
 readFrom: aStream
 	"Initialize the receiver initialized from an existing socket stream 
 	This method will block until the headers have been parsed."
@@ -3564,56 +3564,56 @@ readFrom: aStream
 	headers := WebUtils readHeadersFrom: stream.
 ! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 10:40:00'!
+!WebRequest methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 1:40:00 pm (UTC)'!
 method
 	"The request method (GET, POST etc)"
 
 	^method! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 10:40:00'!
+!WebRequest methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 1:40:00 pm (UTC)'!
 method: aString
 	"The request method (GET, POST etc)"
 
 	method := aString! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 10:40:00'!
+!WebRequest methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 1:40:00 pm (UTC)'!
 rawUrl
 	"The raw (unparsed) url"
 
 	^rawUrl! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'ar 11/May/2010 20:07:00'!
+!WebRequest methodsFor: 'accessing' stamp: 'ar 11/May/2010, 11:07:00 pm (UTC)'!
 rawUrl: aString
 	"The raw (unparsed) url"
 
 	rawUrl := aString
 ! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'ar 28/Jul/2010 19:49:00'!
+!WebRequest methodsFor: 'accessing' stamp: 'ar 28/Jul/2010, 10:49:00 pm (UTC)'!
 requestLine
 	"The actual request line as sent by the client"
 
 	^request ifNil:[self method, ' ', self rawUrl, ' ', self protocol]! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'ar 14/Jun/2010 20:55:00'!
+!WebRequest methodsFor: 'accessing' stamp: 'ar 14/Jun/2010, 11:55:00 pm (UTC)'!
 server
 	"If non-nil, the WebServer instance associated with the request."
 
 	^server! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'ar 14/Jun/2010 20:55:00'!
+!WebRequest methodsFor: 'accessing' stamp: 'ar 14/Jun/2010, 11:55:00 pm (UTC)'!
 server: aWebServer
 	"If non-nil, the WebServer instance associated with the request."
 
 	server := aWebServer! !
 
-!WebRequest methodsFor: 'accessing' stamp: 'jmv 13/Apr/2023 12:21:21'!
+!WebRequest methodsFor: 'accessing' stamp: 'jmv 13/Apr/2023, 3:21:21 pm (UTC)'!
 url
 	"The url without fragment or arguments"
 
 	^((rawUrl copyUpTo: $#) copyUpTo: $?)! !
 
-!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022 12:07:45'!
+!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022, 3:07:45 pm (UTC)'!
 send200Response: aString
 	"Send a 200 OK response"
 
@@ -3621,13 +3621,13 @@ send200Response: aString
 		send200Response: aString asUtf8Bytes
 		contentType: 'text/plain; charset=utf-8'.! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 20/Feb/2010 15:42:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 20/Feb/2010, 6:42:00 pm (UTC)'!
 send200Response: aString contentType: contentType
 	"Send a 200 OK response"
 
 	^self send200Response: aString contentType: contentType do:[:resp]! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 16:32:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 7:32:00 pm (UTC)'!
 send200Response: aString contentType: contentType do: aBlock
 	"Send a 200 OK response"
 
@@ -3637,37 +3637,37 @@ send200Response: aString contentType: contentType do: aBlock
 	aBlock value: resp.
 	^self sendResponse: resp content: aString.! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 03:26:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 6:26:00 am (UTC)'!
 send301Response: location
 	"Send a 301 permanent redirect response"
 
 	^self send301Response: location do:[:resp].! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 03:27:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 6:27:00 am (UTC)'!
 send301Response: location do: aBlock
 	"Send a 301 permanent redirect response"
 
 	^self send3xxResponse: location code: 301 do: aBlock! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 03:26:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 6:26:00 am (UTC)'!
 send302Response: location
 	"Send a 302 temporary redirect response"
 
 	^self send302Response: location do:[:resp].! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 03:26:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 6:26:00 am (UTC)'!
 send302Response: location do: aBlock
 	"Send a 302 temporary redirect response"
 
 	^self send3xxResponse: location code: 302 do: aBlock! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 20/Feb/2010 15:42:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 20/Feb/2010, 6:42:00 pm (UTC)'!
 send3xxResponse: location code: statusCode
 	"Send a 3xx redirect response"
 
 	^self send3xxResponse: location code: statusCode do:[:resp].! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 23/Jul/2010 09:33:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 23/Jul/2010, 12:33:00 pm (UTC)'!
 send3xxResponse: location code: statusCode do: aBlock
 	"Send a 3xx redirect response"
 
@@ -3683,7 +3683,7 @@ send3xxResponse: location code: statusCode do: aBlock
 	^self sendResponse: resp content: ''.
 ! !
 
-!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022 12:07:36'!
+!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022, 3:07:36 pm (UTC)'!
 send400Response
 	"Send a 400 bad request response"
 
@@ -3698,14 +3698,14 @@ send400Response
 		type: 'text/plain; charset=utf-8'
 		close: true! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 20/Feb/2010 15:43:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 20/Feb/2010, 6:43:00 pm (UTC)'!
 send404Response
 	"Send a 404 not found response"
 
 	^self send404Response: '<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1><p>The requested URL ',self rawUrl,' was not found on this server.</p></body></html>'.
 ! !
 
-!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022 12:07:53'!
+!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022, 3:07:53 pm (UTC)'!
 send404Response: body
 	"Send a 404 not found response"
 
@@ -3713,7 +3713,7 @@ send404Response: body
 		send404Response: body asUtf8Bytes
 		do: [ :resp | resp headerAt: 'Content-Type' put: 'text/html; charset=utf-8' ]! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 16:32:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 7:32:00 pm (UTC)'!
 send404Response: body do: aBlock
 	"Send a 404 not found response"
 
@@ -3724,13 +3724,13 @@ send404Response: body do: aBlock
 	^self sendResponse: resp content: body.
 ! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 11/May/2010 20:08:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 11/May/2010, 11:08:00 pm (UTC)'!
 send405Response: allowed
 	"Send a 405 method not allowed response"
 
 	^self send405Response: allowed content: '<html><head><title>405 Method Not Allowed</title></head><body><h1>405 Method Not Allowed</h1><p>The requested method ',self method,' is not allowed for the URL', self rawUrl, '</p></body></html>'.! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 11/May/2010 20:08:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 11/May/2010, 11:08:00 pm (UTC)'!
 send405Response: allowed content: body
 	"Send a 405 method not allowed response"
 	| resp |
@@ -3741,7 +3741,7 @@ send405Response: allowed content: body
 	]).
 	^self sendResponse: resp content: body.! !
 
-!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022 12:07:57'!
+!WebRequest methodsFor: 'responses' stamp: 'jmv 26/May/2022, 3:07:57 pm (UTC)'!
 send500Response: errReport
 	"Send a 500 internal server error response"
 
@@ -3757,7 +3757,7 @@ send500Response: errReport
 				close: true.
 ! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 11/May/2010 20:08:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 11/May/2010, 11:08:00 pm (UTC)'!
 sendOptionsResponse: allowed
 	"Send a 200 OK response for an OPTIONS request"
 
@@ -3767,13 +3767,13 @@ sendOptionsResponse: allowed
 		]).
 	].! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 31/Aug/2010 22:16:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 1/Sep/2010, 1:16:00 am (UTC)'!
 sendResponse: code chunked: chunkBlock
 	"Send a chunked response"
 
 	^self sendResponse: code chunked: chunkBlock do:[:resp]! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 31/Aug/2010 22:16:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 1/Sep/2010, 1:16:00 am (UTC)'!
 sendResponse: code chunked: chunkBlock do: hdrBlock
 	"Send a chunked response"
 
@@ -3790,7 +3790,7 @@ sendResponse: code chunked: chunkBlock do: hdrBlock
 	].
 ! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 28/Jul/2010 20:22:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 28/Jul/2010, 11:22:00 pm (UTC)'!
 sendResponseCode: code content: aString type: contentType close: aBool
 	"Send a 500 Internal server error response"
 
@@ -3798,7 +3798,7 @@ sendResponseCode: code content: aString type: contentType close: aBool
 		aBool ifTrue:[hdr headerAt: 'Connection' put: 'close'].
 	].! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 28/Jul/2010 20:19:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 28/Jul/2010, 11:19:00 pm (UTC)'!
 sendResponseCode: code content: aString type: contentType do: aBlock
 	"Send a 500 Internal server error response"
 
@@ -3808,31 +3808,31 @@ sendResponseCode: code content: aString type: contentType do: aBlock
 	aBlock value: resp.
 	^self sendResponse: resp content: aString.! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 11/May/2010 23:35:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 12/May/2010, 2:35:00 am (UTC)'!
 sendXmlResponse: xmlString
 	"Send an a-ok 200 xml-ish response"
 
 	^self send200Response: xmlString contentType: 'application/xml'! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 03:48:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 6:48:00 am (UTC)'!
 stream200Response: aStream
 	"Stream a 200 OK response"
 
 	^self stream200Response: aStream size: aStream size! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 03:53:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 6:53:00 am (UTC)'!
 stream200Response: aStream size: streamSize
 	"Stream a 200 OK response"
 
 	^self stream200Response: aStream size: streamSize type: 'application/octet-stream'! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 03:53:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 6:53:00 am (UTC)'!
 stream200Response: aStream size: streamSize type: contentType
 	"Stream a 200 OK response"
 
 	^self stream200Response: aStream size: streamSize type: contentType do:[:resp].! !
 
-!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010 18:14:00'!
+!WebRequest methodsFor: 'responses' stamp: 'ar 25/Feb/2010, 9:14:00 pm (UTC)'!
 stream200Response: aStream size: streamSize type: contentType do: aBlock
 	"Stream a 200 OK response"
 
@@ -3842,33 +3842,33 @@ stream200Response: aStream size: streamSize type: contentType do: aBlock
 	aBlock value: resp.
 	^self sendResponse: resp contentStream: aStream size: streamSize.! !
 
-!WebRequest methodsFor: 'printing' stamp: 'CK 24/Nov/2017 14:53:04'!
+!WebRequest methodsFor: 'printing' stamp: 'CK 24/Nov/2017, 5:53:04 pm (UTC)'!
 writeOn: aStream
 	"Write the request"
 
 	self writeRequestOn: aStream.
 	super writeOn: aStream! !
 
-!WebRequest methodsFor: 'printing' stamp: 'DSG 24/May/2012 17:37:00'!
+!WebRequest methodsFor: 'printing' stamp: 'DSG 24/May/2012, 8:37:00 pm (UTC)'!
 writeRequestOn: aStream
 	"Write the request"
 
 	aStream nextPutAll: method; space; nextPutAll: rawUrl; space; nextPutAll: protocol; nextPutAll: String crlfString.
 ! !
 
-!WebRequest class methodsFor: 'instance creation' stamp: 'ar 20/Feb/2010 11:23:00'!
+!WebRequest class methodsFor: 'instance creation' stamp: 'ar 20/Feb/2010, 2:23:00 pm (UTC)'!
 readFrom: aStream
 	"Create a WebRequest from a given stream"
 
 	^self new readFrom: aStream! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 10:39:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 1:39:00 pm (UTC)'!
 code
 	"The HTTP response code"
 
 	^code! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 18/Jun/2010 23:51:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 19/Jun/2010, 2:51:00 am (UTC)'!
 content
 	"Reimplemented to close the socket if the request is transient"
 
@@ -3878,7 +3878,7 @@ content
 	].
 	^content! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 31/Jan/2012 14:02:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 31/Jan/2012, 5:02:00 pm (UTC)'!
 contentStream
 	"Answers a stream for the conent."
 
@@ -3887,72 +3887,72 @@ contentStream
 	].
 	^super contentStream! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 1/Apr/2010 16:02:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 1/Apr/2010, 7:02:00 pm (UTC)'!
 request
 	"The original request for this response"
 
 	^request! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 1/Apr/2010 16:03:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 1/Apr/2010, 7:03:00 pm (UTC)'!
 request: aRequest
 	"The original request for this response"
 
 	request := aRequest! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 10:39:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 1:39:00 pm (UTC)'!
 status
 	"The status line from the response"
 
 	^status! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 10:39:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 1:39:00 pm (UTC)'!
 status: aString
 	"The status line from the response"
 
 	status := aString! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 24/Aug/2010 21:37:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 25/Aug/2010, 12:37:00 am (UTC)'!
 url
 	"The url of the resource at which a request was terminated after a series
 	of redirects. Without redirects, this will be the same as the request url."
 
 	^url! !
 
-!WebResponse methodsFor: 'accessing' stamp: 'ar 24/Aug/2010 21:37:00'!
+!WebResponse methodsFor: 'accessing' stamp: 'ar 25/Aug/2010, 12:37:00 am (UTC)'!
 url: urlString
 	"The url of the resource at which a request was terminated after a series
 	of redirects. Without redirects, this will be the same as the request url."
 
 	url := urlString! !
 
-!WebResponse methodsFor: 'private' stamp: 'topa 3/Apr/2013 17:32:00'!
+!WebResponse methodsFor: 'private' stamp: 'topa 3/Apr/2013, 8:32:00 pm (UTC)'!
 getContent
 	"Do not read any content if this was a HEAD request or code is 204 (no content)"
 	(request method = 'HEAD' or: [code = 204]) ifTrue:[^''].
 	^super getContent! !
 
-!WebResponse methodsFor: 'testing' stamp: 'ar 9/Jul/2010 00:27:00'!
+!WebResponse methodsFor: 'testing' stamp: 'ar 9/Jul/2010, 3:27:00 am (UTC)'!
 isInformational
 	"Is this a 1xx response?"
 
 	^self code between: 100 and: 199
 ! !
 
-!WebResponse methodsFor: 'testing' stamp: 'ar 10/Aug/2010 08:56:00'!
+!WebResponse methodsFor: 'testing' stamp: 'ar 10/Aug/2010, 11:56:00 am (UTC)'!
 isRedirect
 	"Is this a redirect response?"
 
 	^self code between: 300 and: 399
 ! !
 
-!WebResponse methodsFor: 'testing' stamp: 'ar 23/Feb/2010 10:13:00'!
+!WebResponse methodsFor: 'testing' stamp: 'ar 23/Feb/2010, 1:13:00 pm (UTC)'!
 isSuccess
 	"Is this a successful response?"
 
 	^self code between: 200 and: 299
 ! !
 
-!WebResponse methodsFor: 'initialize' stamp: 'SvenVanCaekenberghe 14/Jun/2010 15:48:00'!
+!WebResponse methodsFor: 'initialize' stamp: 'SvenVanCaekenberghe 14/Jun/2010, 6:48:00 pm (UTC)'!
 protocol: respProtocol code: respCode
 	"Initialize a response from protocol and code"
 
@@ -3961,7 +3961,7 @@ protocol: respProtocol code: respCode
 	status := protocol, ' ', code asString, ' ', (self class statusCodeAt: code).
 	headers := OrderedCollection new.! !
 
-!WebResponse methodsFor: 'initialize' stamp: 'jmv 25/Jun/2017 19:15:56'!
+!WebResponse methodsFor: 'initialize' stamp: 'jmv 25/Jun/2017, 10:15:56 pm (UTC)'!
 readFrom: aStream
 	"Parse an HTTP response from the given stream"
 
@@ -3975,13 +3975,13 @@ readFrom: aStream
 	headers := WebUtils readHeadersFrom: stream.
 ! !
 
-!WebResponse methodsFor: 'cookies' stamp: 'ar 20/Feb/2010 19:35:00'!
+!WebResponse methodsFor: 'cookies' stamp: 'ar 20/Feb/2010, 10:35:00 pm (UTC)'!
 setCookie: aCookie
 	"Adds a Set-Cookie header"
 
 	^self addHeader: 'Set-Cookie' value: aCookie asString! !
 
-!WebResponse methodsFor: 'cookies' stamp: 'ar 20/Feb/2010 19:35:00'!
+!WebResponse methodsFor: 'cookies' stamp: 'ar 20/Feb/2010, 10:35:00 pm (UTC)'!
 setCookie: name value: value path: path 
 	"Adds a Set-Cookie header"
 
@@ -3991,7 +3991,7 @@ setCookie: name value: value path: path
 			path: path;
 		yourself)! !
 
-!WebResponse methodsFor: 'cookies' stamp: 'ar 20/Feb/2010 19:35:00'!
+!WebResponse methodsFor: 'cookies' stamp: 'ar 20/Feb/2010, 10:35:00 pm (UTC)'!
 setCookie: name value: value path: path expires: date domain: domain secure: aBool
 	"Adds a Set-Cookie header"
 
@@ -4004,7 +4004,7 @@ setCookie: name value: value path: path expires: date domain: domain secure: aBo
 			secure: aBool;
 		yourself)! !
 
-!WebResponse methodsFor: 'cookies' stamp: 'ar 25/Feb/2010 18:16:00'!
+!WebResponse methodsFor: 'cookies' stamp: 'ar 25/Feb/2010, 9:16:00 pm (UTC)'!
 setCookieAt: key
 	"Evaluate aBlock with all the cookies deined in the request"
 
@@ -4013,7 +4013,7 @@ setCookieAt: key
 	].
 	^nil! !
 
-!WebResponse methodsFor: 'cookies' stamp: 'ar 21/Feb/2010 09:51:00'!
+!WebResponse methodsFor: 'cookies' stamp: 'ar 21/Feb/2010, 12:51:00 pm (UTC)'!
 setCookiesDo: aBlock
 	"Evaluate aBlock with all the cookies deined in the request"
 
@@ -4022,7 +4022,7 @@ setCookiesDo: aBlock
 	].
 ! !
 
-!WebResponse methodsFor: 'printing' stamp: 'ar 20/Feb/2010 16:33:00'!
+!WebResponse methodsFor: 'printing' stamp: 'ar 20/Feb/2010, 7:33:00 pm (UTC)'!
 writeOn: aStream
 	"Store this response on aStream"
 
@@ -4030,20 +4030,20 @@ writeOn: aStream
 	super writeOn: aStream.
 ! !
 
-!WebResponse methodsFor: 'printing' stamp: 'DSG 24/May/2012 17:39:00'!
+!WebResponse methodsFor: 'printing' stamp: 'DSG 24/May/2012, 8:39:00 pm (UTC)'!
 writeStatusOn: aStream
 	"Store this response on aStream"
 
 	aStream nextPutAll: status; nextPutAll: String crlfString.
 ! !
 
-!WebResponse class methodsFor: 'instance creation' stamp: 'ar 20/Feb/2010 11:24:00'!
+!WebResponse class methodsFor: 'instance creation' stamp: 'ar 20/Feb/2010, 2:24:00 pm (UTC)'!
 protocol: protocol code: code
 	"Create a response using the given protocol / code"
 
 	^self new protocol: protocol code: code! !
 
-!WebServer methodsFor: 'logging' stamp: 'ar 28/Jul/2010 19:56:00'!
+!WebServer methodsFor: 'logging' stamp: 'ar 28/Jul/2010, 10:56:00 pm (UTC)'!
 accessLog
 	"The standard access log. Can be either a stream or a string; if the access log
 	is a string then the string is assumed to be a file name and the file will be opened 
@@ -4051,7 +4051,7 @@ accessLog
 
 	^accessLog! !
 
-!WebServer methodsFor: 'logging' stamp: 'ar 28/Jul/2010 19:56:00'!
+!WebServer methodsFor: 'logging' stamp: 'ar 28/Jul/2010, 10:56:00 pm (UTC)'!
 accessLog: aStreamOrFilename
 	"The standard access log. Can be either a stream or a string; if the access log
 	is a string then the string is assumed to be a file name and the file will be opened 
@@ -4059,7 +4059,7 @@ accessLog: aStreamOrFilename
 
 	accessLog := aStreamOrFilename! !
 
-!WebServer methodsFor: 'logging' stamp: 'ar 28/Jul/2010 20:02:00'!
+!WebServer methodsFor: 'logging' stamp: 'ar 28/Jul/2010, 11:02:00 pm (UTC)'!
 logRequest: request response: response
 	"Log a request after it has been successfully processed"
 
@@ -4073,7 +4073,7 @@ logRequest: request response: response
 		on: Error do:[:ex| self log: 'Error in logging: ', ex description].
 ! !
 
-!WebServer methodsFor: 'services' stamp: 'ar 11/May/2010 20:10:00'!
+!WebServer methodsFor: 'services' stamp: 'ar 11/May/2010, 11:10:00 pm (UTC)'!
 addService: entryPoint action: aBlockOrMessage
 	"Add a service to the web server. The service is specified by an entryPoint, 
 	denoting the url under which the service can be requested 
@@ -4084,7 +4084,7 @@ addService: entryPoint action: aBlockOrMessage
 		action: aBlockOrMessage 
 		methods: self defaultHttpMethods.! !
 
-!WebServer methodsFor: 'services' stamp: 'jmv 13/Apr/2023 15:21:51'!
+!WebServer methodsFor: 'services' stamp: 'jmv 13/Apr/2023, 6:21:51 pm (UTC)'!
 addService: entryPoint action: aBlockOrMessage methods: methods
 	"Add a service to the web server. The service is specified by an entryPoint, 
 	denoting the url under which the service can be requested 
@@ -4097,7 +4097,7 @@ addService: entryPoint action: aBlockOrMessage methods: methods
 		entryPoints at: entryPoint percentEscapeUrl asLowercase put: {methods. aBlockOrMessage}.
 	].! !
 
-!WebServer methodsFor: 'services' stamp: 'jmv 13/Apr/2023 15:22:01'!
+!WebServer methodsFor: 'services' stamp: 'jmv 13/Apr/2023, 6:22:01 pm (UTC)'!
 removeService: entryPoint 
 	"Remove a service from the HTTP service provider.  See #addService:action:"
 
@@ -4105,7 +4105,7 @@ removeService: entryPoint
 		entryPoints removeKey: entryPoint percentEscapeUrl asLowercase ifAbsent: [].
 	].! !
 
-!WebServer methodsFor: 'handling' stamp: 'ul 3/Jul/2014 23:56:00'!
+!WebServer methodsFor: 'handling' stamp: 'ul 4/Jul/2014, 2:56:00 am (UTC)'!
 asyncHandleConnectionFrom: aSocket
 	"Handle an incoming connection asynchronously to avoid blocking the listener."
 
@@ -4124,13 +4124,13 @@ asyncHandleConnectionFrom: aSocket
 	handlerProcess resume.
 ! !
 
-!WebServer methodsFor: 'handling' stamp: 'ar 23/Feb/2010 22:34:00'!
+!WebServer methodsFor: 'handling' stamp: 'ar 24/Feb/2010, 1:34:00 am (UTC)'!
 dispatchRequest: request
 	"Look up the handler for a given request and dispatch to it"
 
 	^self dispatchRequest: request url: request url! !
 
-!WebServer methodsFor: 'handling' stamp: 'jmv 13/Apr/2023 15:21:56'!
+!WebServer methodsFor: 'handling' stamp: 'jmv 13/Apr/2023, 6:21:56 pm (UTC)'!
 dispatchRequest: request url: dispatchUrl
 	"Look up the handler for a given url and dispatch to it"
 
@@ -4176,7 +4176,7 @@ dispatchRequest: request url: dispatchUrl
 				ifNil:[self handleError: ex request: request]
 				ifNotNil:[errorHandler value: ex value: request]].! !
 
-!WebServer methodsFor: 'handling' stamp: 'ar 29/Jul/2010 18:46:00'!
+!WebServer methodsFor: 'handling' stamp: 'ar 29/Jul/2010, 9:46:00 pm (UTC)'!
 handleConnectionFrom: aSocket
 	"Synchronously handle an incoming socket connection."
 
@@ -4225,7 +4225,7 @@ handleConnectionFrom: aSocket
 		].
 	].! !
 
-!WebServer methodsFor: 'handling' stamp: 'ar 20/Feb/2010 14:30:00'!
+!WebServer methodsFor: 'handling' stamp: 'ar 20/Feb/2010, 5:30:00 pm (UTC)'!
 invokeAction: action request: request
 	"Invokes the given action. Subclasses can override this method to serialize
 	actions if necessary. At this point, the request header has been read from
@@ -4234,7 +4234,7 @@ invokeAction: action request: request
 	^action valueWithArguments: {request}
 ! !
 
-!WebServer methodsFor: 'handling' stamp: 'ar 28/Jul/2010 20:27:00'!
+!WebServer methodsFor: 'handling' stamp: 'ar 28/Jul/2010, 11:27:00 pm (UTC)'!
 newRequest
 	"Answer a new request.
 	Subclasses should override this method to use a different request class."
@@ -4243,7 +4243,7 @@ newRequest
 		server: self;
 		yourself! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010 20:43:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010, 11:43:00 pm (UTC)'!
 authAccept: method request: request realm: realm header: authHeader
 	"Performs the requested authentication method. 
 	Returns true if successfully authenticated.
@@ -4255,7 +4255,7 @@ authAccept: method request: request realm: realm header: authHeader
 	} otherwise:[false].
 ! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010 20:43:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010, 11:43:00 pm (UTC)'!
 authHeader: method request: request realm: realm
 	"Answer the authentication header for the given method.
 	Subclasses can extend this method to support more auth methods."
@@ -4267,7 +4267,7 @@ authHeader: method request: request realm: realm
 	
 	! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010 20:43:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010, 11:43:00 pm (UTC)'!
 authenticate: request realm: realm methods: accepted do: aBlock
 	"Authenticates an incoming request using one of the accepted methods.
 
@@ -4293,7 +4293,7 @@ authenticate: request realm: realm methods: accepted do: aBlock
 	request sendResponse: resp content: '<html><head><title>401 Unauthorized</title></head><body><h1>401 Unauthorized</h1><p>You are not authorized to access the requested URL</p></body></html>'.
 ! !
 
-!WebServer methodsFor: 'authentication' stamp: 'jmv 26/May/2022 12:05:28'!
+!WebServer methodsFor: 'authentication' stamp: 'jmv 26/May/2022, 3:05:28 pm (UTC)'!
 basicAuth: request realm: realm header: authHeader
 	"Perform Basic auth for the given request"
 
@@ -4309,7 +4309,7 @@ basicAuth: request realm: realm header: authHeader
 	^(self passwordHashAt: user, ':', realm) = hash
 ! !
 
-!WebServer methodsFor: 'authentication' stamp: 'jmv 25/Jun/2017 19:16:08'!
+!WebServer methodsFor: 'authentication' stamp: 'jmv 25/Jun/2017, 10:16:08 pm (UTC)'!
 digestAuth: request realm: realm header: authHeader
 	"Authenticates an incoming request using Digest auth."
 
@@ -4349,7 +4349,7 @@ digestAuth: request realm: realm header: authHeader
 	^md5 = response
 ! !
 
-!WebServer methodsFor: 'authentication' stamp: 'DSG 5/Dec/2013 17:11:00'!
+!WebServer methodsFor: 'authentication' stamp: 'DSG 5/Dec/2013, 8:11:00 pm (UTC)'!
 flushNonceCache
 	"Flushes expired nonces from the cache"
 
@@ -4360,7 +4360,7 @@ flushNonceCache
 	].
 ! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010 20:36:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 30/Mar/2010, 11:36:00 pm (UTC)'!
 hashUser: user password: pass realm: realm
 	"Creates a hash for the given username password pair.
 	This method is the ha1 part of digest auth and can be used for both digest
@@ -4368,7 +4368,7 @@ hashUser: user password: pass realm: realm
 
 	^WebUtils md5Digest: user, ':', realm, ':', pass! !
 
-!WebServer methodsFor: 'authentication' stamp: 'DSG 5/Dec/2013 17:12:00'!
+!WebServer methodsFor: 'authentication' stamp: 'DSG 5/Dec/2013, 8:12:00 pm (UTC)'!
 newNonce
 	"Create a new nonce to be used for a client authentication session"
 
@@ -4379,7 +4379,7 @@ newNonce
 	].
 	^nonce! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 23/Feb/2010 09:20:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 23/Feb/2010, 12:20:00 pm (UTC)'!
 nonceDeadline
 	"Answer the number of seconds a nonce is considered valid for digest auth
 	by the server. After this period, the client will have to reauthenticate.
@@ -4387,7 +4387,7 @@ nonceDeadline
 
 	^30*60 ! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 20/Feb/2010 12:54:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 20/Feb/2010, 3:54:00 pm (UTC)'!
 passwordAt: username realm: realm put: password
 	"Store the password hash for the key."
 
@@ -4395,26 +4395,26 @@ passwordAt: username realm: realm put: password
 	hash := self hashUser: username password: password realm: realm.
 	self passwordHashAt: (username,':',realm) put: hash! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 20/Feb/2010 12:51:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 20/Feb/2010, 3:51:00 pm (UTC)'!
 passwordHashAt: key
 	"Answer the password hash for the given key"
 
 	^vault at: key ifAbsent:['']! !
 
-!WebServer methodsFor: 'authentication' stamp: 'ar 20/Feb/2010 12:01:00'!
+!WebServer methodsFor: 'authentication' stamp: 'ar 20/Feb/2010, 3:01:00 pm (UTC)'!
 passwordHashAt: key put: hash
 	"Store the password hash for the key."
 
 	^vault at: key put: hash! !
 
-!WebServer methodsFor: 'initialize' stamp: 'ar 11/May/2010 20:10:00'!
+!WebServer methodsFor: 'initialize' stamp: 'ar 11/May/2010, 11:10:00 pm (UTC)'!
 builtinHttpMethods
 	"Returns the list of HTTP methods that the server handles built-in,
 	i.e., without passing them to the registered service."
 
 	^#('HEAD' 'TRACE' 'OPTIONS')! !
 
-!WebServer methodsFor: 'initialize' stamp: 'ar 23/Feb/2010 12:10:00'!
+!WebServer methodsFor: 'initialize' stamp: 'ar 23/Feb/2010, 3:10:00 pm (UTC)'!
 critical: aBlock
 	"Evaluate aBlock protected byt the server's mutex.
 	Necessary if code needs to manipulate internal server state."
@@ -4422,14 +4422,14 @@ critical: aBlock
 	^mutex critical: aBlock
 ! !
 
-!WebServer methodsFor: 'initialize' stamp: 'ar 11/May/2010 20:10:00'!
+!WebServer methodsFor: 'initialize' stamp: 'ar 11/May/2010, 11:10:00 pm (UTC)'!
 defaultHttpMethods
 	"Answer the list of HTTP methods that should be be supported by default.
 	The methods must be implemented by the request handler."
 
 	^#('GET' 'POST')! !
 
-!WebServer methodsFor: 'initialize' stamp: 'ar 1/Nov/2010 21:07:00'!
+!WebServer methodsFor: 'initialize' stamp: 'ar 2/Nov/2010, 12:07:00 am (UTC)'!
 destroy
 	"Destroys the receiver"
 
@@ -4442,7 +4442,7 @@ destroy
 		ifTrue:[self class removeUrl: siteUrl]
 ! !
 
-!WebServer methodsFor: 'initialize' stamp: 'ul 16/Oct/2014 13:16:00'!
+!WebServer methodsFor: 'initialize' stamp: 'ul 16/Oct/2014, 4:16:00 pm (UTC)'!
 destroyConnections
 	"Destroy all current connections."
 
@@ -4454,7 +4454,7 @@ destroyConnections
 	mutex critical: [ connections removeAll ]
 ! !
 
-!WebServer methodsFor: 'initialize' stamp: 'DSG 28/Mar/2015 20:16:00'!
+!WebServer methodsFor: 'initialize' stamp: 'DSG 28/Mar/2015, 11:16:00 pm (UTC)'!
 initialize
 	"Initialize the receiver"
 
@@ -4470,33 +4470,33 @@ initialize
 			ifFalse: [ Transcript log: aString printString ]].
 ! !
 
-!WebServer methodsFor: 'initialize' stamp: 'ar 22/Feb/2010 05:35:00'!
+!WebServer methodsFor: 'initialize' stamp: 'ar 22/Feb/2010, 8:35:00 am (UTC)'!
 log: aString
 	"Log the given information."
 
 	logAction ifNotNil:[logAction valueWithArguments: {aString}].
 ! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 29/Jul/2010 18:49:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 29/Jul/2010, 9:49:00 pm (UTC)'!
 certName
 	"The cert name to use for a secure (SSL/TLS) web server."
 
 	^certName! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 29/Jul/2010 18:49:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 29/Jul/2010, 9:49:00 pm (UTC)'!
 certName: aString
 	"The cert name to use for a secure (SSL/TLS) web server."
 
 	certName := aString.! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 11/May/2010 20:22:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 11/May/2010, 11:22:00 pm (UTC)'!
 connections
 	"The active connection processes. Can only be examined after aquiring
 	the WebServer's mutex."
 
 	^connections! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 28/Jul/2010 20:24:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 28/Jul/2010, 11:24:00 pm (UTC)'!
 errorHandler
 	"The user-supplied error handler. If present the handler takes two arguments:
 		* The error being caught by WebServer
@@ -4506,7 +4506,7 @@ errorHandler
 
 	^errorHandler! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 28/Jul/2010 20:24:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 28/Jul/2010, 11:24:00 pm (UTC)'!
 errorHandler: aBlock
 	"The user-supplied error handler. If present the handler takes two arguments:
 		* The error being caught by WebServer
@@ -4516,37 +4516,37 @@ errorHandler: aBlock
 
 	errorHandler := aBlock.! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:01:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:01:00 am (UTC)'!
 listenerInterface
 	"Returns the listener interface for the server"
 
 	^interface! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:01:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:01:00 am (UTC)'!
 listenerPort
 	"Returns the listener port for the server"
 
 	^port! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:00:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:00:00 am (UTC)'!
 listenerProcess
 	"Returns the socket listener process for the server."
 
 	^listenerProcess! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 03:00:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 6:00:00 am (UTC)'!
 listenerSocket
 	"Returns the listener socket for the server."
 
 	^listenerSocket! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 05:35:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 8:35:00 am (UTC)'!
 logAction
 	"The current log action (a block or message)"
 
 	^logAction! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 05:36:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 8:36:00 am (UTC)'!
 logAction: aBlockOrMessage
 	"The current log action (a block or message).
 	Example:
@@ -4556,44 +4556,44 @@ logAction: aBlockOrMessage
 
 	logAction := aBlockOrMessage! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 14/Jun/2010 20:53:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 14/Jun/2010, 11:53:00 pm (UTC)'!
 serverDate
 	"Returns the date string to be used in responses"
 
 	^self class serverDate! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 14/Jun/2010 20:54:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 14/Jun/2010, 11:54:00 pm (UTC)'!
 serverString
 	"Returns the server string to be used in responses.
 	The response is cached for efficiency."
 
 	^serverString ifNil:[serverString := self class serverString].! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 14/Jun/2010 20:57:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 14/Jun/2010, 11:57:00 pm (UTC)'!
 serverString: aString
 	"Set the server string to be used in responses"
 
 	^serverString := aString! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 1/Nov/2010 21:01:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 2/Nov/2010, 12:01:00 am (UTC)'!
 siteUrl
 	"The site URL for WebServer, i.e., http://www.mysite.com or http://www.mysite.com/server (when used in a proxied environment) or https://www.mysite.com (when using SSL). Used to allow a client to derive the 'correct' full URL for a running server instance."
 
 	^siteUrl! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 1/Nov/2010 21:13:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 2/Nov/2010, 12:13:00 am (UTC)'!
 siteUrl: aString
 	"The site URL for WebServer, i.e., http://www.mysite.com or http://www.mysite.com/server (when used in a proxied environment) or https://www.mysite.com (when using SSL). Used to allow a client to derive the 'correct' full URL for a running server instance."
 
 	siteUrl := aString! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 20/Feb/2010 12:03:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 20/Feb/2010, 3:03:00 pm (UTC)'!
 vault
 	"The vault used for storing password hashes."
 
 	^vault! !
 
-!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010 02:51:00'!
+!WebServer methodsFor: 'accessing' stamp: 'ar 22/Feb/2010, 5:51:00 am (UTC)'!
 vault: anObject
 	"The vault used for storing password hashes.
 
@@ -4602,7 +4602,7 @@ vault: anObject
 
 	vault := anObject! !
 
-!WebServer methodsFor: 'errors' stamp: 'HAW 6/May/2020 12:06:30'!
+!WebServer methodsFor: 'errors' stamp: 'HAW 6/May/2020, 3:06:30 pm (UTC)'!
 debugErrorHandler
 
 	^[:anException :aRequest | 
@@ -4610,7 +4610,7 @@ debugErrorHandler
 			on: UnhandledError 
 			do: [ :unhandledError | nil handleSignal: unhandledError ]]! !
 
-!WebServer methodsFor: 'errors' stamp: 'ar 20/Feb/2010 10:35:00'!
+!WebServer methodsFor: 'errors' stamp: 'ar 20/Feb/2010, 1:35:00 pm (UTC)'!
 errorReportFor: anError
 	"Provide a report for an error that's been caught during processing"
 
@@ -4623,7 +4623,7 @@ errorReportFor: anError
 		].
 	] on: Error do: [:ex| ex pass. 'error reporting failed'].! !
 
-!WebServer methodsFor: 'errors' stamp: 'jmv 19/May/2015 21:55:00'!
+!WebServer methodsFor: 'errors' stamp: 'jmv 20/May/2015, 12:55:00 am (UTC)'!
 errorReportFor: anError stack: preStack on: strm
 	"Provide a report for an error that's been caught during processing"
 
@@ -4632,7 +4632,7 @@ errorReportFor: anError stack: preStack on: strm
 	self systemInfoOn: strm.
 ! !
 
-!WebServer methodsFor: 'errors' stamp: 'jmv 19/May/2015 21:55:00'!
+!WebServer methodsFor: 'errors' stamp: 'jmv 20/May/2015, 12:55:00 am (UTC)'!
 errorStackFor: anError stack: preStack on: strm
 	"Provide a report for an error that's been caught during processing"
 
@@ -4654,7 +4654,7 @@ errorStackFor: anError stack: preStack on: strm
 	].
 ! !
 
-!WebServer methodsFor: 'errors' stamp: 'jmv 19/May/2015 23:48:00'!
+!WebServer methodsFor: 'errors' stamp: 'jmv 20/May/2015, 2:48:00 am (UTC)'!
 handleError: ex request: aRequest
 	"The default error handling during processing. Sends a 500 response."
 
@@ -4669,7 +4669,7 @@ handleError: ex request: aRequest
 	[self log: String newLineString, errReport] on: Error do:[:ex2| ex return].
 	aRequest send500Response: errReport. ! !
 
-!WebServer methodsFor: 'errors' stamp: 'jmv 12/Dec/2023 18:29:21'!
+!WebServer methodsFor: 'errors' stamp: 'jmv 12/Dec/2023, 9:29:21 pm (UTC)'!
 systemInfoOn: strm
 	"Provides system information for a server error report"
 	| info |
@@ -4696,36 +4696,36 @@ systemInfoOn: strm
 			info := (Smalltalk getSystemAttribute: i) ifNil:[''].
 			info isEmpty ifFalse:[strm newLine; nextPutAll: info]]]! !
 
-!WebServer methodsFor: 'errors' stamp: 'HAW 6/May/2020 12:06:46'!
+!WebServer methodsFor: 'errors' stamp: 'HAW 6/May/2020, 3:06:46 pm (UTC)'!
 useDebugErrorHandler
 
 	self errorHandler: self debugErrorHandler ! !
 
-!WebServer methodsFor: 'testing' stamp: 'ar 30/Mar/2010 22:09:00'!
+!WebServer methodsFor: 'testing' stamp: 'ar 31/Mar/2010, 1:09:00 am (UTC)'!
 isRunning
 	"Is the server still running?"
 
 	^self isStopped not! !
 
-!WebServer methodsFor: 'testing' stamp: 'ar 30/Mar/2010 22:09:00'!
+!WebServer methodsFor: 'testing' stamp: 'ar 31/Mar/2010, 1:09:00 am (UTC)'!
 isStopped
 	"Is the server still running?"
 
 	^listenerProcess == nil or:[listenerProcess isTerminated]! !
 
-!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010 10:27:00'!
+!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010, 1:27:00 pm (UTC)'!
 listenOn: aPort
 	"Starts the server listening on the given port"
 
 	^self listenOn: aPort interface: nil! !
 
-!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010 10:28:00'!
+!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010, 1:28:00 pm (UTC)'!
 listenOn: aPort interface: anInterface
 	"Starts the server listening on the given port / network interface"
 
 	^self listenOn: aPort interface: anInterface backlogSize: 8! !
 
-!WebServer methodsFor: 'listening' stamp: 'SvenVanCaekenberghe 14/Jun/2010 15:48:00'!
+!WebServer methodsFor: 'listening' stamp: 'SvenVanCaekenberghe 14/Jun/2010, 6:48:00 pm (UTC)'!
 listenOn: aPort interface: anInterface backlogSize: backlog
 	"Starts the server listening on the given port / network interface"
 	
@@ -4744,13 +4744,13 @@ listenOn: aPort interface: anInterface backlogSize: backlog
 	].
 	self startListener.! !
 
-!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010 10:28:00'!
+!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010, 1:28:00 pm (UTC)'!
 listenerProcessPriority
 	"The priority at which the listener process should run"
 
 	^Processor lowIOPriority! !
 
-!WebServer methodsFor: 'listening' stamp: 'ar 4/May/2010 09:22:00'!
+!WebServer methodsFor: 'listening' stamp: 'ar 4/May/2010, 12:22:00 pm (UTC)'!
 runListener
 	"Runs the server's listener loop. 
 	Accepts incoming connections and handles them asynchronously"
@@ -4777,7 +4777,7 @@ runListener
 	]] on: Error do:[:ex| self log: ex].
 ! !
 
-!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010 10:29:00'!
+!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010, 1:29:00 pm (UTC)'!
 startListener
 	"Starts the server's listener process"
 
@@ -4788,32 +4788,32 @@ startListener
 	listenerProcess resume.
 ! !
 
-!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010 10:29:00'!
+!WebServer methodsFor: 'listening' stamp: 'ar 20/Feb/2010, 1:29:00 pm (UTC)'!
 stopListener
 	"Stops the server's listener process"
 
 	listenerProcess ifNotNil:[listenerProcess terminate].
 	listenerProcess := nil.! !
 
-!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010 12:09:00'!
+!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010, 3:09:00 pm (UTC)'!
 sessionAt: key
 	"Answer the session associated with the given key"
 
 	^mutex critical:[sessions at: key ifAbsent:[nil]].! !
 
-!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010 12:10:00'!
+!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010, 3:10:00 pm (UTC)'!
 sessionAt: key ifAbsentPut: session
 	"Answer the session associated with the given key"
 
 	^mutex critical:[sessions at: key ifAbsentPut:[session]].! !
 
-!WebServer methodsFor: 'sessions' stamp: 'ar 11/May/2010 23:34:00'!
+!WebServer methodsFor: 'sessions' stamp: 'ar 12/May/2010, 2:34:00 am (UTC)'!
 sessionAt: key put: session
 	"Store the session associated with the given key"
 
 	^mutex critical:[sessions at: key put: session].! !
 
-!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010 12:11:00'!
+!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010, 3:11:00 pm (UTC)'!
 sessions
 	"The sessions associated with the WebServer. These are not used by the server
 	directly but rather provided so that client code has a convenient place to store
@@ -4821,7 +4821,7 @@ sessions
 	
 	^sessions! !
 
-!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010 12:11:00'!
+!WebServer methodsFor: 'sessions' stamp: 'ar 23/Feb/2010, 3:11:00 pm (UTC)'!
 sessions: aDictionary
 	"The sessions associated with the WebServer. These are not used by the server
 	directly but rather provided so that client code has a convenient place to store
@@ -4829,7 +4829,7 @@ sessions: aDictionary
 	
 	sessions := aDictionary! !
 
-!WebServer class methodsFor: 'benchmarks' stamp: 'jmv 26/Jun/2017 19:12:52'!
+!WebServer class methodsFor: 'benchmarks' stamp: 'jmv 26/Jun/2017, 10:12:52 pm (UTC)'!
 benchmark
 	"Runs a WebClient/WebServer streaming benchmark to measure throughput"
 
@@ -4855,7 +4855,7 @@ benchmark
 	^(amount  * 1000 // time) printStringWithCommas, ' bytes/sec'
 ! !
 
-!WebServer class methodsFor: 'benchmarks' stamp: 'ar 4/May/2010 21:27:00'!
+!WebServer class methodsFor: 'benchmarks' stamp: 'ar 5/May/2010, 12:27:00 am (UTC)'!
 requestBenchmark: persistent
 	"Runs a WebClient/WebServer benchmark to measure request handling speed.
 	Uses a persistent connection if requested."
@@ -4877,7 +4877,7 @@ requestBenchmark: persistent
 		persistent: persistent] ensure:[WebServer reset].
 ! !
 
-!WebServer class methodsFor: 'examples' stamp: 'jmv 10/Oct/2024 11:48:44'!
+!WebServer class methodsFor: 'examples' stamp: 'jmv 10/Oct/2024, 2:48:44 pm (UTC)'!
 browseDir: directory request: request
 	"Responds with a directory listing back to the original request"
 
@@ -4913,7 +4913,7 @@ browseDir: directory request: request
 
 ! !
 
-!WebServer class methodsFor: 'examples' stamp: 'jmv 19/May/2015 23:52:00'!
+!WebServer class methodsFor: 'examples' stamp: 'jmv 20/May/2015, 2:52:00 am (UTC)'!
 browseFile: file request: request
 	"Responds with a file back to the original request"
 
@@ -4926,7 +4926,7 @@ browseFile: file request: request
 	resp headerAt: 'Content-Type' put: mimeTypes first.
 	request sendResponse: resp contentStream: file size: fileSize.! !
 
-!WebServer class methodsFor: 'examples' stamp: 'jmv 18/Mar/2019 13:16:59'!
+!WebServer class methodsFor: 'examples' stamp: 'jmv 18/Mar/2019, 4:16:59 pm (UTC)'!
 browseRequest: request
 	"Handle an HTTP request for browsing some resource"
 
@@ -4962,7 +4962,7 @@ browseRequest: request
 		] fork. 							"fork it"
 	]! !
 
-!WebServer class methodsFor: 'examples' stamp: 'HAW 6/May/2020 09:45:44'!
+!WebServer class methodsFor: 'examples' stamp: 'HAW 6/May/2020, 12:45:44 pm (UTC)'!
 doItFrom: req
 
 	| data result |
@@ -4980,7 +4980,7 @@ doItFrom: req
 	req send200Response: result asString 
 	! !
 
-!WebServer class methodsFor: 'examples' stamp: 'ar 23/Feb/2010 09:30:00'!
+!WebServer class methodsFor: 'examples' stamp: 'ar 23/Feb/2010, 12:30:00 pm (UTC)'!
 exampleAuth		"WebServer exampleAuth"
 	"Simple example requiring basic auth"
 
@@ -5003,7 +5003,7 @@ exampleAuth		"WebServer exampleAuth"
 			do:[self browseRequest: req]].
 ! !
 
-!WebServer class methodsFor: 'examples' stamp: 'ar 20/Feb/2010 14:54:00'!
+!WebServer class methodsFor: 'examples' stamp: 'ar 20/Feb/2010, 5:54:00 pm (UTC)'!
 exampleBrowse	"WebServer exampleBrowse"
 	"This example implements a simple http server allowing to view 
 	and download files (like browsing ftp sites etc)."
@@ -5015,7 +5015,7 @@ exampleBrowse	"WebServer exampleBrowse"
 	server addService: '/' action:[:req| self browseRequest: req].
 ! !
 
-!WebServer class methodsFor: 'examples' stamp: 'HAW 6/May/2020 09:40:26'!
+!WebServer class methodsFor: 'examples' stamp: 'HAW 6/May/2020, 12:40:26 pm (UTC)'!
 exampleDoIt		"WebServer exampleDoIt"
 	"This example executes doIts from a POST request.
 	It's the simplest possible RPC interface to Squeak."
@@ -5029,7 +5029,7 @@ exampleDoIt		"WebServer exampleDoIt"
 		
 ! !
 
-!WebServer class methodsFor: 'examples' stamp: 'ar 29/Jul/2010 18:49:00'!
+!WebServer class methodsFor: 'examples' stamp: 'ar 29/Jul/2010, 9:49:00 pm (UTC)'!
 exampleSSL: certName
 
 	"This example implements a simple https server allowing to view 
@@ -5049,7 +5049,7 @@ exampleSSL: certName
 	server addService: '/' action:[:req| self browseRequest: req].
 ! !
 
-!WebServer class methodsFor: 'examples' stamp: 'jmv 13/Apr/2023 15:12:52'!
+!WebServer class methodsFor: 'examples' stamp: 'jmv 13/Apr/2023, 6:12:52 pm (UTC)'!
 exampleSession		"WebServer exampleSession"
 	"This example uses a simple session cookie to avoid 
 	authentication for every request."
@@ -5079,13 +5079,13 @@ exampleSession		"WebServer exampleSession"
 			ifFalse:[req send302Response: '/login?url=', req url percentEscapeUrlField]].
 ! !
 
-!WebServer class methodsFor: 'accessing' stamp: 'ar 23/Feb/2010 09:29:00'!
+!WebServer class methodsFor: 'accessing' stamp: 'ar 23/Feb/2010, 12:29:00 pm (UTC)'!
 default
 	"A default WebServer instance. Mostly for the examples."
 
 	^Default ifNil:[Default := self new].! !
 
-!WebServer class methodsFor: 'accessing' stamp: 'ar 23/Feb/2010 09:29:00'!
+!WebServer class methodsFor: 'accessing' stamp: 'ar 23/Feb/2010, 12:29:00 pm (UTC)'!
 reset		"WebServer reset"
 	"Reset the default WebServer instance."
 
@@ -5094,7 +5094,7 @@ reset		"WebServer reset"
 		Default := nil.
 	].! !
 
-!WebServer class methodsFor: 'accessing' stamp: 'DSG 29/May/2012 17:57:00'!
+!WebServer class methodsFor: 'accessing' stamp: 'DSG 29/May/2012, 8:57:00 pm (UTC)'!
 serverDate
 	"Returns the date string to be used in responses"
 	
@@ -5108,7 +5108,7 @@ serverDate
 		s nextPutAll: ' GMT'.
 	].! !
 
-!WebServer class methodsFor: 'accessing' stamp: 'jmv 12/Dec/2023 18:31:59'!
+!WebServer class methodsFor: 'accessing' stamp: 'jmv 12/Dec/2023, 9:31:59 pm (UTC)'!
 serverString
 	"Returns the server string to be used in responses"
 
@@ -5116,20 +5116,20 @@ serverString
 		SystemVersion current versionString,'; ',
 		WebUtils platformName,')'.! !
 
-!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010 20:59:00'!
+!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010, 11:59:00 pm (UTC)'!
 forUrl: urlString
 	"Answer the WebServer registered for a given URL string."
 
 	^self forUrl: urlString ifAbsent:[self newForUrl: urlString]! !
 
-!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010 20:59:00'!
+!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010, 11:59:00 pm (UTC)'!
 forUrl: urlString ifAbsent: aBlock
 	"Answer the WebServer registered for a given URL string.
 	If no WebServer is registered, evaluate aBlock."
 
 	^self registry at: urlString ifAbsent: aBlock! !
 
-!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010 21:02:00'!
+!WebServer class methodsFor: 'registry' stamp: 'ar 2/Nov/2010, 12:02:00 am (UTC)'!
 newForUrl: urlString
 	"Create a new WebServer instance registered for a given URL string."
 
@@ -5145,74 +5145,74 @@ newForUrl: urlString
 	^server
 ! !
 
-!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010 21:11:00'!
+!WebServer class methodsFor: 'registry' stamp: 'ar 2/Nov/2010, 12:11:00 am (UTC)'!
 registry
 	"Answer the WebServer site registry"
 
 	^Registry ifNil:[Registry := Dictionary new]! !
 
-!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010 20:59:00'!
+!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010, 11:59:00 pm (UTC)'!
 removeUrl: urlString
 	"Remove and answer the WebServer registered for a given URL string.
 	If no WebServer was registered, return nil."
 
 	^self removeUrl: urlString ifAbsent:[nil]! !
 
-!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010 20:59:00'!
+!WebServer class methodsFor: 'registry' stamp: 'ar 1/Nov/2010, 11:59:00 pm (UTC)'!
 removeUrl: urlString ifAbsent: aBlock
 	"Remove and answer the WebServer registered for a given URL string."
 
 	^self registry removeKey: urlString ifAbsent: aBlock! !
 
-!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011 11:41:00'!
+!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011, 2:41:00 pm (UTC)'!
 handle: selector arguments: argList
 
 	^self handle: selector arguments: argList ifAbsent:[nil]! !
 
-!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011 11:41:00'!
+!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011, 2:41:00 pm (UTC)'!
 handle: selector arguments: argList ifAbsent: aBlock
 
 	^(handlers at: selector ifAbsent:[^aBlock value])
 		valueWithPossibleArgs: argList.! !
 
-!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011 10:47:00'!
+!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011, 1:47:00 pm (UTC)'!
 handleClose
 	"Handle a connection close"
 
 	^self handle: 'close' arguments: (Array with: self)
 ! !
 
-!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011 10:46:00'!
+!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011, 1:46:00 pm (UTC)'!
 handleError: exception
 	"Handle an error"
 
 	^self handle: 'error' arguments: (Array with: exception with: self)! !
 
-!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011 10:45:00'!
+!WebSocket methodsFor: 'private' stamp: 'ar 26/Sep/2011, 1:45:00 pm (UTC)'!
 handleMessage: msgData type: msgType
 	"Handle an incoming message of the given type"
 
 	self handle: 'message' arguments: (Array with: msgData with: msgType with: self)! !
 
-!WebSocket methodsFor: 'private' stamp: 'ar 8/Jul/2010 21:48:00'!
+!WebSocket methodsFor: 'private' stamp: 'ar 9/Jul/2010, 12:48:00 am (UTC)'!
 printOn: aStream
 	"Print the receiver"
 
 	aStream nextPutAll: self class name.
 	aStream nextPutAll: '(', name, ')'.! !
 
-!WebSocket methodsFor: 'initialize' stamp: 'ar 26/Sep/2011 13:06:00'!
+!WebSocket methodsFor: 'initialize' stamp: 'ar 26/Sep/2011, 4:06:00 pm (UTC)'!
 close
 	"Request graceful close"
 
 	^self subclassResponsibility! !
 
-!WebSocket methodsFor: 'initialize' stamp: 'ar 27/Sep/2011 13:42:00'!
+!WebSocket methodsFor: 'initialize' stamp: 'ar 27/Sep/2011, 4:42:00 pm (UTC)'!
 initialize
 	super initialize.
 	handlers := Dictionary new.! !
 
-!WebSocket methodsFor: 'initialize' stamp: 'DSG 28/Mar/2015 20:00:00'!
+!WebSocket methodsFor: 'initialize' stamp: 'DSG 28/Mar/2015, 11:00:00 pm (UTC)'!
 on: aStream
 	"Create a new WebSocket instance using the given SocketStream"
 
@@ -5224,7 +5224,7 @@ on: aStream
 	name := name, ':', stream socket remotePort asString.
 	! !
 
-!WebSocket methodsFor: 'running' stamp: 'ar 8/Jul/2010 20:00:00'!
+!WebSocket methodsFor: 'running' stamp: 'ar 8/Jul/2010, 11:00:00 pm (UTC)'!
 fork
 	"Fork the WebSocket's input process."
 
@@ -5232,50 +5232,50 @@ fork
 	process resume.
 ! !
 
-!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011 10:46:00'!
+!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011, 1:46:00 pm (UTC)'!
 onClose: aBlock
 	"Set the handler block to invoke when the socket is closed"
 
 	handlers at: 'close' put: aBlock.! !
 
-!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011 10:45:00'!
+!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011, 1:45:00 pm (UTC)'!
 onError: aBlock
 	"Set the handler block to invoke when an error occurs"
 
 	handlers at: 'error' put: aBlock.! !
 
-!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011 10:45:00'!
+!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011, 1:45:00 pm (UTC)'!
 onMessage: aBlock
 	"Set the handler block to invoke when a message is received"
 
 	handlers at: 'message' put: aBlock.
 ! !
 
-!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011 10:41:00'!
+!WebSocket methodsFor: 'running' stamp: 'ar 26/Sep/2011, 1:41:00 pm (UTC)'!
 run
 	"Run the WebSocket's input process."
 
 	^self subclassResponsibility! !
 
-!WebSocket methodsFor: 'read/write' stamp: 'ar 26/Sep/2011 10:42:00'!
+!WebSocket methodsFor: 'read/write' stamp: 'ar 26/Sep/2011, 1:42:00 pm (UTC)'!
 send: aString
 	"Writes one frame worth of data"
 
 	^self subclassResponsibility! !
 
-!WebSocket methodsFor: 'accessing' stamp: 'ar 8/Jul/2010 21:39:00'!
+!WebSocket methodsFor: 'accessing' stamp: 'ar 9/Jul/2010, 12:39:00 am (UTC)'!
 timeout
 	"The underlying stream timeout"
 
 	^stream timeout! !
 
-!WebSocket methodsFor: 'accessing' stamp: 'ar 8/Jul/2010 21:40:00'!
+!WebSocket methodsFor: 'accessing' stamp: 'ar 9/Jul/2010, 12:40:00 am (UTC)'!
 timeout: seconds
 	"Sets the underlying stream timeout"
 
 	^stream timeout: seconds! !
 
-!WebSocket class methodsFor: 'example' stamp: 'jmv 25/Jun/2017 20:16:51'!
+!WebSocket class methodsFor: 'example' stamp: 'jmv 25/Jun/2017, 11:16:51 pm (UTC)'!
 example	"WebSocket example"
 
 	"This is a very simple WebSocket example implementing a basic chat system.
@@ -5318,7 +5318,7 @@ example	"WebSocket example"
 		ws run.
 	].! !
 
-!WebSocket class methodsFor: 'example' stamp: 'ar 8/Jul/2010 21:50:00'!
+!WebSocket class methodsFor: 'example' stamp: 'ar 9/Jul/2010, 12:50:00 am (UTC)'!
 examplePage
 	"The example HTML page for WebServer"
 
@@ -5368,13 +5368,13 @@ if (window.WebSocket === undefined) {
 </body>
 </html>'! !
 
-!WebSocket class methodsFor: 'instance creation' stamp: 'ar 8/Jul/2010 18:22:00'!
+!WebSocket class methodsFor: 'instance creation' stamp: 'ar 8/Jul/2010, 9:22:00 pm (UTC)'!
 on: aStream
 	"Create a new WebSocket instance using the given SocketStream"
 
 	^self new on: aStream! !
 
-!WebSocket00 methodsFor: 'running' stamp: 'jmv 9/Jan/2024 17:42:32'!
+!WebSocket00 methodsFor: 'running' stamp: 'jmv 9/Jan/2024, 8:42:32 pm (UTC)'!
 close
 	"Request graceful close"
 
@@ -5385,7 +5385,7 @@ close
 	].
 ! !
 
-!WebSocket00 methodsFor: 'running' stamp: 'ar 8/Jul/2010 21:49:00'!
+!WebSocket00 methodsFor: 'running' stamp: 'ar 9/Jul/2010, 12:49:00 am (UTC)'!
 run
 	"Run the WebSocket's input process."
 
@@ -5400,7 +5400,7 @@ run
 	].
 ! !
 
-!WebSocket00 methodsFor: 'read/write' stamp: 'jmv 9/Jan/2024 17:38:41'!
+!WebSocket00 methodsFor: 'read/write' stamp: 'jmv 9/Jan/2024, 8:38:41 pm (UTC)'!
 readMessage
 	"Reads one frame worth of data"
 
@@ -5426,13 +5426,13 @@ readMessage
 	].
 ! !
 
-!WebSocket00 methodsFor: 'read/write' stamp: 'ar 26/Sep/2011 12:03:00'!
+!WebSocket00 methodsFor: 'read/write' stamp: 'ar 26/Sep/2011, 3:03:00 pm (UTC)'!
 send: aString
 	"Writes one frame worth of data"
 
 	^self send: aString type: 0! !
 
-!WebSocket00 methodsFor: 'read/write' stamp: 'jmv 9/Jan/2024 17:42:37'!
+!WebSocket00 methodsFor: 'read/write' stamp: 'jmv 9/Jan/2024, 8:42:37 pm (UTC)'!
 send: data type: type
 	"Writes one frame worth of data using the given frame type"
 
@@ -5458,7 +5458,7 @@ send: data type: type
 	stream flush.
 ! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 13:06:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 4:06:00 pm (UTC)'!
 close
 	"Send a close control request"
 
@@ -5467,7 +5467,7 @@ close
 		self send: #[] code: 8.
 	].! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 13:07:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 4:07:00 pm (UTC)'!
 handleClose: payload
 	"Close is being sent by remote in process of shutting down connection"
 
@@ -5478,7 +5478,7 @@ handleClose: payload
 
 ! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 11:37:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 2:37:00 pm (UTC)'!
 handleControl: payload type: opcode
 	"Handle a control opcode"
 
@@ -5490,7 +5490,7 @@ handleControl: payload type: opcode
 
 ! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 11:41:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 2:41:00 pm (UTC)'!
 handlePing: payload
 
 	self handle: 'ping' 
@@ -5498,36 +5498,36 @@ handlePing: payload
 		ifAbsent:[self pong: payload].
 ! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 11:40:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 2:40:00 pm (UTC)'!
 handlePong: payload
 
 	self handle: 'pong' arguments: (Array with: payload with: self).! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 12:49:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 3:49:00 pm (UTC)'!
 onPing: aBlock
 	"Set the handler block to invoke when a ping is received"
 
 	handlers at: 'ping' put: aBlock.! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 12:49:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 3:49:00 pm (UTC)'!
 onPong: aBlock
 	"Set the handler block to invoke when a pong is received"
 
 	handlers at: 'pong' put: aBlock.! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 12:03:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 3:03:00 pm (UTC)'!
 ping: data
 	"Send a ping control request"
 
 	self send: data code: 9.! !
 
-!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011 12:03:00'!
+!WebSocket07 methodsFor: 'control requests' stamp: 'ar 26/Sep/2011, 3:03:00 pm (UTC)'!
 pong: data
 	"Send a pong control request"
 
 	self send: data code: 10.! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022 12:08:10'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022, 3:08:10 pm (UTC)'!
 firstFragment: aStringOrBytes
 	"Writes the first fragment of data"
 
@@ -5535,7 +5535,7 @@ firstFragment: aStringOrBytes
 		ifTrue:[^self send: aStringOrBytes asUtf8Bytes code: 1 final: false]
 		ifFalse:[^self send: aStringOrBytes code: 2 final: false].! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022 12:08:13'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022, 3:08:13 pm (UTC)'!
 lastFragment: aStringOrBytes
 	"Writes the last fragment of data.
 	Note: Spec says that code is ZERO for final fragment."
@@ -5544,7 +5544,7 @@ lastFragment: aStringOrBytes
 		ifTrue:[^self send: aStringOrBytes asUtf8Bytes code: 0 final: true]
 		ifFalse:[^self send: aStringOrBytes code: 0 final: true].! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022 12:08:19'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022, 3:08:19 pm (UTC)'!
 nextFragment: aStringOrBytes
 	"Writes the first fragment of data
 	Note: Spec says that code is ZERO for intermediate fragments."
@@ -5553,13 +5553,13 @@ nextFragment: aStringOrBytes
 		ifTrue:[^self send: aStringOrBytes asUtf8Bytes code: 0 final: false]
 		ifFalse:[^self send: aStringOrBytes code: 0 final: false].! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'ar 27/Sep/2011 13:31:00'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'ar 27/Sep/2011, 4:31:00 pm (UTC)'!
 readFrame
 	"Reads one frame worth of data"
 
 	^self readFrameFrom: stream! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 9/Jan/2024 17:40:31'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 9/Jan/2024, 8:40:31 pm (UTC)'!
 readFrameFrom: aStream
 	"Reads one frame worth of data"
 
@@ -5617,7 +5617,7 @@ readFrameFrom: aStream
 	].
 ! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022 12:08:22'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 26/May/2022, 3:08:22 pm (UTC)'!
 send: aStringOrBytes
 	"Writes one frame worth of data"
 
@@ -5625,19 +5625,19 @@ send: aStringOrBytes
 		ifTrue:[^self send: aStringOrBytes asString asUtf8Bytes code: 1]
 		ifFalse:[^self send: aStringOrBytes code: 2].! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'ar 26/Sep/2011 12:48:00'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'ar 26/Sep/2011, 3:48:00 pm (UTC)'!
 send: data code: opcode
 	"Sends unfragmented data using the given opcode"
 
 	^self send: data code: opcode final: true! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'ar 27/Sep/2011 13:47:00'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'ar 27/Sep/2011, 4:47:00 pm (UTC)'!
 send: data code: opcode final: isFinal
 	"Sends unfragmented data using the given opcode"
 
 	^self send: data code: opcode final: isFinal mask: self masking! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 7/May/2023 18:59:40'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 7/May/2023, 9:59:40 pm (UTC)'!
 send: data code: opcode final: isFinal mask: doMask
 	"Sends unfragmented data using the given opcode"
 
@@ -5676,7 +5676,7 @@ send: data code: opcode final: isFinal mask: doMask
 	stream nextPutAll: copy.
 	stream flush.! !
 
-!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 10/Jan/2023 14:50:06'!
+!WebSocket07 methodsFor: 'read/write' stamp: 'jmv 10/Jan/2023, 5:50:06 pm (UTC)'!
 xor: data with: mask
 	"XOR all the data using the given mask bytes.
 
@@ -5689,7 +5689,7 @@ xor: data with: mask
 	].
 ! !
 
-!WebSocket07 methodsFor: 'initialize' stamp: 'klub 13/Jun/2012 17:00:00'!
+!WebSocket07 methodsFor: 'initialize' stamp: 'klub 13/Jun/2012, 8:00:00 pm (UTC)'!
 initialize
 
 	super initialize.
@@ -5698,19 +5698,19 @@ initialize
    ''Frames sent from the client to the server are masked to
    avoid confusing network intermediaries, such as intercepting proxies.''"! !
 
-!WebSocket07 methodsFor: 'accessing' stamp: 'ar 27/Sep/2011 13:47:00'!
+!WebSocket07 methodsFor: 'accessing' stamp: 'ar 27/Sep/2011, 4:47:00 pm (UTC)'!
 masking
 	"If true, outgoing frames are masked."
 
 	^masking! !
 
-!WebSocket07 methodsFor: 'accessing' stamp: 'ar 27/Sep/2011 13:47:00'!
+!WebSocket07 methodsFor: 'accessing' stamp: 'ar 27/Sep/2011, 4:47:00 pm (UTC)'!
 masking: aBool
 	"If true, outgoing frames are masked."
 
 	masking := aBool! !
 
-!WebSocket07 methodsFor: 'private' stamp: 'jmv 9/Jan/2024 17:39:32'!
+!WebSocket07 methodsFor: 'private' stamp: 'jmv 9/Jan/2024, 8:39:32 pm (UTC)'!
 nextNumber: n from: aStream
 	"Answer the next n bytes as a positive Integer or LargePositiveInteger."
 	| s |
@@ -5721,7 +5721,7 @@ nextNumber: n from: aStream
 		s := (s bitShift: 8) bitOr: b ].
 	^ s normalize! !
 
-!WebSocket07 methodsFor: 'running' stamp: 'ar 26/Sep/2011 12:40:00'!
+!WebSocket07 methodsFor: 'running' stamp: 'ar 26/Sep/2011, 3:40:00 pm (UTC)'!
 run
 	"Run the WebSocket's input process."
 
@@ -5733,7 +5733,7 @@ run
 	].
 ! !
 
-!WebUtils class methodsFor: 'decoding' stamp: 'jmv 25/Jun/2017 19:16:15'!
+!WebUtils class methodsFor: 'decoding' stamp: 'jmv 25/Jun/2017, 10:16:15 pm (UTC)'!
 decodeMultipartForm: aStream boundary: boundary do: aBlock
 	"Parse the contents of a multipart/form-data submission.
 
@@ -5762,13 +5762,13 @@ decodeMultipartForm: aStream boundary: boundary do: aBlock
 		aBlock value: headers value: params value: content.
 	].! !
 
-!WebUtils class methodsFor: 'decoding' stamp: 'ar 21/Feb/2010 09:54:00'!
+!WebUtils class methodsFor: 'decoding' stamp: 'ar 21/Feb/2010, 12:54:00 pm (UTC)'!
 decodeUrlEncodedForm: aString
 	"Decodes the fields embedded in the url ?var1=val1&var2=val2"
 
 	^self decodeUrlEncodedForm: aString multipleValues: false! !
 
-!WebUtils class methodsFor: 'decoding' stamp: 'DSG 24/May/2012 21:19:00'!
+!WebUtils class methodsFor: 'decoding' stamp: 'DSG 25/May/2012, 12:19:00 am (UTC)'!
 decodeUrlEncodedForm: aString do: aBlock
 	"Decodes the fields embedded in the url ?var1=val1&var2=val2.
 	Evaluates aBlock with the key/value pairs defined in the fields."
@@ -5790,7 +5790,7 @@ decodeUrlEncodedForm: aString do: aBlock
 	].
 ! !
 
-!WebUtils class methodsFor: 'decoding' stamp: 'ar 20/Jul/2010 20:37:00'!
+!WebUtils class methodsFor: 'decoding' stamp: 'ar 20/Jul/2010, 11:37:00 pm (UTC)'!
 decodeUrlEncodedForm: aString multipleValues: aBool
 	"Decodes the fields embedded in the url ?var1=val1&var2=val2"
 
@@ -5803,7 +5803,7 @@ decodeUrlEncodedForm: aString multipleValues: aBool
 	].
 	^fields! !
 
-!WebUtils class methodsFor: 'decoding' stamp: 'jmv 26/Jun/2017 19:54:45'!
+!WebUtils class methodsFor: 'decoding' stamp: 'jmv 26/Jun/2017, 10:54:45 pm (UTC)'!
 encodeMultipartForm: fieldMap boundary: boundary
 	"Encodes the fieldMap as multipart/form-data.
 
@@ -5830,7 +5830,7 @@ encodeMultipartForm: fieldMap boundary: boundary
 	].
 ! !
 
-!WebUtils class methodsFor: 'decoding' stamp: 'jmv 13/Apr/2023 15:14:07'!
+!WebUtils class methodsFor: 'decoding' stamp: 'jmv 13/Apr/2023, 6:14:07 pm (UTC)'!
 encodeUrlEncodedForm: fieldMap
 	"Encodes the fieldsMap in the form of var1=val1&var2=val2.
 	The fieldMap can be EITHER an array of associations OR a Dictionary of 
@@ -5849,30 +5849,30 @@ encodeUrlEncodedForm: fieldMap
 		] separatedBy:[s nextPutAll:'&'].
 	].! !
 
-!WebUtils class methodsFor: 'decoding' stamp: 'jmv 19/May/2015 21:52:00'!
+!WebUtils class methodsFor: 'decoding' stamp: 'jmv 20/May/2015, 12:52:00 am (UTC)'!
 multipartBoundary
 	"Answer a string to be used as multpart boundary in posts"
 
 	^'----squeak-', Date today printString,'-', Time localMillisecondClock printString, '-webclient-----'.! !
 
-!WebUtils class methodsFor: 'proxy' stamp: 'CK 24/Nov/2017 13:59:29'!
+!WebUtils class methodsFor: 'proxy' stamp: 'CK 24/Nov/2017, 4:59:29 pm (UTC)'!
 defaultProxyServer
 	"Answer the default proxy server to use."
 	^ currentProxyServer ! !
 
-!WebUtils class methodsFor: 'proxy' stamp: 'CK 24/Nov/2017 14:00:05'!
+!WebUtils class methodsFor: 'proxy' stamp: 'CK 24/Nov/2017, 5:00:05 pm (UTC)'!
 defaultProxyServer: aString
 	"Set the default proxy server to use."
 	currentProxyServer _ aString ! !
 
-!WebUtils class methodsFor: 'proxy' stamp: 'DSG 4/Dec/2013 23:03:00'!
+!WebUtils class methodsFor: 'proxy' stamp: 'DSG 5/Dec/2013, 2:03:00 am (UTC)'!
 proxyExceptionsDo: aBlock
 	"Evaluate aBlock with all registered proxy exceptions. 
 	Uses the information from HTTPSocket."
 
 	"HTTPSocket httpProxyExceptions do: aBlock."! !
 
-!WebUtils class methodsFor: 'proxy' stamp: 'CK 27/Nov/2017 12:06:52'!
+!WebUtils class methodsFor: 'proxy' stamp: 'CK 27/Nov/2017, 3:06:52 pm (UTC)'!
 proxyServerFor: serverName
 	"Answer the proxy server to use for the given server:port
 	Returns the proxy server:port to use or nil if no proxy is required."
@@ -5882,7 +5882,7 @@ proxyServerFor: serverName
 	self proxyExceptionsDo:[:pattern| (pattern match: domain) ifTrue:[^nil]].
 	^self defaultProxyServer! !
 
-!WebUtils class methodsFor: 'websockets' stamp: 'ar 20/Jul/2010 20:38:00'!
+!WebUtils class methodsFor: 'websockets' stamp: 'ar 20/Jul/2010, 11:38:00 pm (UTC)'!
 extractWebSocketKey: field
 	"Decodes a WebSocket key:
 
@@ -5906,7 +5906,7 @@ extractWebSocketKey: field
 	^digits // spaces.
 ! !
 
-!WebUtils class methodsFor: 'websockets' stamp: 'jmv 7/May/2023 11:08:48'!
+!WebUtils class methodsFor: 'websockets' stamp: 'jmv 7/May/2023, 2:08:48 pm (UTC)'!
 webSocketHandshake: key1 with: key2 with: data
 	"Do the actual WebSocket handshake computation"
 
@@ -5917,7 +5917,7 @@ webSocketHandshake: key1 with: key2 with: data
 	bytes replaceFrom: 9 to: 16 with: data.
 	^(self md5HashStream: bytes readStream) reversed! !
 
-!WebUtils class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011 10:30:00'!
+!WebUtils class methodsFor: 'websockets' stamp: 'ar 26/Sep/2011, 1:30:00 pm (UTC)'!
 webSocketHash07: key
 	"Do the actual WebSocket hash computation"
 
@@ -5925,7 +5925,7 @@ webSocketHash07: key
 	uid := '258EAFA5-E914-47DA-95CA-C5AB0DC85B11'.
 	^(ByteArray newFrom: (SecureHashAlgorithm new hashMessage: key, uid)) reversed base64Encoded! !
 
-!WebUtils class methodsFor: 'auth' stamp: 'jmv 12/Sep/2024 12:08:20'!
+!WebUtils class methodsFor: 'auth' stamp: 'jmv 12/Sep/2024, 3:08:20 pm (UTC)'!
 handleAuth: aBlock
 	"Utility method to handle web authentication requests interactively.
 
@@ -5948,7 +5948,7 @@ handleAuth: aBlock
 				 ex username: user password: [String fromUtf8Bytes: pass base64Decoded]]].
 		ex pass].! !
 
-!WebUtils class methodsFor: 'oauth' stamp: 'DSG 28/Mar/2015 23:22:00'!
+!WebUtils class methodsFor: 'oauth' stamp: 'DSG 29/Mar/2015, 2:22:00 am (UTC)'!
 hmacSha1: message key: signKey
 	"Compute the SHA1 HMAC for the given message"
 
@@ -5963,7 +5963,7 @@ hmacSha1: message key: signKey
 		(key with: opad collect:[:b1 :b2| b1 bitXor: b2]), 
 		(self sha1Hash: (key with: ipad collect:[:b1 :b2| b1 bitXor: b2]), message)! !
 
-!WebUtils class methodsFor: 'oauth' stamp: 'HAW 20/Sep/2025 18:07:55'!
+!WebUtils class methodsFor: 'oauth' stamp: 'HAW 20/Sep/2025, 9:07:55 pm (UTC)'!
 oAuthSign: webRequest url: requestUrl extra: postFields using: params
 	"Sign the given webRequest using the set of oauth parameters provided"
 
@@ -6047,13 +6047,13 @@ oAuthSign: webRequest url: requestUrl extra: postFields using: params
 
 	webRequest headerAt: 'Authorization' put: header.! !
 
-!WebUtils class methodsFor: 'oauth' stamp: 'ar 23/Aug/2010 21:55:00'!
+!WebUtils class methodsFor: 'oauth' stamp: 'ar 24/Aug/2010, 12:55:00 am (UTC)'!
 oAuthSign: webRequest url: requestUrl using: params
 	"Sign the given webRequest using the set of oauth parameters provided"
 
 	^self oAuthSign: webRequest url: requestUrl extra: #() using: params! !
 
-!WebUtils class methodsFor: 'oauth' stamp: 'ar 12/Aug/2010 16:31:00'!
+!WebUtils class methodsFor: 'oauth' stamp: 'ar 12/Aug/2010, 7:31:00 pm (UTC)'!
 sha1Hash: message
 	"Compute the SHA1 hash for the given message. Slightly different from 
 	SecureHashAlgorithm to produce fixed-length byte arrays."
@@ -6065,7 +6065,7 @@ sha1Hash: message
 	^hash
 ! !
 
-!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012 13:39:00'!
+!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012, 4:39:00 pm (UTC)'!
 jsonArray: anArray on: stream
 	"Encodes an array"
 
@@ -6076,7 +6076,7 @@ jsonArray: anArray on: stream
 	stream nextPut:$].
 ! !
 
-!WebUtils class methodsFor: 'json-encode' stamp: 'jmv 10/Jan/2023 14:13:13'!
+!WebUtils class methodsFor: 'json-encode' stamp: 'jmv 10/Jan/2023, 5:13:13 pm (UTC)'!
 jsonChar: aCharacter on: stream
 	"Writes a single encoded character"
 
@@ -6106,13 +6106,13 @@ jsonChar: aCharacter on: stream
 		'\u', (((codePoint bitAnd: 16rFFFF) printStringBase: 16) padded: #left to: 4 with: $0).
 ! !
 
-!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012 13:41:00'!
+!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012, 4:41:00 pm (UTC)'!
 jsonEncode: anObject
 	"Encode the given object as JSON"
 
 	^String streamContents:[:s| self jsonObj: anObject on: s]! !
 
-!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012 13:40:00'!
+!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012, 4:40:00 pm (UTC)'!
 jsonMap: aDictionary on: stream
 	"Encodes a dictionary"
 
@@ -6125,7 +6125,7 @@ jsonMap: aDictionary on: stream
 	] separatedBy:[stream nextPutAll: ', '].
 	stream nextPut: $}.! !
 
-!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012 13:38:00'!
+!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012, 4:38:00 pm (UTC)'!
 jsonNumber: aNumber on: stream
 	"Encodes a number"
 
@@ -6135,7 +6135,7 @@ jsonNumber: aNumber on: stream
 	stream print: aNumber.
 ! !
 
-!WebUtils class methodsFor: 'json-encode' stamp: 'jmv 26/Jun/2017 19:34:55'!
+!WebUtils class methodsFor: 'json-encode' stamp: 'jmv 26/Jun/2017, 10:34:55 pm (UTC)'!
 jsonObj: anObject on: stream
 	"Encode a generic object"
 
@@ -6149,7 +6149,7 @@ jsonObj: anObject on: stream
 
 	self error: 'Cannot encode: ', anObject! !
 
-!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012 13:39:00'!
+!WebUtils class methodsFor: 'json-encode' stamp: 'ar 10/Feb/2012, 4:39:00 pm (UTC)'!
 jsonString: aString on: stream
 	"Encodes a string"
 
@@ -6158,7 +6158,7 @@ jsonString: aString on: stream
 	stream nextPut: $".
 ! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012 13:43:00'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012, 4:43:00 pm (UTC)'!
 jsonArrayFrom: stream
 	"Decodes a JSON [value, *] array from the stream"
 
@@ -6177,7 +6177,7 @@ jsonArrayFrom: stream
 
 	^result contents! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'jmv 10/Jan/2023 14:08:23'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'jmv 10/Jan/2023, 5:08:23 pm (UTC)'!
 jsonCharFrom: stream on: writeStream
 	"Decodes a backslash-escaped character"
 
@@ -6193,7 +6193,7 @@ jsonCharFrom: stream on: writeStream
 	} otherwise: [ch].
 	writeStream nextPut: decoded! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012 13:48:00'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012, 4:48:00 pm (UTC)'!
 jsonDecode: stream
 	"Decodes an arbitrary JSON encoded value from the given stream"
 
@@ -6208,7 +6208,7 @@ jsonDecode: stream
 	} otherwise:[self jsonNumberFrom: stream].
 ! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012 13:43:00'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012, 4:43:00 pm (UTC)'!
 jsonFalseFrom: stream
 	"Decodes 'false' from aStream"
 
@@ -6217,7 +6217,7 @@ jsonFalseFrom: stream
 			ifFalse:[^self error: 'Expected ''false'''].
 	^false! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012 13:45:00'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'nice 29/Aug/2026, 9:42:41 pm (UTC)'!
 jsonMapFrom: stream
 	"Decodes a JSON {key:value, *} object from the stream"
 
@@ -6225,7 +6225,7 @@ jsonMapFrom: stream
 	map := Dictionary new.
 	(ch := stream next) = ${ ifFalse:[^self error: 'JSON Object expected'].
 	stream skipSeparators.
-	stream peek = $} ifTrue:[^map].
+	(stream peekFor: $}) ifTrue: [^map].
 
 	["Decode the next key:value pair"
 	stream skipSeparators.
@@ -6241,7 +6241,7 @@ jsonMapFrom: stream
 
 	^map! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012 13:43:00'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012, 4:43:00 pm (UTC)'!
 jsonNullFrom: stream
 	"Decodes 'null' from aStream"
 
@@ -6250,7 +6250,7 @@ jsonNullFrom: stream
 			ifFalse:[^self error: 'Expected ''null'''].
 	^nil! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012 13:44:00'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012, 4:44:00 pm (UTC)'!
 jsonNumberFrom: stream
 	"Decodes a JSON number from the stream"
 
@@ -6310,7 +6310,7 @@ jsonNumberFrom: stream
 	].
 	^value! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'jmv 26/Jun/2017 19:49:10'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'jmv 26/Jun/2017, 10:49:10 pm (UTC)'!
 jsonStringFrom: stream
 	"Decodes a JSON encoded string"
 
@@ -6326,7 +6326,7 @@ jsonStringFrom: stream
 	].
 	^self error: 'Unterminated string'! !
 
-!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012 13:46:00'!
+!WebUtils class methodsFor: 'json-decode' stamp: 'ar 10/Feb/2012, 4:46:00 pm (UTC)'!
 jsonTrueFrom: stream
 	"Decodes 'true' from aStream"
 
@@ -6335,7 +6335,7 @@ jsonTrueFrom: stream
 			 ifFalse:[^self error: 'Expected ''true'''].
 	^true! !
 
-!WebUtils class methodsFor: 'misc' stamp: 'DSG 28/Mar/2015 22:49:00'!
+!WebUtils class methodsFor: 'misc' stamp: 'DSG 29/Mar/2015, 1:49:00 am (UTC)'!
 logEntryFor: request response: response
 	"Create a log entry in common log format from the given request / response"
 
@@ -6376,7 +6376,7 @@ logEntryFor: request response: response
 	^entry
 ! !
 
-!WebUtils class methodsFor: 'misc' stamp: 'pb 25/May/2016 01:29:00'!
+!WebUtils class methodsFor: 'misc' stamp: 'pb 25/May/2016, 4:29:00 am (UTC)'!
 logRequest: request response: response on: streamOrFilename
 	"Log a request in common log format on the given stream / file."
 
@@ -6394,7 +6394,7 @@ logRequest: request response: response on: streamOrFilename
 			streamOrFilename nextPutAll: entry; newLine.
 			streamOrFilename flush ]! !
 
-!WebUtils class methodsFor: 'misc' stamp: 'jmv 16/Aug/2021 12:04:50'!
+!WebUtils class methodsFor: 'misc' stamp: 'jmv 16/Aug/2021, 3:04:50 pm (UTC)'!
 mcVersion
 	"Answers the Monticello version of WebServer's MC package"
 
@@ -6406,26 +6406,26 @@ mcVersion
 	"
 	^version ifNil:[''].! !
 
-!WebUtils class methodsFor: 'misc' stamp: 'ar 17/Nov/2011 10:16:00'!
+!WebUtils class methodsFor: 'misc' stamp: 'ar 17/Nov/2011, 1:16:00 pm (UTC)'!
 platformName
 	"Return the name of the platform we're running on."
 
 	^Smalltalk getSystemAttribute: 1001! !
 
-!WebUtils class methodsFor: 'misc' stamp: 'ar 17/Nov/2011 10:06:00'!
+!WebUtils class methodsFor: 'misc' stamp: 'ar 17/Nov/2011, 1:06:00 pm (UTC)'!
 vmVersion	
 	"Return a string identifying the interpreter version"
 
 	^Smalltalk getSystemAttribute: 1004! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'ar 20/Feb/2010 12:45:00'!
+!WebUtils class methodsFor: 'md5' stamp: 'ar 20/Feb/2010, 3:45:00 pm (UTC)'!
 md5Digest: aStringOrByteArray
 	"This creates a little endian hex string to be used with various auth methods
 	This is the same as htdigest (apache) uses for its md5 digest auth db"
 
 	^(self md5HashStream: (ReadStream on: aStringOrByteArray asByteArray)) reversed hex! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'jmv 7/May/2023 11:06:05'!
+!WebUtils class methodsFor: 'md5' stamp: 'jmv 7/May/2023, 2:06:05 pm (UTC)'!
 md5HashStream: aStream
 	"self md5HashStream: (ReadStream on: 'foo')"
 
@@ -6470,7 +6470,7 @@ md5HashStream: aStream
 	^bytes
 ! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010 09:28:00'!
+!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010, 12:28:00 pm (UTC)'!
 md5Transform: in hash: hash
 	"This adds the incoming words to the existing hash"
 
@@ -6556,7 +6556,7 @@ md5Transform: in hash: hash
 
 	^hash! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010 09:28:00'!
+!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010, 12:28:00 pm (UTC)'!
 rotate: value by: amount
 	"Rotate value left by amount"
 
@@ -6566,7 +6566,7 @@ rotate: value by: amount
 	^((value bitAnd: lowMask) bitShift: amount) + 
 		((value bitAnd: highMask) bitShift: amount-32)! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010 09:28:00'!
+!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010, 12:28:00 pm (UTC)'!
 step1: w x: x y: y z: z data: data add: add shift: s
 	"Step 1 in MD5 transformation"
 
@@ -6576,7 +6576,7 @@ step1: w x: x y: y z: z data: data add: add shift: s
 	result := self rotate: result by: s.
 	^result + x bitAnd: 16rFFFFFFFF! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010 09:28:00'!
+!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010, 12:28:00 pm (UTC)'!
 step2: w x: x y: y z: z data: data add: add shift: s
 	"Step 2 in MD5 transformation"
 
@@ -6586,7 +6586,7 @@ step2: w x: x y: y z: z data: data add: add shift: s
 	result := self rotate: result by: s.
 	^result + x bitAnd: 16rFFFFFFFF! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010 09:28:00'!
+!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010, 12:28:00 pm (UTC)'!
 step3: w x: x y: y z: z data: data add: add shift: s
 	"Step 3 in MD5 transformation"
 
@@ -6596,7 +6596,7 @@ step3: w x: x y: y z: z data: data add: add shift: s
 	result := self rotate: result by: s.
 	^result + x bitAnd: 16rFFFFFFFF! !
 
-!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010 09:28:00'!
+!WebUtils class methodsFor: 'md5' stamp: 'ar 23/Feb/2010, 12:28:00 pm (UTC)'!
 step4: w x: x y: y z: z data: data add: add shift: s
 	"Step 4 in MD5 transformation"
 
@@ -6606,7 +6606,7 @@ step4: w x: x y: y z: z data: data add: add shift: s
 	result := self rotate: result by: s.
 	^result + x bitAnd: 16rFFFFFFFF! !
 
-!WebUtils class methodsFor: 'auth utils' stamp: 'DSG 5/Dec/2013 17:20:00'!
+!WebUtils class methodsFor: 'auth utils' stamp: 'DSG 5/Dec/2013, 8:20:00 pm (UTC)'!
 parseAuthParams: authHeader
 	"Parse the auth header to find authentication parameters"
 
@@ -6625,14 +6625,14 @@ parseAuthParams: authHeader
 	].
 	^authParams! !
 
-!WebUtils class methodsFor: 'quoting' stamp: 'ar 31/Mar/2010 08:43:00'!
+!WebUtils class methodsFor: 'quoting' stamp: 'ar 31/Mar/2010, 11:43:00 am (UTC)'!
 quote: aString
 	"Quote the given string, escaping as necessary any embedded quotes"
 
 	^'"', (aString copyReplaceAll: '"' with: '\"'), '"'
 ! !
 
-!WebUtils class methodsFor: 'quoting' stamp: 'ar 31/Mar/2010 08:45:00'!
+!WebUtils class methodsFor: 'quoting' stamp: 'ar 31/Mar/2010, 11:45:00 am (UTC)'!
 unquote: aString
 	"Unquote the given string, unescaping as necessary any embedded quotes"
 
@@ -6640,7 +6640,7 @@ unquote: aString
 	(aString endsWith: '"') ifFalse:[^aString].
 	^(aString copyReplaceAll: '\"' with: '"') allButFirst allButLast! !
 
-!WebUtils class methodsFor: 'headers' stamp: 'jmv 25/Jun/2017 19:36:55'!
+!WebUtils class methodsFor: 'headers' stamp: 'jmv 25/Jun/2017, 10:36:55 pm (UTC)'!
 readHeadersFrom: aStream
 	"Parse http headers and answer a collection of key -> value pairs."
 
@@ -6659,7 +6659,7 @@ readHeadersFrom: aStream
 	].
 	^headers! !
 
-!SqueakSSL methodsFor: 'convenience' stamp: 'jmv 13/Apr/2023 15:50:00'!
+!SqueakSSL methodsFor: 'convenience' stamp: 'jmv 13/Apr/2023, 6:50:00 pm (UTC)'!
 accept
 	"Convenience API. Perform an SSL server handshake.
 	Raises an error if something goes wrong."
@@ -6683,7 +6683,7 @@ accept
 	].
 ! !
 
-!SqueakSSL methodsFor: 'convenience' stamp: 'jmv 13/Apr/2023 15:50:14'!
+!SqueakSSL methodsFor: 'convenience' stamp: 'jmv 13/Apr/2023, 6:50:14 pm (UTC)'!
 connect
 	"Convenience API. Perform an SSL client handshake. 
 	Raises an error if something goes wrong."
@@ -6707,7 +6707,7 @@ connect
 		count := self readDataInto: inbuf.
 	].! !
 
-!SqueakSSL methodsFor: 'convenience' stamp: 'ar 18/Jul/2010 14:18:00'!
+!SqueakSSL methodsFor: 'convenience' stamp: 'ar 18/Jul/2010, 5:18:00 pm (UTC)'!
 decrypt: data
 	"Convenience API. Decrypt incoming data and return the result.
 
@@ -6720,7 +6720,7 @@ decrypt: data
 	count < 0 ifTrue:[self error: 'Decryption failed, code: ', count].
 	^buf copyFrom: 1 to: count! !
 
-!SqueakSSL methodsFor: 'convenience' stamp: 'ar 18/Jul/2010 14:18:00'!
+!SqueakSSL methodsFor: 'convenience' stamp: 'ar 18/Jul/2010, 5:18:00 pm (UTC)'!
 encrypt: data
 	"Convenience API. Encrypt incoming data and return the result."
 
@@ -6730,7 +6730,7 @@ encrypt: data
 	count < 0 ifTrue:[self error: 'Decryption failed, code: ', count].
 	^buf copyFrom: 1 to: count! !
 
-!SqueakSSL methodsFor: 'convenience' stamp: 'ar 16/Jul/2010 23:04:00'!
+!SqueakSSL methodsFor: 'convenience' stamp: 'ar 17/Jul/2010, 2:04:00 am (UTC)'!
 receiveData
 	"Convenience API. Receive data and decrypt it."
 
@@ -6750,7 +6750,7 @@ receiveData
 		].
 	].! !
 
-!SqueakSSL methodsFor: 'convenience' stamp: 'ar 16/Jul/2010 23:04:00'!
+!SqueakSSL methodsFor: 'convenience' stamp: 'ar 17/Jul/2010, 2:04:00 am (UTC)'!
 sendData: inbuf
 	"Convenience API. Encrypt and send data"
 
@@ -6759,13 +6759,13 @@ sendData: inbuf
 	count := self encrypt: inbuf from: 1 to: inbuf size into: outbuf.
 	^self writeData: outbuf count: count.! !
 
-!SqueakSSL methodsFor: 'operations' stamp: 'ar 16/Jul/2010 23:02:00'!
+!SqueakSSL methodsFor: 'operations' stamp: 'ar 17/Jul/2010, 2:02:00 am (UTC)'!
 accept: srcBuf from: start to: stop into: dstBuf
 	"Start or continue the server handshake using the given input token."
 
 	^self primitiveSSL: handle accept: srcBuf startingAt: start count: stop-start+1 into: dstBuf! !
 
-!SqueakSSL methodsFor: 'operations' stamp: 'eem 23/Mar/2016 16:55:00'!
+!SqueakSSL methodsFor: 'operations' stamp: 'eem 23/Mar/2016, 7:55:00 pm (UTC)'!
 connect: srcBuf from: start to: stop into: dstBuf
 	"Start or continue the server handshake using the given input token."
 
@@ -6775,7 +6775,7 @@ connect: srcBuf from: start to: stop into: dstBuf
 		[Processor yield].
 	^r! !
 
-!SqueakSSL methodsFor: 'operations' stamp: 'ar 16/Jul/2010 21:58:00'!
+!SqueakSSL methodsFor: 'operations' stamp: 'ar 17/Jul/2010, 12:58:00 am (UTC)'!
 decrypt: srcBuf from: start to: stop into: dstBuf
 	"Decrypt the input in srcBuf into the provided output buffer.
 
@@ -6792,20 +6792,20 @@ decrypt: srcBuf from: start to: stop into: dstBuf
 
 	^self primitiveSSL: handle decrypt: srcBuf startingAt: start count: stop-start+1 into: dstBuf! !
 
-!SqueakSSL methodsFor: 'operations' stamp: 'ar 16/Jul/2010 21:59:00'!
+!SqueakSSL methodsFor: 'operations' stamp: 'ar 17/Jul/2010, 12:59:00 am (UTC)'!
 encrypt: srcBuf from: start to: stop into: dstBuf
 	"Encrypt the input in srcBuf into the provided output buffer.
 	The output buffer must be large enough to include the framing information."
 
 	^self primitiveSSL: handle encrypt: srcBuf startingAt: start count: stop-start+1 into: dstBuf! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 18/Jul/2010 21:31:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 19/Jul/2010, 12:31:00 am (UTC)'!
 certName
 	"The name of the (local) certificate to provide to the remote peer."
 
 	^self primitiveSSL: handle getStringProperty: 1! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 16/Nov/2011 16:48:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 16/Nov/2011, 7:48:00 pm (UTC)'!
 certName: aString
 	"Sets the name of the (local) certificate to provide to the remote peer.
 	OpenSSL:
@@ -6816,7 +6816,7 @@ certName: aString
 
 	^self primitiveSSL: handle setStringProperty: 1 toValue: (aString ifNil:[''])! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 18/Jul/2010 21:27:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 19/Jul/2010, 12:27:00 am (UTC)'!
 certState
 	"Returns the certificate verification bits. The returned value indicates
 	whether the certificate is valid. The two standard values are:
@@ -6836,46 +6836,46 @@ certState
 	"
 	^self primitiveSSL: handle getIntProperty: 3! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 18/Jul/2010 21:26:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 19/Jul/2010, 12:26:00 am (UTC)'!
 logLevel
 	"Returns the log level of the ssl instance"
 
 	^self primitiveSSL: handle getIntProperty: 1! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 18/Jul/2010 21:27:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 19/Jul/2010, 12:27:00 am (UTC)'!
 logLevel: aNumber
 	"Sets the log level of the ssl instance"
 
 	^self primitiveSSL: handle setIntProperty: 1 toValue: aNumber! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 18/Jul/2010 21:31:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 19/Jul/2010, 12:31:00 am (UTC)'!
 peerName
 	"Returns the certificate name of the remote peer.
 	The method only returns a name if the certificate has been verified."
 
 	^self primitiveSSL: handle getStringProperty: 0! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 18/Jul/2010 21:25:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 19/Jul/2010, 12:25:00 am (UTC)'!
 pluginVersion
 	"Returns the version of the plugin"
 
 	^self primitiveSSL: handle getIntProperty: 0! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010 20:16:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010, 11:16:00 pm (UTC)'!
 readBlock
 	"The block used to read data where required. The block takes one argument,
 	the buffer to fill with data and is expected to return the number of bytes read."
 
 	^readBlock! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010 20:16:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010, 11:16:00 pm (UTC)'!
 readBlock: aBlock
 	"The block used to read data where required. The block takes one argument,
 	the buffer to fill with data and is expected to return the number of bytes read."
 
 	readBlock := aBlock! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ul 16/Oct/2014 10:35:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ul 16/Oct/2014, 1:35:00 pm (UTC)'!
 serverName: aString
 	"Sets the name to use with the Server Name Indication TLS extension. Which should be a valid FQDN. No WinSSL support yet."
 
@@ -6883,7 +6883,7 @@ serverName: aString
 		on: Error
 		do: [ "nothing" ]! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 18/Jul/2010 21:27:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 19/Jul/2010, 12:27:00 am (UTC)'!
 sslState
 	"Returns the current state of the SSL connection:
 		0 - Unused.
@@ -6894,21 +6894,21 @@ sslState
 	^self primitiveSSL: handle getIntProperty: 2
 		! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010 20:17:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010, 11:17:00 pm (UTC)'!
 writeBlock
 	"The block used to write data where required. The block takes two arguments,
 	the buffer and the number of bytes to be written from the buffer."
 
 	^writeBlock! !
 
-!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010 20:17:00'!
+!SqueakSSL methodsFor: 'accessing' stamp: 'ar 15/Jul/2010, 11:17:00 pm (UTC)'!
 writeBlock: aBlock
 	"The block used to write data where required. The block takes two arguments,
 	the buffer and the number of bytes to be written from the buffer."
 
 	writeBlock := aBlock! !
 
-!SqueakSSL methodsFor: 'initialize' stamp: 'ar 16/Jul/2010 22:01:00'!
+!SqueakSSL methodsFor: 'initialize' stamp: 'ar 17/Jul/2010, 1:01:00 am (UTC)'!
 destroy
 	"Destroys the underlying platform handle"
 
@@ -6917,14 +6917,14 @@ destroy
 		handle := nil.
 	].! !
 
-!SqueakSSL methodsFor: 'initialize' stamp: 'ar 16/Jul/2010 23:10:00'!
+!SqueakSSL methodsFor: 'initialize' stamp: 'ar 17/Jul/2010, 2:10:00 am (UTC)'!
 initialize
 	"Initialize the receiver"
 
 	handle := self primitiveSSLCreate.
 ! !
 
-!SqueakSSL methodsFor: 'initialize' stamp: 'ar 18/Jul/2010 20:37:00'!
+!SqueakSSL methodsFor: 'initialize' stamp: 'ar 18/Jul/2010, 11:37:00 pm (UTC)'!
 on: aSocket
 	"Convenience API. Set up SqueakSSL to operate on a standard TCP socket.
 	Generally not very useful for real applications (it lacks error handling etc) 
@@ -6938,13 +6938,13 @@ on: aSocket
 		aSocket sendData: (outbuf copyFrom: 1 to: count).
 	].! !
 
-!SqueakSSL methodsFor: 'testing' stamp: 'ar 16/Jul/2010 22:37:00'!
+!SqueakSSL methodsFor: 'testing' stamp: 'ar 17/Jul/2010, 1:37:00 am (UTC)'!
 isConnected
 	"Returns true if the SSL handshake has been completed"
 
 	^self sslState = 3! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 21:57:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 12:57:00 am (UTC)'!
 primitiveSSL: sslHandle accept: srcbuf startingAt: start count: length into: dstbuf
 	"Primitive. Starts or continues a server handshake using the provided data.
 	Will eventually produce output to be sent to the server.
@@ -6957,7 +6957,7 @@ primitiveSSL: sslHandle accept: srcbuf startingAt: start count: length into: dst
 	<primitive: 'primitiveAccept' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 21:57:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 12:57:00 am (UTC)'!
 primitiveSSL: sslHandle connect: srcbuf startingAt: start count: length into: dstbuf
 	"Primitive. Starts or continues a client handshake using the provided data.
 	Will eventually produce output to be sent to the server.
@@ -6970,7 +6970,7 @@ primitiveSSL: sslHandle connect: srcbuf startingAt: start count: length into: ds
 	<primitive: 'primitiveConnect' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 21:58:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 12:58:00 am (UTC)'!
 primitiveSSL: sslHandle decrypt: srcbuf startingAt: start count: length into: dstbuf
 	"Primitive. Takes incoming data for decryption and continues to decrypt data.
 	Returns the number of bytes produced in the output"
@@ -6978,7 +6978,7 @@ primitiveSSL: sslHandle decrypt: srcbuf startingAt: start count: length into: ds
 	<primitive: 'primitiveDecrypt' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 21:59:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 12:59:00 am (UTC)'!
 primitiveSSL: sslHandle encrypt: srcbuf startingAt: start count: length into: dstbuf
 	"Primitive. Encrypts the incoming buffer into the result buffer.
 	Returns the number of bytes produced as a result."
@@ -6986,68 +6986,68 @@ primitiveSSL: sslHandle encrypt: srcbuf startingAt: start count: length into: ds
 	<primitive: 'primitiveEncrypt' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 22:00:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 1:00:00 am (UTC)'!
 primitiveSSL: sslHandle getIntProperty: propID
 	"Primitive. Returns a string property from an SSL session."
 
 	<primitive: 'primitiveGetIntProperty' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 21:59:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 12:59:00 am (UTC)'!
 primitiveSSL: sslHandle getStringProperty: propID
 	"Primitive. Returns a string property from an SSL session."
 
 	<primitive: 'primitiveGetStringProperty' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 12/Jan/2011 09:40:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 12/Jan/2011, 12:40:00 pm (UTC)'!
 primitiveSSL: sslHandle setIntProperty: propID toValue: anInteger
 	"Primitive. Sets a string property in an SSL session."
 
 	<primitive: 'primitiveSetIntProperty' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 22:00:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 1:00:00 am (UTC)'!
 primitiveSSL: sslHandle setStringProperty: propID toValue: aString
 	"Primitive. Sets a string property in an SSL session."
 
 	<primitive: 'primitiveSetStringProperty' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 22:01:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 1:01:00 am (UTC)'!
 primitiveSSLCreate
 	"Primitive. Creates and returns a new SSL handle"
 
 	<primitive: 'primitiveCreate' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'primitives' stamp: 'ar 16/Jul/2010 22:01:00'!
+!SqueakSSL methodsFor: 'primitives' stamp: 'ar 17/Jul/2010, 1:01:00 am (UTC)'!
 primitiveSSLDestroy: sslHandle
 	"Primitive. Destroys the SSL session handle"
 
 	<primitive: 'primitiveDestroy' module: 'SqueakSSL'>
 	^self primitiveFailed! !
 
-!SqueakSSL methodsFor: 'private' stamp: 'ar 15/Jul/2010 20:08:00'!
+!SqueakSSL methodsFor: 'private' stamp: 'ar 15/Jul/2010, 11:08:00 pm (UTC)'!
 readDataInto: aBuffer
 	"Private. Read actual data into the given buffer.
 	Return the number of bytes read."
 
 	^readBlock value: aBuffer! !
 
-!SqueakSSL methodsFor: 'private' stamp: 'ar 16/Nov/2011 16:31:00'!
+!SqueakSSL methodsFor: 'private' stamp: 'ar 16/Nov/2011, 7:31:00 pm (UTC)'!
 setStringProperty: index to: aString
 	"Private. Use with caution"
 
 	^self primitiveSSL: handle setStringProperty: index toValue: aString! !
 
-!SqueakSSL methodsFor: 'private' stamp: 'ar 15/Jul/2010 20:08:00'!
+!SqueakSSL methodsFor: 'private' stamp: 'ar 15/Jul/2010, 11:08:00 pm (UTC)'!
 writeData: aBuffer count: count
 	"Private. Write actual data from the given buffer."
 
 	writeBlock value: aBuffer value: count! !
 
-!SqueakSSL class methodsFor: 'utilities' stamp: 'jmv 13/Apr/2023 15:50:09'!
+!SqueakSSL class methodsFor: 'utilities' stamp: 'jmv 13/Apr/2023, 6:50:09 pm (UTC)'!
 checkCert: certName
 	"Attempt to verify the cert with the given name by performing 
 	an SSL handshake. Raises an error if there is an issue with the cert,
@@ -7083,13 +7083,13 @@ checkCert: certName
 		sslServer ifNotNil:[sslServer destroy].
 	].! !
 
-!SqueakSSL class methodsFor: 'utilities' stamp: 'ar 17/Nov/2011 10:16:00'!
+!SqueakSSL class methodsFor: 'utilities' stamp: 'ar 17/Nov/2011, 1:16:00 pm (UTC)'!
 platformName
 	"Return the name of the platform we're running on."
 
 	^Smalltalk getSystemAttribute: 1001! !
 
-!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012 14:58:00'!
+!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012, 5:58:00 pm (UTC)'!
 ensureSampleCert
 	"Ensure that we have a sample certificate for the tests"
 
@@ -7099,7 +7099,7 @@ ensureSampleCert
 	} otherwise: [^nil].
 ! !
 
-!SqueakSSL class methodsFor: 'examples' stamp: 'jmv 25/Jun/2017 21:14:29'!
+!SqueakSSL class methodsFor: 'examples' stamp: 'jmv 26/Jun/2017, 12:14:29 am (UTC)'!
 ensureSampleCertFile
 	"On Unix, we can simply create a valid cert file"
 
@@ -7112,7 +7112,7 @@ ensureSampleCertFile
 			stream nextPutAll: self exampleCertFile ]].
 	^file pathName! !
 
-!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012 14:57:00'!
+!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012, 5:57:00 pm (UTC)'!
 ensureSampleCertInStore
 	"Ensure that we have a valid certificate in the Windows certificate store"
 
@@ -7123,7 +7123,7 @@ ensureSampleCertInStore
 	^'testcert'. "Friendly name of test cert"
 ! !
 
-!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012 14:57:00'!
+!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012, 5:57:00 pm (UTC)'!
 exampleCertFile
 ^'-----BEGIN RSA PRIVATE KEY-----
 MIICXQIBAAKBgQDnCv/gxDCb2yq15qkNwYtdMOHfW609Ck7wfwjVgzSNg+Hw+1R4
@@ -7159,11 +7159,11 @@ qppAjJjNpAgYC0yWoWcIxatYF/AsgGc2WL3hzI8oK7by6STfVi5RfLA6jS7lIDOv
 -----END CERTIFICATE-----
 '! !
 
-!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012 14:57:00'!
+!SqueakSSL class methodsFor: 'examples' stamp: 'ar 17/Jun/2012, 5:57:00 pm (UTC)'!
 exampleCertPFX
 	^ #[48 130 7 50 2 1 3 48 130 6 248 6 9 42 134 72 134 247 13 1 7 1 160 130 6 233 4 130 6 229 48 130 6 225 48 130 3 191 6 9 42 134 72 134 247 13 1 7 6 160 130 3 176 48 130 3 172 2 1 0 48 130 3 165 6 9 42 134 72 134 247 13 1 7 1 48 28 6 10 42 134 72 134 247 13 1 12 1 6 48 14 4 8 88 63 142 234 51 170 181 1 2 2 8 0 128 130 3 120 247 113 35 203 188 93 48 77 162 13 174 138 246 211 61 198 135 133 35 173 48 145 17 17 215 165 194 254 211 158 248 98 76 208 35 117 179 66 160 245 118 213 71 174 220 87 29 165 94 87 52 172 173 229 251 165 205 43 242 114 250 65 123 9 113 132 130 241 182 211 44 155 163 177 90 52 4 72 47 37 0 101 149 229 33 113 144 29 160 38 44 28 178 1 193 134 122 194 233 165 233 236 242 121 119 47 72 143 91 146 148 29 155 94 202 17 124 77 21 110 194 197 228 149 28 9 129 74 139 76 1 180 245 235 1 191 177 175 158 159 16 12 52 96 80 243 34 26 155 45 210 192 183 217 230 122 13 19 197 214 172 29 151 24 153 136 8 203 72 220 199 79 22 79 251 248 83 204 246 117 242 216 219 53 20 182 121 148 173 221 177 210 171 107 56 101 159 63 110 23 37 168 47 25 252 163 244 206 125 220 122 108 251 223 93 219 129 242 137 229 199 216 254 230 235 62 33 236 39 211 255 184 37 134 152 51 188 182 195 242 18 43 29 134 16 183 48 35 0 100 231 121 145 91 99 171 183 225 246 126 56 190 198 188 79 227 107 211 1 65 113 64 71 9 120 185 75 138 171 220 155 182 35 226 180 121 108 83 253 1 232 183 151 97 160 73 117 218 140 182 224 58 227 40 171 59 143 213 187 41 57 174 185 115 190 81 111 110 81 149 122 114 170 14 10 168 113 248 120 13 247 231 160 162 14 4 227 41 48 249 153 2 107 130 176 16 144 160 116 41 25 241 225 126 110 24 7 69 221 205 108 141 73 164 61 76 219 248 94 142 69 171 109 44 45 75 34 179 205 40 62 161 191 222 79 131 239 230 86 201 124 48 226 212 13 178 187 248 29 191 81 98 229 199 91 204 153 220 112 227 71 116 233 131 134 160 244 78 77 84 128 144 63 123 210 148 221 133 201 44 41 218 89 64 253 172 106 220 127 130 151 11 88 155 57 172 192 196 165 93 177 197 139 128 45 223 88 64 196 6 15 153 160 156 168 3 202 102 129 134 25 75 61 51 190 216 218 178 101 250 91 255 169 245 170 55 228 47 111 197 10 145 196 180 96 217 97 49 104 134 62 228 86 203 242 207 75 246 77 115 20 81 40 173 107 113 251 9 172 18 21 10 102 117 86 63 252 91 190 64 190 140 1 146 70 75 130 110 94 129 107 155 24 253 117 204 162 32 30 102 75 62 42 204 19 159 205 62 23 26 192 23 79 128 205 18 72 198 84 83 107 16 234 121 61 33 101 48 72 32 197 119 216 2 24 213 8 133 63 181 65 15 192 138 240 203 219 69 207 68 66 233 168 195 13 212 235 34 22 142 226 141 25 131 250 123 202 13 163 142 214 170 179 240 5 21 201 143 103 4 70 139 84 104 115 140 248 163 15 71 220 197 222 251 170 15 158 82 26 214 186 154 139 37 245 77 174 37 29 218 103 99 14 230 36 75 72 140 186 89 146 99 10 10 94 68 150 159 234 64 234 32 254 117 187 160 102 46 25 25 77 184 134 151 2 236 109 63 58 186 148 239 251 122 59 123 200 29 42 70 51 118 54 71 184 71 0 111 178 10 81 141 247 59 254 67 191 214 239 78 238 217 142 184 87 107 111 14 102 97 61 229 94 118 187 52 204 25 52 233 177 250 17 62 113 22 163 2 250 13 5 238 103 80 143 201 25 73 33 93 212 81 126 207 29 138 72 191 60 182 132 255 76 97 254 188 96 81 72 73 43 118 191 106 118 41 112 45 96 255 148 59 79 111 89 61 199 106 75 199 154 21 60 25 124 156 168 42 233 7 102 203 120 161 126 125 118 110 114 229 174 26 31 215 140 120 85 171 146 207 176 159 100 102 215 83 142 39 61 255 84 12 19 235 207 44 199 229 220 98 38 167 113 24 88 66 31 115 135 184 70 133 129 3 57 44 202 230 225 37 70 222 228 126 130 216 185 247 48 130 3 26 6 9 42 134 72 134 247 13 1 7 1 160 130 3 11 4 130 3 7 48 130 3 3 48 130 2 255 6 11 42 134 72 134 247 13 1 12 10 1 2 160 130 2 166 48 130 2 162 48 28 6 10 42 134 72 134 247 13 1 12 1 3 48 14 4 8 157 82 4 247 110 231 147 241 2 2 8 0 4 130 2 128 81 141 63 61 170 27 13 87 195 101 166 17 185 109 40 123 79 40 85 18 112 106 87 142 32 19 113 12 131 155 36 149 204 92 237 1 142 195 36 34 134 117 241 52 38 4 223 121 9 207 149 114 168 232 16 31 38 128 191 205 129 96 20 210 13 246 170 175 72 206 132 163 135 42 227 200 61 4 223 65 246 136 48 139 206 95 243 12 78 111 152 17 172 160 235 19 185 107 248 215 171 69 17 108 110 12 143 48 163 35 112 60 104 210 180 61 97 35 132 190 185 52 214 94 137 51 90 103 115 176 108 81 179 254 43 128 230 0 178 229 102 142 136 122 52 213 218 150 93 29 251 227 151 124 220 211 152 14 214 57 253 134 5 216 20 70 142 9 67 253 187 20 45 239 144 60 149 38 118 94 5 240 92 240 11 163 131 39 237 219 228 68 198 176 184 23 155 181 19 149 188 2 73 215 118 95 52 169 186 179 142 106 201 222 98 38 7 72 12 167 242 23 217 58 8 48 98 75 203 68 202 230 50 109 112 231 34 77 8 212 132 34 53 120 195 211 170 209 138 45 25 22 249 200 39 170 102 104 35 23 165 199 0 180 149 231 66 55 227 101 212 227 111 140 202 218 21 211 142 227 95 228 34 59 29 23 212 43 142 132 36 100 19 58 38 124 136 77 192 186 174 111 82 162 61 13 207 31 123 138 16 236 169 94 182 156 137 71 11 3 223 81 146 185 230 164 108 87 82 126 167 121 216 202 201 21 197 50 204 62 46 30 80 245 60 157 124 81 50 79 225 144 130 55 141 182 176 61 62 128 88 105 3 206 168 97 81 180 145 20 211 135 252 195 71 185 42 209 139 98 27 47 3 181 252 89 41 67 246 238 34 71 224 211 65 165 130 115 138 102 130 153 126 248 225 200 42 33 247 34 83 47 161 223 179 49 244 240 108 184 244 229 129 42 34 208 77 62 142 125 57 121 39 2 223 123 75 83 35 184 136 71 228 58 15 61 16 21 111 21 72 84 107 99 66 51 251 47 132 92 62 85 53 197 90 170 118 254 28 232 170 69 119 55 25 30 210 189 113 231 121 214 151 141 218 11 54 90 17 40 94 143 41 72 221 16 204 7 126 200 220 28 157 75 159 142 181 56 44 244 2 206 93 230 121 110 124 181 108 157 161 2 131 121 119 22 99 4 194 228 137 124 193 89 196 239 216 79 206 88 233 84 70 205 120 107 79 1 95 117 198 73 112 207 18 52 174 188 81 59 75 238 227 184 57 166 66 12 188 200 97 251 40 146 239 27 44 6 104 216 90 153 8 161 189 194 32 200 124 180 43 124 169 200 80 238 28 234 114 46 216 243 192 75 180 149 181 215 39 214 64 69 183 205 159 252 238 50 141 132 214 2 245 5 251 219 32 217 37 146 78 226 201 81 209 79 74 174 108 65 49 70 48 31 6 9 42 134 72 134 247 13 1 9 20 49 18 30 16 0 116 0 101 0 115 0 116 0 99 0 101 0 114 0 116 48 35 6 9 42 134 72 134 247 13 1 9 21 49 22 4 20 161 19 18 59 76 168 198 72 97 179 205 74 244 65 111 116 223 140 145 154 48 49 48 33 48 9 6 5 43 14 3 2 26 5 0 4 20 182 216 177 70 221 73 183 142 238 169 97 22 175 148 97 145 207 223 75 54 4 8 178 120 42 60 194 226 96 245 2 2 8 0]! !
 
-!SqueakSSL class methodsFor: 'examples' stamp: 'jmv 25/Jun/2017 21:27:45'!
+!SqueakSSL class methodsFor: 'examples' stamp: 'jmv 26/Jun/2017, 12:27:45 am (UTC)'!
 google: query
 	"An example HTTPS query to encrypted.google.com.
 	Example:
@@ -7213,7 +7213,7 @@ google: query
 	] ensure:[ssl destroy].
 ! !
 
-!SqueakSSL class methodsFor: 'examples' stamp: 'jmv 25/Jun/2017 21:31:39'!
+!SqueakSSL class methodsFor: 'examples' stamp: 'jmv 26/Jun/2017, 12:31:39 am (UTC)'!
 serverOn: port certName: certName
 	"An HTTPS server example. Fires up a listener at the given port such that
 	you can point a browser to that https url. Responds with a single line of text
@@ -7264,7 +7264,7 @@ serverOn: port certName: certName
 		socket destroy.
 	].! !
 
-!SqueakSSL class methodsFor: 'instance creation' stamp: 'ar 16/Jul/2010 22:59:00'!
+!SqueakSSL class methodsFor: 'instance creation' stamp: 'ar 17/Jul/2010, 1:59:00 am (UTC)'!
 on: aSocket
 	"Convenience API. Create a SqueakSSL operating on a standard TCP socket.
 	Generally not very useful for real applications (it lacks error handling etc) 
@@ -7272,21 +7272,21 @@ on: aSocket
 
 	^self new on: aSocket! !
 
-!SqueakSSL class methodsFor: 'instance creation' stamp: 'ar 17/Jun/2012 11:13:00'!
+!SqueakSSL class methodsFor: 'instance creation' stamp: 'ar 17/Jun/2012, 2:13:00 pm (UTC)'!
 secureSocket
 	"Answer the class to use as secure socket implementation.
 	Provided here so that users only need a dependency on SqueakSSL."
 
 	^SecureSocket! !
 
-!SqueakSSL class methodsFor: 'instance creation' stamp: 'ar 17/Jun/2012 11:25:00'!
+!SqueakSSL class methodsFor: 'instance creation' stamp: 'ar 17/Jun/2012, 2:25:00 pm (UTC)'!
 secureSocketStream
 	"Answer the class to use as secure socket stream implementation.
 	Provided here so that users only need a dependency on SqueakSSL."
 
 	^SecureSocketStream! !
 
-!CharacterSequence class methodsFor: '*WebClient' stamp: 'jmv 19/May/2024 15:21:59'!
+!CharacterSequence class methodsFor: '*WebClient' stamp: 'jmv 19/May/2024, 6:21:59 pm (UTC)'!
 invalidAsciiInUrlFields
 	"Answer a CharacterSet ByteArray with all ASCII characters that are invalid in an URL field.
 	See https://en.wikipedia.org/wiki/URL_encoding
@@ -7300,7 +7300,7 @@ invalidAsciiInUrlFields
 			answer at: char codePoint + 1 put: 1 ].
 	^answer! !
 
-!CharacterSequence class methodsFor: '*WebClient' stamp: 'jmv 19/May/2024 15:21:53'!
+!CharacterSequence class methodsFor: '*WebClient' stamp: 'jmv 19/May/2024, 6:21:53 pm (UTC)'!
 invalidAsciiInUrls
 	"Answer a CharacterSet ByteArray with all ASCII characters that are invalid in an URL.
 	See https://en.wikipedia.org/wiki/URL_encoding
@@ -7315,7 +7315,7 @@ invalidAsciiInUrls
 			answer at: char codePoint + 1 put: 1 ].
 	^answer! !
 
-!String methodsFor: '*WebClient' stamp: 'jmv 19/May/2024 15:22:17'!
+!String methodsFor: '*WebClient' stamp: 'jmv 19/May/2024, 6:22:17 pm (UTC)'!
 percentEscapeUrl
 	"Answer an instance of String where all characters are ASCII.
 	If we contain any ASCII character that is invalid in an URL, parentEscape it
@@ -7328,7 +7328,7 @@ percentEscapeUrl
 		^self ].
 	^String percentEscapingNonAsciiAndThoseIn: badChars bytes: self asUtf8Bytes! !
 
-!String methodsFor: '*WebClient' stamp: 'jmv 9/Jan/2024 17:29:50'!
+!String methodsFor: '*WebClient' stamp: 'jmv 9/Jan/2024, 8:29:50 pm (UTC)'!
 percentEscapeUrlField
 	"Answer an instance of String where all characters are ASCII.
 	If we contain any ASCII character that is invalid in an URL field, parentEscape it
@@ -7341,7 +7341,7 @@ percentEscapeUrlField
 		^self ].
 	^String percentEscapingNonAsciiAndThoseIn: badChars bytes: self asUtf8Bytes! !
 
-!String methodsFor: '*WebClient' stamp: 'jmv 9/Jan/2024 18:03:29'!
+!String methodsFor: '*WebClient' stamp: 'jmv 9/Jan/2024, 9:03:29 pm (UTC)'!
 unescapePercents
 	"change each %XY substring to the character with ASCII value XY in hex.
 	This is the opposite of #percentEscapingNonAscii: and #percentEscapingNonAsciiAndThoseIn:bytes:
@@ -7374,7 +7374,7 @@ unescapePercents
 	].
 	^ answerClass fromUtf8Bytes: answerBytes! !
 
-!UnicodeString methodsFor: '*WebClient' stamp: 'jmv 19/May/2024 15:22:20'!
+!UnicodeString methodsFor: '*WebClient' stamp: 'jmv 19/May/2024, 6:22:20 pm (UTC)'!
 percentEscapeUrl
 	"Answer an instance of String where all characters are ASCII.
 	If we contain any ASCII character that is invalid in an URL, parentEscape it
@@ -7387,7 +7387,7 @@ percentEscapeUrl
 		^self asByteString ].
 	^String percentEscapingNonAsciiAndThoseIn: badChars bytes: self asUtf8Bytes! !
 
-!UnicodeString methodsFor: '*WebClient' stamp: 'jmv 9/Jan/2024 17:30:30'!
+!UnicodeString methodsFor: '*WebClient' stamp: 'jmv 9/Jan/2024, 8:30:30 pm (UTC)'!
 percentEscapeUrlField
 	"Answer an instance of String where all characters are ASCII.
 	If we contain any ASCII character that is invalid in an URL field, parentEscape it

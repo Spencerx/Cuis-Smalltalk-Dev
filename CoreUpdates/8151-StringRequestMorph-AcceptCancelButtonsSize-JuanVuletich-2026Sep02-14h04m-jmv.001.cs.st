@@ -18,7 +18,7 @@ addTextPane
 		hasUnacceptedEdits: true; "Allow accepting initial contents"
 		acceptOnCR: true;
 		escAction: [ self cancel ].
-	e := FontFamily defaultLineSpacing asPoint print.
+	e := FontFamily defaultLineSpacing asPoint.
 	(controlsContainer := LinearLayoutMorph newRow color: Color transparent)
 		addMorphUseAll: textMorph;
 		addMorph: 

@@ -1,6 +1,6 @@
-'From Cuis7.9 [latest update: #8147] on 26 August 2026 at 12:43:52 pm'!
+'From Cuis7.9 [latest update: #8156] on 3 September 2026 at 6:15:15 pm'!
 'Description '!
-!provides: 'RefactoringTests' 1 5!
+!provides: 'RefactoringTests' 1 6!
 !requires: 'DynamicallyCodeCreatingTestSupport' 1 0 nil!
 !requires: '__Refactoring_TestData__' 1 0 nil!
 SystemOrganization addCategory: #RefactoringTests!
@@ -1999,92 +1999,79 @@ test53_CanFindParameterizableReplacementsInTwoEqualMethodsWithDifferentSelectors
 		andIsOf: (classToRefactor>>#m11) methodReference.
 	! !
 
-!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 14/Apr/2026, 9:40:48 pm (UTC)'!
+!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 22/Aug/2026, 7:45:55 pm (UTC)'!
 test54_CanFindParameterizableReplacementsOfMultipleWhenReceiversAreEquivalent
 	
 	| sourceCode paramReplacements |
 	
 	classToRefactor addInstVarName: 'instVarCollection'.
 	sourceCode := 'm1
-	| a b c d aCollection |
+	| a b c aCollection |
 	aCollection := OrderedCollection new.
 	a := aCollection inject: 0 into: [:acc :each | acc + each].
 	b := instVarCollection inject: 1 into: [:acc :each | acc * each].
 	c := self inject: 1 into: [:acc :each | acc ** each].
-	d := undeclaredVar inject: 1 into: [:acc :each | acc - each].
-	^ a + b + c + d'.
+	^ a + b + c'.
 	
 	self 
 		compile: sourceCode 
-		andFind: (74 to: 126)
+		andFind: (72 to: 124)
 		to: (Message selector: #k1:k2:k3: arguments: #('aCollection' 'a' 'b')).
 
 	paramReplacements := finder parameterizableReplacements.
-	self assert: paramReplacements size equals: 3.
+	self assert: paramReplacements size equals: 2.
 	self 
 		assertAnyParamReplacementOf: paramReplacements 
-		hasInterval: (135 to: 193) 
-		hasParamsIntervals: { 135 to: 151 . 161 to: 161 . 169 to: 193 }  
+		hasInterval: (133 to: 191) 
+		hasParamsIntervals: { 133 to: 149 . 159 to: 159 . 167 to: 191 }  
 		andIsOf: sourceMethod.
 	self 
 		assertAnyParamReplacementOf: paramReplacements 
-		hasInterval: (202 to: 248) 
-		hasParamsIntervals: { 202 to: 205 . 215 to: 215 . 223 to: 248 } 
-		andIsOf: sourceMethod.
-	self 
-		assertAnyParamReplacementOf: paramReplacements 
-		hasInterval: (257 to: 311) 
-		hasParamsIntervals: { 257 to: 269 . 279 to: 279 . 287 to: 311 } 
-		andIsOf: sourceMethod! !
+		hasInterval: (200 to: 246) 
+		hasParamsIntervals: { 200 to: 203 . 213 to: 213 . 221 to: 246 } 
+		andIsOf: sourceMethod.! !
 
-!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 15/Apr/2026, 3:42:44 pm (UTC)'!
+!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 22/Aug/2026, 7:50:20 pm (UTC)'!
 test55_CanAcceptParameterizableReplacementWithEquivalentReceivers
 
 	| sourceCode replacements |
 	
 	classToRefactor addInstVarName: 'instVarCollection'.
 	sourceCode := 'm1
-	| a b c d aCollection |
+	| a b c aCollection |
 	aCollection := OrderedCollection new.
 	a := aCollection inject: 0 into: [:acc :each | acc + each].
 	b := instVarCollection inject: 1 into: [:acc :each | acc * each].
 	c := self inject: 1 into: [:acc :each | acc ** each].
-	d := undeclaredVar inject: 1 into: [:acc :each | acc - each].
-	^ a + b + c + d'.
+	^ a + b + c'.
 	
 	self 
 		compile: sourceCode 
-		andFind: (74 to: 126)
+		andFind: (72 to: 124)
 		to: (Message selector: #k1:k2:k3: arguments: #('aCollection' 'a' 'b')).
 		
 	self acceptParamReplacementsTo: (Message selector: #k1:k2:k3: arguments: #('aCollection' 'a' 'b')).
 
 	replacements := finder replacements.
-	self assert: replacements size equals: 4.
+	self assert: replacements size equals: 3.
 	self 
 		assertAnyReplacementOf: replacements 
-		hasInterval: (135 to: 193) 
+		hasInterval: (133 to: 191) 
 		isOf: sourceMethod 
 		andHasEqualParamsInOrder: { 'instVarCollection' . '1' . '[:acc :each | acc * each]' }
-		withIntervals: { 135 to: 151 . 161 to: 161 . 169 to: 193 }.
+		withIntervals: { 133 to: 149 . 159 to: 159 . 167 to: 191 }.
 	self 
 		assertAnyReplacementOf: replacements 
-		hasInterval: (202 to: 248) 
+		hasInterval: (200 to: 246) 
 		isOf: sourceMethod 
 		andHasEqualParamsInOrder: { 'self' . '1' . '[:acc :each | acc ** each]' }
-		withIntervals: { 202 to: 205 . 215 to: 215 . 223 to: 248 }.
+		withIntervals: { 200 to: 203 . 213 to: 213 . 221 to: 246 }.
 	self 
 		assertAnyReplacementOf: replacements 
-		hasInterval: (257 to: 311) 
-		isOf: sourceMethod 
-		andHasEqualParamsInOrder: { 'undeclaredVar' . '1' . '[:acc :each | acc - each]' }
-		withIntervals: { 257 to: 269 . 279 to: 279 . 287 to: 311 }.
-	self 
-		assertAnyReplacementOf: replacements 
-		hasInterval: (74 to: 126) 
+		hasInterval: (72 to: 124) 
 		isOf: sourceMethod 
 		andHasEqualParamsInOrder: { 'aCollection' . '0' . '[:acc :each | acc + each]' }
-		withIntervals: { 74 to: 84 . 94 to: 94 . 102 to: 126 }.! !
+		withIntervals: { 72 to: 82 . 92 to: 92 . 100 to: 124 }.! !
 
 !ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 9/Apr/2026, 1:01:00 am (UTC)'!
 test56_CannotFindParameterizableReplacementWhenParametersHaveReturns
@@ -2121,21 +2108,49 @@ test57_CannotFindParameterizableReplacementWhenParametersHaveAssignments
 
 	self deny: finder hasFoundParameterizableReplacements.! !
 
-!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 28/Jul/2026, 12:06:05 am (UTC)'!
+!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 23/Aug/2026, 10:21:17 pm (UTC)'!
 test58_DoesNotLookForNodesThatAreNotInTheCompleteSourceRanges
 
-	"This test ensures that replacing #notOptimizedMethodNode with #methodNode causes a failure"
+	"This test ensures that replacing #notOptimizedMethodNode with #methodNode causes a failure.
+	This checks that ReplacementsFinder uses #notOptimizedMethodNode"
 	
-	self 
-		shouldnt: [
+	self shouldNotRaiseErrorOrFindAnyParameterReplacements: [
 			self 
 				compile: 'm1 
 	self foo ifNil: [ ^1 ] ifNotNil: [ ^2 ]' 
-				andFind: (6 to: 9).
-	] 
-		raise: Error. 
+				andFind: (6 to: 9) ]! !
+
+!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 23/Aug/2026, 10:16:41 pm (UTC)'!
+test59_DoesNotUseOptimizedNodesForFinding
+
+	"This test ensures that replacing #notOptimizedMethodNode with #methodNode causes a failure.
+	This checks that NodesInRangeFinder uses #notOptimizedMethodNode"
 	
-	self deny: finder hasFoundParameterizableReplacements.! !
+	self shouldNotRaiseErrorOrFindAnyParameterReplacements: [
+		self 
+			compile: 'm1 false ifTrue: [ ^ 10 ]. ^ 20' 
+			andFind: (4 to: 25) ].! !
+
+!ExtractMethodFinderTest methodsFor: 'tests' stamp: 'JEC 24/Aug/2026, 10:05:40 pm (UTC)'!
+test60_DoesNotFailsWhenNotHavingAMessage
+
+	"This is an edge case. So far, the finder creates replacements without the Message (with the method name added by the user), because that step is now performed after determining whether the method will have parameters or not. As a result, during creation, there are some validations related to the method name that we need to skip for now, since they will be performed later."
+
+	| sourceCode |
+	
+	sourceCode := 'processIfValid
+	| subtotal |
+	self validate ifFalse: [ ^ nil ].
+	subtotal := self price.
+	^ subtotal * self taxRate.'.
+	
+	self shouldNotRaiseErrorOrFindAnyParameterReplacements: [
+		self 
+			compile: sourceCode 
+			andFind: (66 to: 115)
+			to: nil ].
+	
+	! !
 
 !ExtractMethodFinderTest methodsFor: 'setup/teardown' stamp: 'HAW 2/Sep/2021, 10:02:12 pm (UTC)'!
 setUp
@@ -2198,6 +2213,15 @@ assertAnyReplacementOf: replacements isOfSourceMethodAndHasInterval: expectedInt
 		assertAnyReplacementOf: replacements 
 		hasInterval: expectedInterval
 		andIsOf: sourceMethod! !
+
+!ExtractMethodFinderTest methodsFor: 'assertions' stamp: 'JEC 23/Aug/2026, 10:20:29 pm (UTC)'!
+shouldNotRaiseErrorOrFindAnyParameterReplacements: aBlock
+
+	self 
+		shouldnt: aBlock 
+		raise: Error. 
+
+	self deny: finder hasFoundParameterizableReplacements.! !
 
 !ExtractMethodFinderTest methodsFor: 'excercising' stamp: 'JEC 14/Mar/2026, 7:02:07 pm (UTC)'!
 acceptParamReplacementsTo: aMessage
@@ -2884,37 +2908,32 @@ test025_WhenReceiversAreInstVars_WontBeParameterized
 		areEquivalentToAll: { self parseNodeAt: 124 }
 		parameterizing: { self parseNodeAt: 132 . self parseNodeAt: 140 }! !
 
-!ParameterizableNodesFinderTest methodsFor: 'tests' stamp: 'JEC 7/Apr/2026, 8:18:17 pm (UTC)'!
+!ParameterizableNodesFinderTest methodsFor: 'tests' stamp: 'JEC 22/Aug/2026, 7:41:01 pm (UTC)'!
 test026_WhenOneReceiverIsATempVarAndOthersAreDifferentKindOfVariables_AllWillBeParameterized
 
 	| parameterizableNodes |
 
 	classToRefactor addInstVarName: 'instVarCollection'.
 	self compile: 'm1
-	| a b c d aCollection |
+	| a b c aCollection |
 	aCollection := OrderedCollection new.
 	a := aCollection inject: 0 into: [:acc :each | acc + each].
 	b := instVarCollection inject: 1 into: [:acc :each | acc * each].
 	c := self inject: 1 into: [:acc :each | acc ** each].
-	d := undeclaredVar inject: 1 into: [:acc :each | acc - each].
-	^ a + b + c + d'.
+	^ a + b + c'.
 	
-	self findParameterizableNodesInSameMethodFromAll: { self parseNodeAt: 86 }.
+	self findParameterizableNodesInSameMethodFromAll: { self parseNodeAt: 88 }.
 	
 	parameterizableNodes := finder parameterizableNodes.
-	self assert: parameterizableNodes size equals: 3.
+	self assert: parameterizableNodes size equals: 2.
 	self 
 		assert: parameterizableNodes first 
 		areEquivalentToAll: { self parseNodeAt: 153 }
-		parameterizing: { self parseNodeAt: 135 . self parseNodeAt: 161 . self parseNodeAt: 169 }.
+		parameterizing: { self parseNodeAt: 135 . self parseNodeAt: 159 . self parseNodeAt: 168 }.
 	self 
 		assert: parameterizableNodes second 
 		areEquivalentToAll: { self parseNodeAt: 207 }
-		parameterizing: { self parseNodeAt: 202 . self parseNodeAt: 215 . self parseNodeAt: 223 }.
-	self 
-		assert: parameterizableNodes third 
-		areEquivalentToAll: { self parseNodeAt: 271 }
-		parameterizing: { self parseNodeAt: 257 . self parseNodeAt: 279 . self parseNodeAt: 287 }! !
+		parameterizing: { self parseNodeAt: 202 . self parseNodeAt: 213 . self parseNodeAt: 221 }! !
 
 !ParameterizableNodesFinderTest methodsFor: 'tests' stamp: 'JEC 7/Apr/2026, 8:19:10 pm (UTC)'!
 test027_WhenOneReceiversArePseudoVariablesAndInstVars_WontBeParameterized
@@ -3056,6 +3075,20 @@ test034_CannotFindParameterizableCodeFromACascadeCode
 	self findParameterizableNodesInSameMethodFromAll: { nodeToFind }.
 	
 	self deny: finder hasFoundParameterizableReplacements! !
+
+!ParameterizableNodesFinderTest methodsFor: 'tests' stamp: 'JEC 22/Aug/2026, 7:07:36 pm (UTC)'!
+test035_WhenReceiverIsALiteralVariable_ItWontBeFoundAsParameterizable
+
+	self compile: 'm1
+	| a b c aCollection |
+	aCollection := OrderedCollection new.
+	a := Smalltalk valueWithArguments: #(1 2 3).
+	b := Smalltalk valueWithArguments: {5}.
+	^a + b'.
+	
+	self findParameterizableNodesInSameMethodFromAll: { self parseNodeAt: 81 }.
+	
+	self deny: finder hasFoundParameterizableReplacements.! !
 
 !ParameterizableNodesFinderTest methodsFor: 'exercising' stamp: 'JEC 6/Apr/2026, 4:12:03 pm (UTC)'!
 compile: aSourceCode
